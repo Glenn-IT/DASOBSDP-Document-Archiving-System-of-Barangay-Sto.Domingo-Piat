@@ -157,11 +157,11 @@
 | 12 | Cancel Button | `btnCancel` ? discards changes |
 
 **Checklist:**
-- [ ] Form created and named `AdminUpdateDocumentForm`
-- [ ] All same fields as New Document form added
-- [ ] Fields pre-filled with placeholder selected data
-- [ ] Update button added
-- [ ] Cancel button added
+- [x] Form created and named `AdminUpdateDocumentForm`
+- [x] All same fields as New Document form added
+- [x] Fields pre-filled with placeholder selected data
+- [x] Update button added
+- [x] Cancel button added
 
 ---
 
@@ -175,10 +175,10 @@
 | 3 | Cancel Button | `btnCancel` ? cancels and closes |
 
 **Checklist:**
-- [ ] Form created and named `AdminDeleteDocumentForm`
-- [ ] Confirmation message label added
-- [ ] Delete button added
-- [ ] Cancel button added
+- [x] Form created and named `AdminDeleteDocumentForm`
+- [x] Confirmation message label added
+- [x] Delete button added
+- [x] Cancel button added
 
 ---
 
@@ -546,8 +546,8 @@
 | 3 | `AdminDashboardForm` | Admin | [x] Done |
 | 4 | `AdminArchiveListForm` | Admin | [x] Done |
 | 5 | `AdminNewDocumentForm` | Admin | [x] Done |
-| 6 | `AdminUpdateDocumentForm` | Admin | [ ] Not Started |
-| 7 | `AdminDeleteDocumentForm` | Admin | [ ] Not Started |
+| 6 | `AdminUpdateDocumentForm` | Admin | [x] Done |
+| 7 | `AdminDeleteDocumentForm` | Admin | [x] Done |
 | 8 | `AdminUsersListForm` | Admin | [ ] Not Started |
 | 9 | `AdminAddAccountForm` | Admin | [ ] Not Started |
 | 10 | `AdminUpdateAccountForm` | Admin | [ ] Not Started |
