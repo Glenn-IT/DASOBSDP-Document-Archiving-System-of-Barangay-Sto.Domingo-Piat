@@ -25,6 +25,7 @@ Partial Class AdminDashboardForm
         btnUsersList    = New System.Windows.Forms.Button()
         btnActivityLogs = New System.Windows.Forms.Button()
         btnViewProfile  = New System.Windows.Forms.Button()
+        pnlSidebarBottom = New System.Windows.Forms.Panel()
         btnLogout       = New System.Windows.Forms.Button()
         pnlRight        = New System.Windows.Forms.Panel()
         pnlHeader       = New System.Windows.Forms.Panel()
@@ -41,13 +42,12 @@ Partial Class AdminDashboardForm
         pnlSidebar.Name      = "pnlSidebar"
         pnlSidebar.TabIndex  = 0
 
-        ' ?? pnlSidebarTop  (brand header inside sidebar) ??????????
+        ' ?? pnlSidebarTop  (brand header, docked Top) ?????????????
         pnlSidebarTop.BackColor = System.Drawing.Color.FromArgb(40, 80, 44)
         pnlSidebarTop.Dock      = System.Windows.Forms.DockStyle.Top
         pnlSidebarTop.Height    = 110
         pnlSidebarTop.Name      = "pnlSidebarTop"
 
-        ' ?? lblSysTitle ???????????????????????????????????????????
         lblSysTitle.AutoSize  = False
         lblSysTitle.Dock      = System.Windows.Forms.DockStyle.Top
         lblSysTitle.Text      = "Document Archiving System"
@@ -58,20 +58,19 @@ Partial Class AdminDashboardForm
         lblSysTitle.Name      = "lblSysTitle"
         lblSysTitle.Padding   = New System.Windows.Forms.Padding(6, 0, 6, 0)
 
-        ' ?? lblSysSubTitle ????????????????????????????????????????
-        lblSysSubTitle.AutoSize   = False
-        lblSysSubTitle.Dock       = System.Windows.Forms.DockStyle.Top
-        lblSysSubTitle.Text       = "Brgy. Sto. Domingo - Piat"
-        lblSysSubTitle.Font       = New System.Drawing.Font("Segoe UI", 7.5, System.Drawing.FontStyle.Regular)
-        lblSysSubTitle.ForeColor  = System.Drawing.Color.FromArgb(242, 237, 194)
-        lblSysSubTitle.TextAlign  = System.Drawing.ContentAlignment.TopCenter
-        lblSysSubTitle.Height     = 28
-        lblSysSubTitle.Name       = "lblSysSubTitle"
+        lblSysSubTitle.AutoSize  = False
+        lblSysSubTitle.Dock      = System.Windows.Forms.DockStyle.Top
+        lblSysSubTitle.Text      = "Brgy. Sto. Domingo - Piat"
+        lblSysSubTitle.Font      = New System.Drawing.Font("Segoe UI", 7.5, System.Drawing.FontStyle.Regular)
+        lblSysSubTitle.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
+        lblSysSubTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        lblSysSubTitle.Height    = 28
+        lblSysSubTitle.Name      = "lblSysSubTitle"
 
         pnlSidebarTop.Controls.Add(lblSysSubTitle)
         pnlSidebarTop.Controls.Add(lblSysTitle)
 
-        ' ?? lblMenuLabel  (section divider) ???????????????????????
+        ' ?? lblMenuLabel ??????????????????????????????????????????
         lblMenuLabel.AutoSize  = False
         lblMenuLabel.Text      = "MAIN MENU"
         lblMenuLabel.Font      = New System.Drawing.Font("Segoe UI", 7.5, System.Drawing.FontStyle.Bold)
@@ -83,11 +82,10 @@ Partial Class AdminDashboardForm
         lblMenuLabel.Padding   = New System.Windows.Forms.Padding(16, 0, 0, 0)
         lblMenuLabel.Name      = "lblMenuLabel"
 
-        ' ?? Sidebar Button helper sizes ????????????????????????????
         Dim sbSize As New System.Drawing.Size(220, 48)
         Dim sbFont As New System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Regular)
 
-        ' ?? btnArchiveList  (A) ???????????????????????????????????
+        ' ?? Menu buttons (Top-anchored, fixed positions) ???????????
         btnArchiveList.Text                              = "  Archive List"
         btnArchiveList.Font                              = sbFont
         btnArchiveList.BackColor                         = System.Drawing.Color.FromArgb(52, 103, 57)
@@ -103,7 +101,6 @@ Partial Class AdminDashboardForm
         btnArchiveList.Name                              = "btnArchiveList"
         btnArchiveList.TabIndex                          = 0
 
-        ' ?? btnUsersList  (B) ????????????????????????????????????
         btnUsersList.Text                              = "  Users List"
         btnUsersList.Font                              = sbFont
         btnUsersList.BackColor                         = System.Drawing.Color.FromArgb(52, 103, 57)
@@ -119,7 +116,6 @@ Partial Class AdminDashboardForm
         btnUsersList.Name                              = "btnUsersList"
         btnUsersList.TabIndex                          = 1
 
-        ' ?? btnActivityLogs  (C) ?????????????????????????????????
         btnActivityLogs.Text                              = "  Activity Logs"
         btnActivityLogs.Font                              = sbFont
         btnActivityLogs.BackColor                         = System.Drawing.Color.FromArgb(52, 103, 57)
@@ -135,7 +131,6 @@ Partial Class AdminDashboardForm
         btnActivityLogs.Name                              = "btnActivityLogs"
         btnActivityLogs.TabIndex                          = 2
 
-        ' ?? btnViewProfile  (D) ??????????????????????????????????
         btnViewProfile.Text                              = "  View Profile"
         btnViewProfile.Font                              = sbFont
         btnViewProfile.BackColor                         = System.Drawing.Color.FromArgb(52, 103, 57)
@@ -151,21 +146,28 @@ Partial Class AdminDashboardForm
         btnViewProfile.Name                              = "btnViewProfile"
         btnViewProfile.TabIndex                          = 3
 
-        ' ?? btnLogout  (E) — pinned at bottom ????????????????????
+        ' ?? pnlSidebarBottom  (Dock=Bottom — always visible) ??????
+        pnlSidebarBottom.BackColor = System.Drawing.Color.FromArgb(40, 80, 44)
+        pnlSidebarBottom.Dock      = System.Windows.Forms.DockStyle.Bottom
+        pnlSidebarBottom.Height    = 56
+        pnlSidebarBottom.Name      = "pnlSidebarBottom"
+
+        ' ?? btnLogout  (inside pnlSidebarBottom, Dock=Fill) ???????
         btnLogout.Text                              = "  Logout"
         btnLogout.Font                              = sbFont
-        btnLogout.BackColor                         = System.Drawing.Color.FromArgb(52, 103, 57)
+        btnLogout.BackColor                         = System.Drawing.Color.FromArgb(40, 80, 44)
         btnLogout.ForeColor                         = System.Drawing.Color.FromArgb(242, 237, 194)
         btnLogout.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
         btnLogout.FlatAppearance.BorderSize         = 0
         btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(180, 60, 60)
-        btnLogout.Size                              = sbSize
-        btnLogout.Location                          = New System.Drawing.Point(0, 600)
+        btnLogout.Dock                              = System.Windows.Forms.DockStyle.Fill
         btnLogout.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
         btnLogout.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
         btnLogout.Cursor                            = System.Windows.Forms.Cursors.Hand
         btnLogout.Name                              = "btnLogout"
-        btnLogout.TabIndex                          = 4
+        btnLogout.TabIndex                          = 0
+
+        pnlSidebarBottom.Controls.Add(btnLogout)
 
         ' Assemble sidebar
         pnlSidebar.Controls.Add(pnlSidebarTop)
@@ -174,21 +176,20 @@ Partial Class AdminDashboardForm
         pnlSidebar.Controls.Add(btnUsersList)
         pnlSidebar.Controls.Add(btnActivityLogs)
         pnlSidebar.Controls.Add(btnViewProfile)
-        pnlSidebar.Controls.Add(btnLogout)
+        pnlSidebar.Controls.Add(pnlSidebarBottom)
 
-        ' ?? pnlRight  (cream right side area) ????????????????????
+        ' ?? pnlRight ??????????????????????????????????????????????
         pnlRight.BackColor = System.Drawing.Color.FromArgb(242, 237, 194)
         pnlRight.Dock      = System.Windows.Forms.DockStyle.Fill
         pnlRight.Name      = "pnlRight"
         pnlRight.TabIndex  = 1
 
-        ' ?? pnlHeader  (#79AE6F — Mid Green top bar) ?????????????
+        ' ?? pnlHeader ?????????????????????????????????????????????
         pnlHeader.BackColor = System.Drawing.Color.FromArgb(121, 174, 111)
         pnlHeader.Dock      = System.Windows.Forms.DockStyle.Top
         pnlHeader.Height    = 64
         pnlHeader.Name      = "pnlHeader"
 
-        ' ?? lblPageTitle ?????????????????????????????????????????
         lblPageTitle.AutoSize  = False
         lblPageTitle.Text      = "Admin Dashboard"
         lblPageTitle.Font      = New System.Drawing.Font("Segoe UI", 13, System.Drawing.FontStyle.Bold)
@@ -197,30 +198,30 @@ Partial Class AdminDashboardForm
         lblPageTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         lblPageTitle.Size      = New System.Drawing.Size(500, 64)
         lblPageTitle.Location  = New System.Drawing.Point(20, 0)
+        lblPageTitle.Anchor    = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left
         lblPageTitle.Name      = "lblPageTitle"
 
-        ' ?? lblWelcomeUser ???????????????????????????????????????
         lblWelcomeUser.AutoSize  = False
         lblWelcomeUser.Text      = "Welcome, Admin"
-        lblWelcomeUser.Font      = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular)
+        lblWelcomeUser.Font      = New System.Drawing.Font("Segoe UI", 9)
         lblWelcomeUser.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
         lblWelcomeUser.BackColor = System.Drawing.Color.Transparent
         lblWelcomeUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         lblWelcomeUser.Size      = New System.Drawing.Size(240, 64)
         lblWelcomeUser.Location  = New System.Drawing.Point(640, 0)
+        lblWelcomeUser.Anchor    = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right
         lblWelcomeUser.Name      = "lblWelcomeUser"
 
         pnlHeader.Controls.Add(lblPageTitle)
         pnlHeader.Controls.Add(lblWelcomeUser)
 
-        ' ?? pnlMainContent  (content area below header) ??????????
+        ' ?? pnlMainContent ????????????????????????????????????????
         pnlMainContent.BackColor = System.Drawing.Color.FromArgb(242, 237, 194)
         pnlMainContent.Dock      = System.Windows.Forms.DockStyle.Fill
         pnlMainContent.Name      = "pnlMainContent"
         pnlMainContent.TabIndex  = 0
         pnlMainContent.Padding   = New System.Windows.Forms.Padding(16)
 
-        ' Assemble right side (Fill goes last, Top goes first)
         pnlRight.Controls.Add(pnlMainContent)
         pnlRight.Controls.Add(pnlHeader)
 
@@ -230,8 +231,9 @@ Partial Class AdminDashboardForm
         Me.ClientSize          = New System.Drawing.Size(1100, 660)
         Me.Controls.Add(pnlRight)
         Me.Controls.Add(pnlSidebar)
-        Me.FormBorderStyle     = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.MaximizeBox         = False
+        Me.FormBorderStyle     = System.Windows.Forms.FormBorderStyle.Sizable
+        Me.MaximizeBox         = True
+        Me.WindowState         = System.Windows.Forms.FormWindowState.Maximized
         Me.Name                = "AdminDashboardForm"
         Me.StartPosition       = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text                = "Document Archiving System — Admin Dashboard"
@@ -239,20 +241,21 @@ Partial Class AdminDashboardForm
         Me.ResumeLayout(False)
     End Sub
 
-    Friend WithEvents pnlSidebar      As System.Windows.Forms.Panel
-    Friend WithEvents pnlSidebarTop   As System.Windows.Forms.Panel
-    Friend WithEvents lblSysTitle     As System.Windows.Forms.Label
-    Friend WithEvents lblSysSubTitle  As System.Windows.Forms.Label
-    Friend WithEvents lblMenuLabel    As System.Windows.Forms.Label
-    Friend WithEvents btnArchiveList  As System.Windows.Forms.Button
-    Friend WithEvents btnUsersList    As System.Windows.Forms.Button
-    Friend WithEvents btnActivityLogs As System.Windows.Forms.Button
-    Friend WithEvents btnViewProfile  As System.Windows.Forms.Button
-    Friend WithEvents btnLogout       As System.Windows.Forms.Button
-    Friend WithEvents pnlRight        As System.Windows.Forms.Panel
-    Friend WithEvents pnlHeader       As System.Windows.Forms.Panel
-    Friend WithEvents lblPageTitle    As System.Windows.Forms.Label
-    Friend WithEvents lblWelcomeUser  As System.Windows.Forms.Label
-    Friend WithEvents pnlMainContent  As System.Windows.Forms.Panel
+    Friend WithEvents pnlSidebar        As System.Windows.Forms.Panel
+    Friend WithEvents pnlSidebarTop     As System.Windows.Forms.Panel
+    Friend WithEvents lblSysTitle       As System.Windows.Forms.Label
+    Friend WithEvents lblSysSubTitle    As System.Windows.Forms.Label
+    Friend WithEvents lblMenuLabel      As System.Windows.Forms.Label
+    Friend WithEvents btnArchiveList    As System.Windows.Forms.Button
+    Friend WithEvents btnUsersList      As System.Windows.Forms.Button
+    Friend WithEvents btnActivityLogs   As System.Windows.Forms.Button
+    Friend WithEvents btnViewProfile    As System.Windows.Forms.Button
+    Friend WithEvents pnlSidebarBottom  As System.Windows.Forms.Panel
+    Friend WithEvents btnLogout         As System.Windows.Forms.Button
+    Friend WithEvents pnlRight          As System.Windows.Forms.Panel
+    Friend WithEvents pnlHeader         As System.Windows.Forms.Panel
+    Friend WithEvents lblPageTitle      As System.Windows.Forms.Label
+    Friend WithEvents lblWelcomeUser    As System.Windows.Forms.Label
+    Friend WithEvents pnlMainContent    As System.Windows.Forms.Panel
 
 End Class

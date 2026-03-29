@@ -62,7 +62,7 @@ Public Class AdminDashboardForm
             MessageBoxIcon.Question)
 
         If result = DialogResult.Yes Then
-            Application.Restart()
+            Me.Close()
         End If
     End Sub
 

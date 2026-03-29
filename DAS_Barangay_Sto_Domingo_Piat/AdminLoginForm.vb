@@ -20,8 +20,12 @@ Public Class AdminLoginForm
         End If
 
         Dim dashboard As New AdminDashboardForm()
-        dashboard.Show()
         Me.Hide()
+        dashboard.ShowDialog()
+        Me.Show()
+        txtAdminUsername.Clear()
+        txtAdminPassword.Clear()
+        txtAdminUsername.Focus()
     End Sub
 
     Private Sub btnAdminForgotPassword_Click(sender As Object, e As EventArgs) Handles btnAdminForgotPassword.Click

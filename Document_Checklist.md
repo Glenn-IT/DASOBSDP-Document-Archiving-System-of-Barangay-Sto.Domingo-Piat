@@ -133,17 +133,17 @@
 | 10 | Cancel Button | `btnCancel` ? closes form without saving |
 
 **Checklist:**
-- [ ] Form created and named `AdminNewDocumentForm`
-- [ ] Document ID field added
-- [ ] Document Title field added
-- [ ] Description multiline field added
-- [ ] Date and Time picker added
-- [ ] Image banner upload control added with PictureBox preview
-- [ ] PDF upload control added with file label display
-- [ ] Uploaded By field added
-- [ ] Status dropdown added (Active/Archived)
-- [ ] Add button added
-- [ ] Cancel button added
+- [x] Form created and named `AdminNewDocumentForm`
+- [x] Document ID field added
+- [x] Document Title field added
+- [x] Description multiline field added
+- [x] Date and Time picker added
+- [x] Image banner upload control added with PictureBox preview
+- [x] PDF upload control added with file label display
+- [x] Uploaded By field added
+- [x] Status dropdown added (Active/Archived)
+- [x] Add button added
+- [x] Cancel button added
 
 ---
 
@@ -545,7 +545,7 @@
 | 2 | `AdminForgotPasswordForm` | Admin | [x] Done |
 | 3 | `AdminDashboardForm` | Admin | [x] Done |
 | 4 | `AdminArchiveListForm` | Admin | [x] Done |
-| 5 | `AdminNewDocumentForm` | Admin | [ ] Not Started |
+| 5 | `AdminNewDocumentForm` | Admin | [x] Done |
 | 6 | `AdminUpdateDocumentForm` | Admin | [ ] Not Started |
 | 7 | `AdminDeleteDocumentForm` | Admin | [ ] Not Started |
 | 8 | `AdminUsersListForm` | Admin | [ ] Not Started |
