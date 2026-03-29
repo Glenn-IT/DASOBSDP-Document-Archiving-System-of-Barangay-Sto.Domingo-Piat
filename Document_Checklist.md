@@ -31,12 +31,12 @@
 | 5 | Forgot Password Link/Button | `btnAdminForgotPassword` ? navigates to Forgot Password Page |
 
 **Checklist:**
-- [ ] Form created and named `AdminLoginForm`
-- [ ] Title label added
-- [ ] Username field added
-- [ ] Password field added (masked)
-- [ ] Login button added with navigation
-- [ ] Forgot Password button added with navigation
+- [x] Form created and named `AdminLoginForm`
+- [x] Title label added
+- [x] Username field added
+- [x] Password field added (masked)
+- [x] Login button added with navigation
+- [x] Forgot Password button added with navigation
 
 ---
 
@@ -541,7 +541,7 @@
 
 | # | Form Name | Side | Status |
 |---|-----------|------|--------|
-| 1 | `AdminLoginForm` | Admin | [ ] Not Started |
+| 1 | `AdminLoginForm` | Admin | [x] Done |
 | 2 | `AdminForgotPasswordForm` | Admin | [ ] Not Started |
 | 3 | `AdminDashboardForm` | Admin | [ ] Not Started |
 | 4 | `AdminArchiveListForm` | Admin | [ ] Not Started |
