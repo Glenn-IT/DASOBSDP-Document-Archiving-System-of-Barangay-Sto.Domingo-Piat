@@ -6,7 +6,7 @@ Public Class AdminAddAccountForm
     End Sub
 
     Private Sub AdminAddAccountForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        cmbUserType.Items.AddRange(New String() {"Admin", "User"})
+        cmbUserType.Items.AddRange(New String() {UserType_Admin, UserType_User})
         cmbUserType.SelectedIndex = 1
 
         cmbSecurityQuestion.Items.AddRange(New String() {
@@ -20,20 +20,48 @@ Public Class AdminAddAccountForm
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If txtUsername.Text.Trim() = "" OrElse txtNewPassword.Text.Trim() = "" Then
+        Dim username         As String = InputHelper.SanitizeInput(txtUsername.Text)
+        Dim securityAnswer   As String = InputHelper.SanitizeInput(txtSecurityAnswer.Text)
+        Dim newPassword      As String = txtNewPassword.Text.Trim()
+        Dim confirmPassword  As String = txtConfirmPassword.Text.Trim()
+        Dim userType         As String = If(cmbUserType.SelectedItem IsNot Nothing,
+                                            cmbUserType.SelectedItem.ToString(), UserType_User)
+        Dim securityQuestion As String = If(cmbSecurityQuestion.SelectedItem IsNot Nothing,
+                                            cmbSecurityQuestion.SelectedItem.ToString(), "")
+
+        If username = "" OrElse newPassword = "" Then
             MessageBox.Show("Please fill in all required fields.", "Add Account",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
-        If txtNewPassword.Text <> txtConfirmPassword.Text Then
+        If newPassword <> confirmPassword Then
             MessageBox.Show("Passwords do not match.", "Add Account",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
-        MessageBox.Show("Account added successfully!", "Add Account",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Me.DialogResult = DialogResult.OK
-        Me.Close()
+
+        Try
+            If UserRepository.CheckDuplicateUsername(username) Then
+                MessageBox.Show($"Username '{username}' is already taken. Please choose a different username.",
+                                "Add Account", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Dim userCode       As String = UserRepository.GenerateCode()
+            Dim hashedPassword As String = PasswordHelper.HashPassword(newPassword)
+            UserRepository.Insert(userCode, username, hashedPassword, userType,
+                                  securityQuestion, securityAnswer)
+
+            ActivityLogger.Log(SessionManager.Username, "Success",
+                $"Admin created account: {username}")
+            MessageBox.Show("Account added successfully!", "Add Account",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.DialogResult = DialogResult.OK
+            Me.Close()
+        Catch ex As Exception
+            MessageBox.Show("Error creating account: " & ex.Message,
+                            "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
