@@ -1,19 +1,24 @@
 Public Class UserDashboardPanel
     Inherits System.Windows.Forms.UserControl
 
-    ' Placeholder counts — replace with DB values later
-    Private ReadOnly TotalDocuments    As Integer = 7
-    Private ReadOnly RecentUploads     As Integer = 3
-    Private ReadOnly PendingApproval   As Integer = 3
-
     Public Sub New()
         InitializeComponent()
     End Sub
 
     Private Sub UserDashboardPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        lblTotalCount.Text   = TotalDocuments.ToString()
-        lblRecentCount.Text  = RecentUploads.ToString()
-        lblPendingCount.Text = PendingApproval.ToString()
+        lblGreeting.Text = $"Welcome, {SessionManager.Username}!"
+        LoadStatsFromDB()
+    End Sub
+
+    Private Sub LoadStatsFromDB()
+        Try
+            lblTotalCount.Text  = DocumentRepository.CountByUser(SessionManager.Username).ToString()
+            lblRecentCount.Text = DocumentRepository.CountRecentByUser(SessionManager.Username).ToString()
+            lblPendingCount.Text = DocumentRepository.CountPendingByUser(SessionManager.Username).ToString()
+        Catch ex As Exception
+            MessageBox.Show("Error loading dashboard stats: " & ex.Message,
+                            "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
 End Class
