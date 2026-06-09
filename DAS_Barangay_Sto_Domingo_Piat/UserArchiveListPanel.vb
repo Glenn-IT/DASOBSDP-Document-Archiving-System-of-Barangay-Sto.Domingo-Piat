@@ -6,35 +6,37 @@ Public Class UserArchiveListPanel
     End Sub
 
     Private Sub UserArchiveListPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LoadPlaceholderData()
+        LoadMyDocuments()
     End Sub
 
-    Private Sub LoadPlaceholderData()
+    Friend Sub LoadMyDocuments(Optional searchQuery As String = Nothing)
         dgvUserArchiveList.Rows.Clear()
-        dgvUserArchiveList.Rows.Add("DOC-0001", "Barangay Budget Report 2024",        "2024-11-15 09:00", "Approved",    "Active")
-        dgvUserArchiveList.Rows.Add("DOC-0002", "Health Program Summary",             "2024-12-01 14:30", "For Review",  "Active")
-        dgvUserArchiveList.Rows.Add("DOC-0003", "Infrastructure Project Docs",        "2025-02-03 10:15", "Approved",    "Active")
-        dgvUserArchiveList.Rows.Add("DOC-0004", "Solid Waste Management Plan",        "2025-01-20 08:45", "Archived",    "Archived")
-        dgvUserArchiveList.Rows.Add("DOC-0005", "Livelihood Program 2025",            "2025-03-05 11:00", "For Review",  "Active")
-        dgvUserArchiveList.Rows.Add("DOC-0006", "Barangay Assembly Minutes — Q1",     "2025-03-12 13:00", "Approved",    "Active")
-        dgvUserArchiveList.Rows.Add("DOC-0007", "Disaster Risk Reduction Plan",       "2025-03-20 09:30", "For Review",  "Active")
+        Try
+            Dim dt As DataTable = DocumentRepository.GetByUser(SessionManager.Username, searchQuery)
+            For Each row As DataRow In dt.Rows
+                Dim rowIdx As Integer = dgvUserArchiveList.Rows.Add(
+                    row("DocumentCode").ToString(),
+                    row("Title").ToString(),
+                    Convert.ToDateTime(row("DateUploaded")).ToString("yyyy-MM-dd HH:mm"),
+                    row("ApprovalStatus").ToString(),
+                    row("Status").ToString()
+                )
+                dgvUserArchiveList.Rows(rowIdx).Tag = CInt(row("DocumentID"))
+            Next
+        Catch ex As Exception
+            MessageBox.Show("Error loading documents: " & ex.Message,
+                            "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Dim query As String = InputHelper.SanitizeInput(txtSearch.Text)
+        LoadMyDocuments(If(query = "", Nothing, query))
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-        Dim query As String = txtSearch.Text.Trim().ToLower()
-        LoadPlaceholderData()
-        If query = "" Then Return
-        For i As Integer = dgvUserArchiveList.Rows.Count - 1 To 0 Step -1
-            Dim row As DataGridViewRow = dgvUserArchiveList.Rows(i)
-            Dim match As Boolean = False
-            For Each cell As DataGridViewCell In row.Cells
-                If cell.Value IsNot Nothing AndAlso cell.Value.ToString().ToLower().Contains(query) Then
-                    match = True
-                    Exit For
-                End If
-            Next
-            If Not match Then dgvUserArchiveList.Rows.RemoveAt(i)
-        Next
+        Dim query As String = InputHelper.SanitizeInput(txtSearch.Text)
+        LoadMyDocuments(If(query = "", Nothing, query))
     End Sub
 
     Private Sub btnDeleteDocument_Click(sender As Object, e As EventArgs) Handles btnDeleteDocument.Click
@@ -43,8 +45,17 @@ Public Class UserArchiveListPanel
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
+
+        Dim selectedRow  As DataGridViewRow = dgvUserArchiveList.SelectedRows(0)
+        Dim documentID   As Integer = CInt(selectedRow.Tag)
+        Dim documentCode As String  = selectedRow.Cells(0).Value.ToString()
+
         Dim frm As New UserDeleteDocumentForm()
-        frm.ShowDialog()
+        frm.DocumentID   = documentID
+        frm.DocumentCode = documentCode
+        If frm.ShowDialog() = DialogResult.OK Then
+            LoadMyDocuments()
+        End If
     End Sub
 
 End Class
