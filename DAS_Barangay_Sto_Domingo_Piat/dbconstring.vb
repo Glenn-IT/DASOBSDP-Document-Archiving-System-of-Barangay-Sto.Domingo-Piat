@@ -1,31 +1,26 @@
-﻿Imports System.IO
+Imports System.IO
 
 Public Class dbconstring
 
-    ' Default connection string — matches DATABASE.md
-    ' Encrypt=False disables SSL certificate validation for local SQLEXPRESS
-    Private Const DefaultConnection As String =
-        "Data Source=Glenn\SQLEXPRESS;" &
-        "Initial Catalog=dasbsdp;" &
-        "Integrated Security=True;" &
-        "TrustServerCertificate=True;" &
-        "Encrypt=False;"
-
     ''' <summary>
-    ''' Returns the active connection string.
-    ''' Reads from config.txt in the application directory if it exists,
-    ''' otherwise falls back to the default hardcoded connection string.
+    ''' Returns the connection string read from config.txt in the application directory.
+    ''' Create config.txt next to the .exe — see config.txt.example for the format.
     ''' </summary>
     Public Shared ReadOnly Property Connection As String
         Get
             Dim configPath As String = Path.Combine(
                 Environment.CurrentDirectory, "config.txt")
 
-            If File.Exists(configPath) Then
-                Return File.ReadAllText(configPath).Trim()
+            If Not File.Exists(configPath) Then
+                Throw New InvalidOperationException(
+                    "config.txt not found in the application directory." &
+                    Environment.NewLine &
+                    "Create config.txt with your SQL Server connection string." &
+                    Environment.NewLine &
+                    "See config.txt.example for the required format.")
             End If
 
-            Return DefaultConnection
+            Return File.ReadAllText(configPath).Trim()
         End Get
     End Property
 
