@@ -178,7 +178,7 @@ Partial Class AdminUpdateDocumentForm
         txtUploadedBy.Name = "txtUploadedBy" : txtUploadedBy.TabIndex = 4
 
         ' Status
-        lblStatus.AutoSize = False : lblStatus.Text = "Status" : lblStatus.Font = lbFont
+        lblStatus.AutoSize = False : lblStatus.Text = "Document Type" : lblStatus.Font = lbFont
         lblStatus.ForeColor = dark : lblStatus.BackColor = System.Drawing.Color.Transparent
         lblStatus.Size = New System.Drawing.Size(360, 20) : lblStatus.Location = New System.Drawing.Point(0, 406)
         lblStatus.Name = "lblStatus"
