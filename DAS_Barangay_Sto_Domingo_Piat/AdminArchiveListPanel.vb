@@ -6,8 +6,9 @@ Public Class AdminArchiveListPanel
     End Sub
 
     Private Sub AdminArchiveListPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LoadPlaceholderData()
         LayoutSearchBar()
+        SetupApprovalMenu()
+        LoadDocumentsFromDB()
     End Sub
 
     Private Sub AdminArchiveListPanel_Resize(sender As Object, e As EventArgs) Handles Me.Resize
@@ -21,50 +22,54 @@ Public Class AdminArchiveListPanel
         Dim barH   As Integer = 32
         Dim topOff As Integer = (pnlSearch.Height - barH) \ 2
 
-
         btnSearch.SetBounds(pnlSearch.Width - margin - btnW, topOff, btnW, barH)
         txtSearch.SetBounds(margin + iconW + 4, topOff,
                             pnlSearch.Width - margin - btnW - 4 - iconW - margin - 4, barH)
     End Sub
 
-    Private Sub LoadPlaceholderData()
-        dgvArchiveList.Rows.Clear()
-        dgvArchiveList.Rows.Add("DOC-0001", "Barangay Resolution No. 01",  "admin",   "2025-01-10 08:30", "Active")
-        dgvArchiveList.Rows.Add("DOC-0002", "Community Development Plan",   "jdela",   "2025-01-15 09:00", "Active")
-        dgvArchiveList.Rows.Add("DOC-0003", "Infrastructure Project Docs",  "mreyes",  "2025-02-03 10:15", "Active")
-        dgvArchiveList.Rows.Add("DOC-0004", "Health Program Report 2024",   "admin",   "2025-02-20 11:00", "Archived")
-        dgvArchiveList.Rows.Add("DOC-0005", "Livelihood Program Proposal",  "rsantos", "2025-03-05 14:30", "Active")
-        dgvArchiveList.Rows.Add("DOC-0006", "Solid Waste Management Plan",  "jdela",   "2025-03-18 09:45", "Archived")
-        dgvArchiveList.Rows.Add("DOC-0007", "Barangay Budget FY 2025",      "admin",   "2025-04-01 08:00", "Active")
+    Private Sub SetupApprovalMenu()
+        Dim cms         As New ContextMenuStrip()
+        Dim approveItem As New ToolStripMenuItem("Approve Document")
+        AddHandler approveItem.Click, AddressOf ApproveSelectedDocument
+        cms.Items.Add(approveItem)
+        dgvArchiveList.ContextMenuStrip = cms
     End Sub
 
-    Private Sub FilterArchive(query As String)
-        LoadPlaceholderData()
-        If query.Trim() = "" Then Return
-        Dim q As String = query.Trim().ToLower()
-        For i As Integer = dgvArchiveList.Rows.Count - 1 To 0 Step -1
-            Dim row As DataGridViewRow = dgvArchiveList.Rows(i)
-            Dim match As Boolean = False
-            For Each cell As DataGridViewCell In row.Cells
-                If cell.Value IsNot Nothing AndAlso cell.Value.ToString().ToLower().Contains(q) Then
-                    match = True : Exit For
-                End If
+    Friend Sub LoadDocumentsFromDB(Optional searchQuery As String = Nothing)
+        dgvArchiveList.Rows.Clear()
+        Try
+            Dim dt As DataTable = DocumentRepository.GetAll(searchQuery)
+            For Each row As DataRow In dt.Rows
+                Dim idx As Integer = dgvArchiveList.Rows.Add(
+                    row("DocumentCode").ToString(),
+                    row("Title").ToString(),
+                    row("UploadedBy").ToString(),
+                    Convert.ToDateTime(row("DateUploaded")).ToString("yyyy-MM-dd HH:mm"),
+                    row("Status").ToString()
+                )
+                dgvArchiveList.Rows(idx).Tag = CInt(row("DocumentID"))
             Next
-            If Not match Then dgvArchiveList.Rows.RemoveAt(i)
-        Next
+        Catch ex As Exception
+            MessageBox.Show("Error loading documents: " & ex.Message,
+                            "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        FilterArchive(txtSearch.Text)
+        Dim q As String = InputHelper.SanitizeInput(txtSearch.Text)
+        LoadDocumentsFromDB(If(q = "", Nothing, q))
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-        FilterArchive(txtSearch.Text)
+        Dim q As String = InputHelper.SanitizeInput(txtSearch.Text)
+        LoadDocumentsFromDB(If(q = "", Nothing, q))
     End Sub
 
     Private Sub btnAddDocument_Click(sender As Object, e As EventArgs) Handles btnAddDocument.Click
         Dim frm As New AdminNewDocumentForm()
-        frm.ShowDialog()
+        If frm.ShowDialog() = DialogResult.OK Then
+            LoadDocumentsFromDB()
+        End If
     End Sub
 
     Private Sub btnUpdateDocument_Click(sender As Object, e As EventArgs) Handles btnUpdateDocument.Click
@@ -73,8 +78,16 @@ Public Class AdminArchiveListPanel
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
+        Dim selectedRow  As DataGridViewRow = dgvArchiveList.SelectedRows(0)
+        Dim documentId   As Integer = CInt(selectedRow.Tag)
+        Dim documentCode As String  = selectedRow.Cells(0).Value.ToString()
+
         Dim frm As New AdminUpdateDocumentForm()
-        frm.ShowDialog()
+        frm.DocumentID   = documentId
+        frm.DocumentCode = documentCode
+        If frm.ShowDialog() = DialogResult.OK Then
+            LoadDocumentsFromDB()
+        End If
     End Sub
 
     Private Sub btnDeleteDocument_Click(sender As Object, e As EventArgs) Handles btnDeleteDocument.Click
@@ -83,8 +96,44 @@ Public Class AdminArchiveListPanel
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
+        Dim selectedRow  As DataGridViewRow = dgvArchiveList.SelectedRows(0)
+        Dim documentId   As Integer = CInt(selectedRow.Tag)
+        Dim documentCode As String  = selectedRow.Cells(0).Value.ToString()
+
         Dim frm As New AdminDeleteDocumentForm()
-        frm.ShowDialog()
+        frm.DocumentID   = documentId
+        frm.DocumentCode = documentCode
+        If frm.ShowDialog() = DialogResult.OK Then
+            LoadDocumentsFromDB()
+        End If
+    End Sub
+
+    Private Sub ApproveSelectedDocument(sender As Object, e As EventArgs)
+        If dgvArchiveList.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a document to approve.", "Approve Document",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        Dim selectedRow  As DataGridViewRow = dgvArchiveList.SelectedRows(0)
+        Dim documentId   As Integer = CInt(selectedRow.Tag)
+        Dim documentCode As String  = selectedRow.Cells(0).Value.ToString()
+
+        Dim confirm As DialogResult = MessageBox.Show(
+            $"Approve document {documentCode}?",
+            "Approve Document", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If confirm <> DialogResult.Yes Then Return
+
+        Try
+            DocumentRepository.Approve(documentId)
+            ActivityLogger.Log(SessionManager.Username, "Success",
+                $"Admin approved document: {documentCode}")
+            MessageBox.Show("Document approved successfully.", "Approve Document",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information)
+            LoadDocumentsFromDB()
+        Catch ex As Exception
+            MessageBox.Show("Error approving document: " & ex.Message,
+                            "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
 End Class
