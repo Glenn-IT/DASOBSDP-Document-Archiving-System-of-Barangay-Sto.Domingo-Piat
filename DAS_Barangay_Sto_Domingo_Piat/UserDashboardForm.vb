@@ -12,6 +12,16 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub LoadPanel(panel As UserControl)
+        If pnlMainContent.Controls.Count > 0 Then
+            Dim current As UserViewProfilePanel =
+                TryCast(pnlMainContent.Controls(0), UserViewProfilePanel)
+            If current IsNot Nothing AndAlso current.HasUnsavedChanges Then
+                Dim answer As DialogResult = MessageBox.Show(
+                    "You have unsaved profile changes. Discard and leave?",
+                    "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                If answer <> DialogResult.Yes Then Return
+            End If
+        End If
         pnlMainContent.Controls.Clear()
         panel.Dock = DockStyle.Fill
         pnlMainContent.Controls.Add(panel)
@@ -59,6 +69,10 @@ Public Class UserDashboardForm
             MessageBoxIcon.Question)
 
         If result = DialogResult.Yes Then
+            ActivityLogger.Log(SessionManager.Username, "Success", "User logged out.")
+            SessionManager.Clear()
+            Dim loginForm As New LoginForm()
+            loginForm.Show()
             Me.Close()
         End If
     End Sub
