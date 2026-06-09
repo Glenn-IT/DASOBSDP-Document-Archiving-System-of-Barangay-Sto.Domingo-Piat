@@ -6,23 +6,33 @@ Public Class AdminUsersListPanel
     End Sub
 
     Private Sub AdminUsersListPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LoadPlaceholderData()
+        LoadUsersFromDB()
     End Sub
 
-    Private Sub LoadPlaceholderData()
+    Friend Sub LoadUsersFromDB()
         dgvUsersList.Rows.Clear()
-        dgvUsersList.Rows.Add("USR-0001", "admin",    "Admin", "Active")
-        dgvUsersList.Rows.Add("USR-0002", "jdela",    "User",  "Active")
-        dgvUsersList.Rows.Add("USR-0003", "mreyes",   "User",  "Active")
-        dgvUsersList.Rows.Add("USR-0004", "rsantos",  "User",  "Inactive")
-        dgvUsersList.Rows.Add("USR-0005", "bcruz",    "User",  "Active")
-        dgvUsersList.Rows.Add("USR-0006", "lgarcia",  "Admin", "Active")
-        dgvUsersList.Rows.Add("USR-0007", "ptorres",  "User",  "Inactive")
+        Try
+            Dim dt As DataTable = UserRepository.GetAll()
+            For Each row As DataRow In dt.Rows
+                Dim idx As Integer = dgvUsersList.Rows.Add(
+                    row("UserCode").ToString(),
+                    row("Username").ToString(),
+                    row("UserType").ToString(),
+                    row("Status").ToString()
+                )
+                dgvUsersList.Rows(idx).Tag = CInt(row("UserID"))
+            Next
+        Catch ex As Exception
+            MessageBox.Show("Error loading users: " & ex.Message,
+                            "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnAddUser_Click(sender As Object, e As EventArgs) Handles btnAddUser.Click
         Dim frm As New AdminAddAccountForm()
-        frm.ShowDialog()
+        If frm.ShowDialog() = DialogResult.OK Then
+            LoadUsersFromDB()
+        End If
     End Sub
 
     Private Sub btnUpdateUser_Click(sender As Object, e As EventArgs) Handles btnUpdateUser.Click
@@ -31,8 +41,16 @@ Public Class AdminUsersListPanel
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
+        Dim selectedRow As DataGridViewRow = dgvUsersList.SelectedRows(0)
+        Dim userId      As Integer = CInt(selectedRow.Tag)
+        Dim username    As String  = selectedRow.Cells(1).Value.ToString()
+
         Dim frm As New AdminUpdateAccountForm()
-        frm.ShowDialog()
+        frm.UserID   = userId
+        frm.Username = username
+        If frm.ShowDialog() = DialogResult.OK Then
+            LoadUsersFromDB()
+        End If
     End Sub
 
     Private Sub btnDeleteUser_Click(sender As Object, e As EventArgs) Handles btnDeleteUser.Click
@@ -41,8 +59,16 @@ Public Class AdminUsersListPanel
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
+        Dim selectedRow As DataGridViewRow = dgvUsersList.SelectedRows(0)
+        Dim userId      As Integer = CInt(selectedRow.Tag)
+        Dim username    As String  = selectedRow.Cells(1).Value.ToString()
+
         Dim frm As New AdminDeleteUserForm()
-        frm.ShowDialog()
+        frm.UserID   = userId
+        frm.Username = username
+        If frm.ShowDialog() = DialogResult.OK Then
+            LoadUsersFromDB()
+        End If
     End Sub
 
 End Class
