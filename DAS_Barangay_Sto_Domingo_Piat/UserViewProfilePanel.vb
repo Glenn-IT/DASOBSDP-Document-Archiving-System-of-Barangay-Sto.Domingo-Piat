@@ -1,6 +1,13 @@
 Public Class UserViewProfilePanel
     Inherits System.Windows.Forms.UserControl
 
+    Private _isDirty As Boolean = False
+    Public ReadOnly Property HasUnsavedChanges As Boolean
+        Get
+            Return _isDirty
+        End Get
+    End Property
+
     Public Sub New()
         InitializeComponent()
     End Sub
@@ -13,28 +20,67 @@ Public Class UserViewProfilePanel
             "What city were you born in?",
             "What is your favorite childhood nickname?"
         })
+        txtUsername.ReadOnly = True
+        txtUserType.ReadOnly = True
 
-        ' Pre-fill with current user profile data
-        txtUsername.Text       = "jdela"
-        txtUserType.Text       = "User"
-        cmbSecurityQuestion.SelectedIndex = 0
-        txtSecurityAnswer.Text = "Santos"
+        AddHandler cmbSecurityQuestion.SelectedIndexChanged, Sub() _isDirty = True
+        AddHandler txtSecurityAnswer.TextChanged,            Sub() _isDirty = True
+        AddHandler txtNewPassword.TextChanged,               Sub() _isDirty = True
+        AddHandler txtConfirmPassword.TextChanged,           Sub() _isDirty = True
+
+        LoadProfileFromDB()
+    End Sub
+
+    Private Sub LoadProfileFromDB()
+        Try
+            Dim dt As DataTable = UserRepository.GetByUsername(SessionManager.Username)
+            If dt.Rows.Count > 0 Then
+                Dim row As DataRow = dt.Rows(0)
+                txtUsername.Text                 = SessionManager.Username
+                txtUserType.Text                 = row("UserType").ToString()
+                cmbSecurityQuestion.SelectedItem = row("SecurityQuestion").ToString()
+                txtSecurityAnswer.Text           = row("SecurityAnswer").ToString()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading profile: " & ex.Message,
+                            "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        txtNewPassword.Clear()
+        txtConfirmPassword.Clear()
+        _isDirty = False
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If txtNewPassword.Text.Trim() <> "" AndAlso txtNewPassword.Text <> txtConfirmPassword.Text Then
+        Dim securityAnswer   As String = InputHelper.SanitizeInput(txtSecurityAnswer.Text)
+        Dim securityQuestion As String = If(cmbSecurityQuestion.SelectedItem IsNot Nothing,
+                                            cmbSecurityQuestion.SelectedItem.ToString(), "")
+        Dim newPassword      As String = txtNewPassword.Text.Trim()
+        Dim confirmPassword  As String = txtConfirmPassword.Text.Trim()
+
+        If newPassword <> "" AndAlso newPassword <> confirmPassword Then
             MessageBox.Show("Passwords do not match.", "View Profile",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
-        MessageBox.Show("Profile updated successfully!", "View Profile",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Try
+            Dim hashedPassword As String = If(newPassword <> "",
+                PasswordHelper.HashPassword(newPassword), Nothing)
+            UserRepository.UpdateProfile(SessionManager.Username, securityQuestion,
+                                         securityAnswer, hashedPassword)
+            ActivityLogger.Log(SessionManager.Username, "Success",
+                "User updated their profile.")
+            MessageBox.Show("Profile updated successfully!", "View Profile",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information)
+            LoadProfileFromDB()
+        Catch ex As Exception
+            MessageBox.Show("Error updating profile: " & ex.Message,
+                            "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        txtNewPassword.Clear()
-        txtConfirmPassword.Clear()
-        UserViewProfilePanel_Load(Nothing, EventArgs.Empty)
+        LoadProfileFromDB()
     End Sub
 
 End Class
