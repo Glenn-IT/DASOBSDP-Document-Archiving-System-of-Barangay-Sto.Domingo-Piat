@@ -196,13 +196,13 @@ IF NOT EXISTS (SELECT 1 FROM tbl_Users)
 BEGIN
     INSERT INTO tbl_Users (UserCode, Username, PasswordHash, UserType, SecurityQuestion, SecurityAnswer, Status)
     VALUES
-        ('USR-0001', 'admin',   'admin123',   'Admin', 'What is your mother''s maiden name?',      'Santos',  'Active'),
-        ('USR-0002', 'jdela',   'jdela123',   'User',  'What is your mother''s maiden name?',      'Santos',  'Active'),
-        ('USR-0003', 'mreyes',  'mreyes123',  'User',  'What was the name of your first pet?',     'Brownie', 'Active'),
-        ('USR-0004', 'rsantos', 'rsantos123', 'User',  'What is your elementary school name?',     'BSPES',   'Inactive'),
-        ('USR-0005', 'bcruz',   'bcruz123',   'User',  'What city were you born in?',              'Piat',    'Active'),
-        ('USR-0006', 'lgarcia', 'lgarcia123', 'Admin', 'What is your favorite childhood nickname?','Garci',   'Active'),
-        ('USR-0007', 'ptorres', 'ptorres123', 'User',  'What was the name of your first pet?',     'Spotty',  'Inactive');
+        ('USR-0001', 'admin',   '$2a$11$zrfWgscm52K3Cg5iYuvTMuUMs3ISKhG2bT6Fz7tWLW7i8IPhuQ88C', 'Admin', 'What is your mother''s maiden name?',      'Santos',  'Active'),
+        ('USR-0002', 'jdela',   '$2a$11$eu9P4dEGU8E0Afb2K3H0leXtbCWUtavG1VjfKQOPv1tq6mOINf1fa', 'User',  'What is your mother''s maiden name?',      'Santos',  'Active'),
+        ('USR-0003', 'mreyes',  '$2a$11$uLoVubSKvSo0S5M1HZuvhuo1hmT4.WMP1uDhxlzZ91/otyoj9NdrG', 'User',  'What was the name of your first pet?',     'Brownie', 'Active'),
+        ('USR-0004', 'rsantos', '$2a$11$EtgScj4iLSvWM/7PQgKp3.Bh1JZqkTehKWsA0iIGhxw43dN3o5Ame', 'User',  'What is your elementary school name?',     'BSPES',   'Inactive'),
+        ('USR-0005', 'bcruz',   '$2a$11$TuU3tY4ilPcJP35NHykizOLu3ouAAcsd8LwKcaGuUNy5fh5iUo9iW', 'User',  'What city were you born in?',              'Piat',    'Active'),
+        ('USR-0006', 'lgarcia', '$2a$11$jg0.wM67Q8J1Awi/Skee5ukJtlpbB.XfoSwyf9c6MkBXVNK9pXxoS', 'Admin', 'What is your favorite childhood nickname?','Garci',   'Active'),
+        ('USR-0007', 'ptorres', '$2a$11$UYvM0OAj2oyfMew1YBH8vejt/vHNdJF2lgba79WmhEj/QtVB055vq', 'User',  'What was the name of your first pet?',     'Spotty',  'Inactive');
 END
 GO
 
