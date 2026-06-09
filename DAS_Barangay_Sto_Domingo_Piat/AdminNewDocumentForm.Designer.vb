@@ -219,7 +219,7 @@ Partial Class AdminNewDocumentForm
 
         ' Status
         lblStatus.AutoSize  = False
-        lblStatus.Text      = "Status"
+        lblStatus.Text      = "Document Type"
         lblStatus.Font      = lbFont
         lblStatus.ForeColor = dark
         lblStatus.BackColor = System.Drawing.Color.Transparent
@@ -250,7 +250,7 @@ Partial Class AdminNewDocumentForm
         pnlLeft.Controls.Add(lblStatus)
         pnlLeft.Controls.Add(cmbStatus)
 
-        ' ?? pnlRight  (right half — image + PDF) ??????????????????
+        ' ?? pnlRight  (right half ï¿½ image + PDF) ??????????????????
         pnlRight.BackColor = System.Drawing.Color.Transparent
         pnlRight.Dock      = System.Windows.Forms.DockStyle.Fill
         pnlRight.Name      = "pnlRight"
