@@ -24,8 +24,8 @@
 ## Section 1 — Login (LoginForm)
 
 ### 1.1 Valid Admin Login
-- [ ] Enter valid admin username and password → should open `AdminDashboardForm`
-- [ ] Activity log should record: `"Admin logged in successfully."`
+- [x] Enter valid admin username and password → should open `AdminDashboardForm`
+- [x] Activity log should record: `"Admin logged in successfully."`
 
 ### 1.2 Valid User Login
 - [ ] Enter valid user username and password → should open `UserDashboardForm`
