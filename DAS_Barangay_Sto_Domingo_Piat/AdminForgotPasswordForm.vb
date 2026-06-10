@@ -3,6 +3,7 @@ Public Class AdminForgotPasswordForm
 
     Private lblUsernameField As New System.Windows.Forms.Label()
     Private txtUsernameField As New System.Windows.Forms.TextBox()
+    Private _detectedUserType As String = ""
 
     Public Sub New()
         InitializeComponent()
@@ -54,13 +55,21 @@ Public Class AdminForgotPasswordForm
         If username = "" Then Return
 
         cmbSecurityQuestion.Items.Clear()
+        _detectedUserType = ""
         Try
-            Dim question As String = UserRepository.GetSecurityQuestion(username, UserType_Admin)
-            If question Is Nothing Then
-                MessageBox.Show("No admin account found with that username.", "Forgot Password",
+            Dim dt As DataTable = UserRepository.GetByUsername(username)
+            If dt.Rows.Count = 0 Then
+                MessageBox.Show("No account found with that username.", "Forgot Password",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Else
-                cmbSecurityQuestion.Items.Add(question)
+                _detectedUserType = dt.Rows(0)("UserType").ToString()
+                cmbSecurityQuestion.Items.AddRange(New String() {
+                    "What is your mother's maiden name?",
+                    "What was the name of your first pet?",
+                    "What is your elementary school name?",
+                    "What city were you born in?",
+                    "What is your favorite childhood nickname?"
+                })
                 cmbSecurityQuestion.SelectedIndex = 0
             End If
         Catch ex As Exception
@@ -80,28 +89,39 @@ Public Class AdminForgotPasswordForm
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
+        If _detectedUserType = "" Then
+            MessageBox.Show("Please enter a valid username first.", "Forgot Password",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
         If newPass <> confirmPass Then
             MessageBox.Show("Passwords do not match. Please try again.", "Forgot Password",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
+        Dim selectedQuestion As String = If(cmbSecurityQuestion.SelectedItem IsNot Nothing,
+                                            cmbSecurityQuestion.SelectedItem.ToString(), "")
+        If selectedQuestion = "" Then
+            MessageBox.Show("Please select a security question.", "Forgot Password",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         Try
-            If Not UserRepository.ValidateSecurityAnswer(username, UserType_Admin, answer) Then
-                MessageBox.Show("Incorrect security answer.", "Forgot Password",
+            If Not UserRepository.ValidateSecurityAnswer(username, _detectedUserType, selectedQuestion, answer) Then
+                MessageBox.Show("Incorrect security question or answer.", "Forgot Password",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
 
             Dim hashedPassword As String = PasswordHelper.HashPassword(newPass)
-            UserRepository.UpdatePassword(username, UserType_Admin, hashedPassword)
+            UserRepository.UpdatePassword(username, _detectedUserType, hashedPassword)
 
-            ActivityLogger.Log(username, "Success", "Admin reset their password via forgot password.")
+            ActivityLogger.Log(username, "Success", $"{_detectedUserType} reset their password via forgot password.")
             MessageBox.Show("Password reset successfully!", "Forgot Password",
                             MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            Dim loginForm As New LoginForm()
-            loginForm.Show()
             Me.Close()
         Catch ex As Exception
             MessageBox.Show("Error resetting password: " & ex.Message,
@@ -110,8 +130,6 @@ Public Class AdminForgotPasswordForm
     End Sub
 
     Private Sub btnBackToLogin_Click(sender As Object, e As EventArgs) Handles btnBackToLogin.Click
-        Dim loginForm As New LoginForm()
-        loginForm.Show()
         Me.Close()
     End Sub
 
