@@ -16,38 +16,44 @@ Partial Class LoginForm
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        pnlBackground    = New System.Windows.Forms.Panel()
-        pnlCard          = New System.Windows.Forms.Panel()
-        pnlHeader        = New System.Windows.Forms.Panel()
-        lblSubTitle      = New System.Windows.Forms.Label()
-        lblSystemTitle   = New System.Windows.Forms.Label()
-        lblWelcome       = New System.Windows.Forms.Label()
-        lblUsername      = New System.Windows.Forms.Label()
-        txtUsername      = New System.Windows.Forms.TextBox()
-        lblPassword      = New System.Windows.Forms.Label()
-        txtPassword      = New System.Windows.Forms.TextBox()
-        btnLogin         = New System.Windows.Forms.Button()
-        btnForgotPassword = New System.Windows.Forms.Button()
-        lblFooter        = New System.Windows.Forms.Label()
-
-        Me.SuspendLayout()
-
-        Dim cream As System.Drawing.Color = System.Drawing.Color.FromArgb(242, 237, 194)
-        Dim dark  As System.Drawing.Color = System.Drawing.Color.FromArgb(52, 103, 57)
-        Dim mid   As System.Drawing.Color = System.Drawing.Color.FromArgb(121, 174, 111)
-
-        ' ?? pnlBackground ?????????????????????????????????????????
-        pnlBackground.BackColor = dark
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LoginForm))
+        pnlBackground = New Panel()
+        pnlCard = New Panel()
+        pnlHeader = New Panel()
+        lblSubTitle = New Label()
+        lblSystemTitle = New Label()
+        lblWelcome = New Label()
+        lblUsername = New Label()
+        txtUsername = New TextBox()
+        lblPassword = New Label()
+        txtPassword = New TextBox()
+        btnLogin = New Button()
+        btnForgotPassword = New Button()
+        lblFooter = New Label()
+        Panel1 = New Panel()
+        PictureBox1 = New PictureBox()
+        pnlBackground.SuspendLayout()
+        pnlCard.SuspendLayout()
+        pnlHeader.SuspendLayout()
+        Panel1.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' pnlBackground
+        ' 
+        pnlBackground.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        pnlBackground.Controls.Add(Panel1)
         pnlBackground.Controls.Add(pnlCard)
         pnlBackground.Controls.Add(lblFooter)
-        pnlBackground.Dock      = System.Windows.Forms.DockStyle.Fill
-        pnlBackground.Location  = New System.Drawing.Point(0, 0)
-        pnlBackground.Name      = "pnlBackground"
-        pnlBackground.Size      = New System.Drawing.Size(900, 657)
-        pnlBackground.TabIndex  = 0
-
-        ' ?? pnlCard ???????????????????????????????????????????????
-        pnlCard.BackColor = cream
+        pnlBackground.Dock = DockStyle.Fill
+        pnlBackground.Location = New Point(0, 0)
+        pnlBackground.Name = "pnlBackground"
+        pnlBackground.Size = New Size(900, 753)
+        pnlBackground.TabIndex = 0
+        ' 
+        ' pnlCard
+        ' 
+        pnlCard.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         pnlCard.Controls.Add(pnlHeader)
         pnlCard.Controls.Add(lblWelcome)
         pnlCard.Controls.Add(lblUsername)
@@ -56,153 +62,188 @@ Partial Class LoginForm
         pnlCard.Controls.Add(txtPassword)
         pnlCard.Controls.Add(btnLogin)
         pnlCard.Controls.Add(btnForgotPassword)
-        pnlCard.Location = New System.Drawing.Point(250, 79)
-        pnlCard.Name     = "pnlCard"
-        pnlCard.Size     = New System.Drawing.Size(400, 487)
+        pnlCard.Location = New Point(250, 226)
+        pnlCard.Name = "pnlCard"
+        pnlCard.Size = New Size(400, 487)
         pnlCard.TabIndex = 0
-
-        ' ?? pnlHeader ?????????????????????????????????????????????
-        pnlHeader.BackColor = mid
+        ' 
+        ' pnlHeader
+        ' 
+        pnlHeader.BackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
         pnlHeader.Controls.Add(lblSubTitle)
         pnlHeader.Controls.Add(lblSystemTitle)
-        pnlHeader.Dock     = System.Windows.Forms.DockStyle.Top
-        pnlHeader.Location = New System.Drawing.Point(0, 0)
-        pnlHeader.Name     = "pnlHeader"
-        pnlHeader.Padding  = New System.Windows.Forms.Padding(10, 11, 10, 11)
-        pnlHeader.Size     = New System.Drawing.Size(400, 113)
+        pnlHeader.Dock = DockStyle.Top
+        pnlHeader.Location = New Point(0, 0)
+        pnlHeader.Name = "pnlHeader"
+        pnlHeader.Padding = New Padding(10, 11, 10, 11)
+        pnlHeader.Size = New Size(400, 113)
         pnlHeader.TabIndex = 0
-
-        lblSystemTitle.Dock      = System.Windows.Forms.DockStyle.Top
-        lblSystemTitle.Font      = New System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold)
-        lblSystemTitle.ForeColor = System.Drawing.Color.White
-        lblSystemTitle.Location  = New System.Drawing.Point(10, 11)
-        lblSystemTitle.Name      = "lblSystemTitle"
-        lblSystemTitle.Size      = New System.Drawing.Size(380, 57)
-        lblSystemTitle.TabIndex  = 1
-        lblSystemTitle.Text      = "Document Archiving System of Barangay Sto. Domingo"
-        lblSystemTitle.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-
-        lblSubTitle.Dock      = System.Windows.Forms.DockStyle.Top
-        lblSubTitle.Font      = New System.Drawing.Font("Segoe UI", 8.5)
-        lblSubTitle.ForeColor = cream
-        lblSubTitle.Location  = New System.Drawing.Point(10, 68)
-        lblSubTitle.Name      = "lblSubTitle"
-        lblSubTitle.Size      = New System.Drawing.Size(380, 32)
-        lblSubTitle.TabIndex  = 0
-        lblSubTitle.Text      = "Piat, Cagayan"
-        lblSubTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter
-
-        ' ?? lblWelcome ????????????????????????????????????????????
-        lblWelcome.AutoSize  = False
-        lblWelcome.BackColor = System.Drawing.Color.Transparent
-        lblWelcome.Font      = New System.Drawing.Font("Segoe UI", 14, System.Drawing.FontStyle.Bold)
-        lblWelcome.ForeColor = dark
-        lblWelcome.Location  = New System.Drawing.Point(30, 131)
-        lblWelcome.Name      = "lblWelcome"
-        lblWelcome.Size      = New System.Drawing.Size(340, 43)
-        lblWelcome.TabIndex  = 1
-        lblWelcome.Text      = "Login"
-        lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-
-        ' ?? lblUsername ???????????????????????????????????????????
-        lblUsername.AutoSize  = False
-        lblUsername.BackColor = System.Drawing.Color.Transparent
-        lblUsername.Font      = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
-        lblUsername.ForeColor = dark
-        lblUsername.Location  = New System.Drawing.Point(30, 193)
-        lblUsername.Name      = "lblUsername"
-        lblUsername.Size      = New System.Drawing.Size(340, 23)
-        lblUsername.TabIndex  = 2
-        lblUsername.Text      = "Username"
-
-        ' ?? txtUsername ???????????????????????????????????????????
-        txtUsername.BackColor       = cream
-        txtUsername.BorderStyle     = System.Windows.Forms.BorderStyle.FixedSingle
-        txtUsername.Font            = New System.Drawing.Font("Segoe UI", 10)
-        txtUsername.ForeColor       = dark
-        txtUsername.Location        = New System.Drawing.Point(30, 218)
-        txtUsername.Name            = "txtUsername"
+        ' 
+        ' lblSubTitle
+        ' 
+        lblSubTitle.Dock = DockStyle.Top
+        lblSubTitle.Font = New Font("Segoe UI", 8.5F)
+        lblSubTitle.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        lblSubTitle.Location = New Point(10, 68)
+        lblSubTitle.Name = "lblSubTitle"
+        lblSubTitle.Size = New Size(380, 32)
+        lblSubTitle.TabIndex = 0
+        lblSubTitle.Text = "Piat, Cagayan"
+        lblSubTitle.TextAlign = ContentAlignment.TopCenter
+        ' 
+        ' lblSystemTitle
+        ' 
+        lblSystemTitle.Dock = DockStyle.Top
+        lblSystemTitle.Font = New Font("Segoe UI", 10F, FontStyle.Bold)
+        lblSystemTitle.ForeColor = Color.White
+        lblSystemTitle.Location = New Point(10, 11)
+        lblSystemTitle.Name = "lblSystemTitle"
+        lblSystemTitle.Size = New Size(380, 57)
+        lblSystemTitle.TabIndex = 1
+        lblSystemTitle.Text = "Document Archiving System of Barangay Sto. Domingo"
+        lblSystemTitle.TextAlign = ContentAlignment.BottomCenter
+        ' 
+        ' lblWelcome
+        ' 
+        lblWelcome.BackColor = Color.Transparent
+        lblWelcome.Font = New Font("Segoe UI", 14F, FontStyle.Bold)
+        lblWelcome.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        lblWelcome.Location = New Point(30, 131)
+        lblWelcome.Name = "lblWelcome"
+        lblWelcome.Size = New Size(340, 43)
+        lblWelcome.TabIndex = 1
+        lblWelcome.Text = "Login"
+        lblWelcome.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' lblUsername
+        ' 
+        lblUsername.BackColor = Color.Transparent
+        lblUsername.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        lblUsername.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        lblUsername.Location = New Point(30, 193)
+        lblUsername.Name = "lblUsername"
+        lblUsername.Size = New Size(340, 23)
+        lblUsername.TabIndex = 2
+        lblUsername.Text = "Username"
+        ' 
+        ' txtUsername
+        ' 
+        txtUsername.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        txtUsername.BorderStyle = BorderStyle.FixedSingle
+        txtUsername.Font = New Font("Segoe UI", 10F)
+        txtUsername.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        txtUsername.Location = New Point(30, 218)
+        txtUsername.Name = "txtUsername"
         txtUsername.PlaceholderText = "Enter username"
-        txtUsername.Size            = New System.Drawing.Size(340, 27)
-        txtUsername.TabIndex        = 0
-
-        ' ?? lblPassword ???????????????????????????????????????????
-        lblPassword.AutoSize  = False
-        lblPassword.BackColor = System.Drawing.Color.Transparent
-        lblPassword.Font      = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
-        lblPassword.ForeColor = dark
-        lblPassword.Location  = New System.Drawing.Point(30, 274)
-        lblPassword.Name      = "lblPassword"
-        lblPassword.Size      = New System.Drawing.Size(340, 23)
-        lblPassword.TabIndex  = 3
-        lblPassword.Text      = "Password"
-
-        ' ?? txtPassword ???????????????????????????????????????????
-        txtPassword.BackColor       = cream
-        txtPassword.BorderStyle     = System.Windows.Forms.BorderStyle.FixedSingle
-        txtPassword.Font            = New System.Drawing.Font("Segoe UI", 10)
-        txtPassword.ForeColor       = dark
-        txtPassword.Location        = New System.Drawing.Point(30, 299)
-        txtPassword.Name            = "txtPassword"
-        txtPassword.PasswordChar    = "*"c
+        txtUsername.Size = New Size(340, 27)
+        txtUsername.TabIndex = 0
+        ' 
+        ' lblPassword
+        ' 
+        lblPassword.BackColor = Color.Transparent
+        lblPassword.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        lblPassword.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        lblPassword.Location = New Point(30, 274)
+        lblPassword.Name = "lblPassword"
+        lblPassword.Size = New Size(340, 23)
+        lblPassword.TabIndex = 3
+        lblPassword.Text = "Password"
+        ' 
+        ' txtPassword
+        ' 
+        txtPassword.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        txtPassword.BorderStyle = BorderStyle.FixedSingle
+        txtPassword.Font = New Font("Segoe UI", 10F)
+        txtPassword.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        txtPassword.Location = New Point(30, 299)
+        txtPassword.Name = "txtPassword"
+        txtPassword.PasswordChar = "*"c
         txtPassword.PlaceholderText = "Enter password"
-        txtPassword.Size            = New System.Drawing.Size(340, 27)
-        txtPassword.TabIndex        = 1
-
-        ' ?? btnLogin ??????????????????????????????????????????????
-        btnLogin.BackColor                         = dark
-        btnLogin.Cursor                            = System.Windows.Forms.Cursors.Hand
-        btnLogin.FlatAppearance.BorderSize         = 0
-        btnLogin.FlatAppearance.MouseOverBackColor = mid
-        btnLogin.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
-        btnLogin.Font                              = New System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold)
-        btnLogin.ForeColor                         = cream
-        btnLogin.Location                          = New System.Drawing.Point(30, 365)
-        btnLogin.Name                              = "btnLogin"
-        btnLogin.Size                              = New System.Drawing.Size(340, 48)
-        btnLogin.TabIndex                          = 2
-        btnLogin.Text                              = "LOGIN"
-        btnLogin.UseVisualStyleBackColor           = False
-
-        ' ?? btnForgotPassword ?????????????????????????????????????
-        btnForgotPassword.BackColor                         = System.Drawing.Color.Transparent
-        btnForgotPassword.Cursor                            = System.Windows.Forms.Cursors.Hand
-        btnForgotPassword.FlatAppearance.BorderSize         = 0
-        btnForgotPassword.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
-        btnForgotPassword.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
-        btnForgotPassword.Font                              = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Underline)
-        btnForgotPassword.ForeColor                         = mid
-        btnForgotPassword.Location                          = New System.Drawing.Point(30, 428)
-        btnForgotPassword.Name                              = "btnForgotPassword"
-        btnForgotPassword.Size                              = New System.Drawing.Size(340, 32)
-        btnForgotPassword.TabIndex                          = 3
-        btnForgotPassword.Text                              = "Forgot Password?"
-        btnForgotPassword.UseVisualStyleBackColor           = False
-
-        ' ?? lblFooter ?????????????????????????????????????????????
-        lblFooter.AutoSize  = False
-        lblFooter.BackColor = System.Drawing.Color.Transparent
-        lblFooter.Font      = New System.Drawing.Font("Segoe UI", 8)
-        lblFooter.ForeColor = System.Drawing.Color.FromArgb(159, 203, 152)
-        lblFooter.Location  = New System.Drawing.Point(0, 621)
-        lblFooter.Name      = "lblFooter"
-        lblFooter.Size      = New System.Drawing.Size(900, 29)
-        lblFooter.TabIndex  = 1
-        lblFooter.Text      = "© 2025 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
-        lblFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-
-        ' ?? Form ??????????????????????????????????????????????????
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
-        Me.AutoScaleMode       = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize          = New System.Drawing.Size(900, 657)
-        Me.Controls.Add(pnlBackground)
-        Me.FormBorderStyle     = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.MaximizeBox         = False
-        Me.Name                = "LoginForm"
-        Me.StartPosition       = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text                = "Document Archiving System — Login"
-
-        Me.ResumeLayout(False)
+        txtPassword.Size = New Size(340, 27)
+        txtPassword.TabIndex = 1
+        ' 
+        ' btnLogin
+        ' 
+        btnLogin.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        btnLogin.Cursor = Cursors.Hand
+        btnLogin.FlatAppearance.BorderSize = 0
+        btnLogin.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnLogin.FlatStyle = FlatStyle.Flat
+        btnLogin.Font = New Font("Segoe UI", 10F, FontStyle.Bold)
+        btnLogin.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnLogin.Location = New Point(30, 365)
+        btnLogin.Name = "btnLogin"
+        btnLogin.Size = New Size(340, 48)
+        btnLogin.TabIndex = 2
+        btnLogin.Text = "LOGIN"
+        btnLogin.UseVisualStyleBackColor = False
+        ' 
+        ' btnForgotPassword
+        ' 
+        btnForgotPassword.BackColor = Color.Transparent
+        btnForgotPassword.Cursor = Cursors.Hand
+        btnForgotPassword.FlatAppearance.BorderSize = 0
+        btnForgotPassword.FlatAppearance.MouseOverBackColor = Color.Transparent
+        btnForgotPassword.FlatStyle = FlatStyle.Flat
+        btnForgotPassword.Font = New Font("Segoe UI", 9F, FontStyle.Underline)
+        btnForgotPassword.ForeColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnForgotPassword.Location = New Point(30, 428)
+        btnForgotPassword.Name = "btnForgotPassword"
+        btnForgotPassword.Size = New Size(340, 32)
+        btnForgotPassword.TabIndex = 3
+        btnForgotPassword.Text = "Forgot Password?"
+        btnForgotPassword.UseVisualStyleBackColor = False
+        ' 
+        ' lblFooter
+        ' 
+        lblFooter.BackColor = Color.Transparent
+        lblFooter.Font = New Font("Segoe UI", 8F)
+        lblFooter.ForeColor = Color.FromArgb(CByte(159), CByte(203), CByte(152))
+        lblFooter.Location = New Point(0, 717)
+        lblFooter.Name = "lblFooter"
+        lblFooter.Size = New Size(900, 29)
+        lblFooter.TabIndex = 1
+        lblFooter.Text = "© 2025 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
+        lblFooter.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' Panel1
+        ' 
+        Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom
+        Panel1.Controls.Add(PictureBox1)
+        Panel1.Location = New Point(357, 28)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New Size(204, 179)
+        Panel1.TabIndex = 2
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Dock = DockStyle.Fill
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(0, 0)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(204, 179)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 0
+        PictureBox1.TabStop = False
+        ' 
+        ' LoginForm
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 17F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(900, 753)
+        Controls.Add(pnlBackground)
+        FormBorderStyle = FormBorderStyle.FixedSingle
+        MaximizeBox = False
+        Name = "LoginForm"
+        StartPosition = FormStartPosition.CenterScreen
+        Text = "Document Archiving System — Login"
+        pnlBackground.ResumeLayout(False)
+        pnlCard.ResumeLayout(False)
+        pnlCard.PerformLayout()
+        pnlHeader.ResumeLayout(False)
+        Panel1.ResumeLayout(False)
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
     End Sub
 
     Friend WithEvents pnlBackground     As System.Windows.Forms.Panel
@@ -218,5 +259,7 @@ Partial Class LoginForm
     Friend WithEvents btnLogin          As System.Windows.Forms.Button
     Friend WithEvents btnForgotPassword As System.Windows.Forms.Button
     Friend WithEvents lblFooter         As System.Windows.Forms.Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents PictureBox1 As PictureBox
 
 End Class

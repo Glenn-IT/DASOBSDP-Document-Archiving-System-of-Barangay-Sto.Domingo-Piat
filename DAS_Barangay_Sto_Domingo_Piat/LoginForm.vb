@@ -36,10 +36,10 @@ Public Class LoginForm
                 Return
             End If
 
-            Dim row        As DataRow = dt.Rows(0)
-            Dim userType   As String  = row("UserType").ToString()
-            Dim status     As String  = row("Status").ToString()
-            Dim storedHash As String  = row("PasswordHash").ToString()
+            Dim row As DataRow = dt.Rows(0)
+            Dim userType As String = row("UserType").ToString()
+            Dim status As String = row("Status").ToString()
+            Dim storedHash As String = row("PasswordHash").ToString()
 
             If Not PasswordHelper.VerifyPassword(password, storedHash) Then
                 IncrementFailedAttempts(username)
@@ -59,8 +59,8 @@ Public Class LoginForm
             End If
 
             SessionManager.Username = username
-            SessionManager.UserType  = userType
-            SessionManager.UserCode  = row("UserCode").ToString()
+            SessionManager.UserType = userType
+            SessionManager.UserCode = row("UserCode").ToString()
 
             _failedAttempts.Remove(username)
             ActivityLogger.Log(username, "Success", $"{userType} logged in successfully.")
