@@ -6,25 +6,7 @@ Public Class UserSearchArchivePanel
     End Sub
 
     Private Sub UserSearchArchivePanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LayoutSearchBar()
         LoadDocumentsFromDB()
-    End Sub
-
-    Private Sub UserSearchArchivePanel_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        LayoutSearchBar()
-    End Sub
-
-    Private Sub LayoutSearchBar()
-        Dim margin As Integer = 16
-        Dim btnW   As Integer = 90
-        Dim iconW  As Integer = 36
-        Dim barH   As Integer = 32
-        Dim topOff As Integer = (pnlSearch.Height - barH) \ 2
-
-        lblSearchIcon.SetBounds(margin, topOff, iconW, barH)
-        btnSearch.SetBounds(pnlSearch.Width - margin - btnW, topOff, btnW, barH)
-        txtSearchQuery.SetBounds(margin + iconW + 4, topOff,
-                                 pnlSearch.Width - margin - btnW - 4 - iconW - margin - 4, barH)
     End Sub
 
     Private Sub LoadDocumentsFromDB(Optional searchQuery As String = Nothing)

@@ -6,25 +6,8 @@ Public Class AdminArchiveListPanel
     End Sub
 
     Private Sub AdminArchiveListPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LayoutSearchBar()
         SetupApprovalMenu()
         LoadDocumentsFromDB()
-    End Sub
-
-    Private Sub AdminArchiveListPanel_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        LayoutSearchBar()
-    End Sub
-
-    Private Sub LayoutSearchBar()
-        Dim margin As Integer = 16
-        Dim btnW   As Integer = 90
-        Dim iconW  As Integer = 36
-        Dim barH   As Integer = 32
-        Dim topOff As Integer = (pnlSearch.Height - barH) \ 2
-
-        btnSearch.SetBounds(pnlSearch.Width - margin - btnW, topOff, btnW, barH)
-        txtSearch.SetBounds(margin + iconW + 4, topOff,
-                            pnlSearch.Width - margin - btnW - 4 - iconW - margin - 4, barH)
     End Sub
 
     Private Sub SetupApprovalMenu()

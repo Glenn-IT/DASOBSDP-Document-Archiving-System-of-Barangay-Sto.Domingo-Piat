@@ -17,10 +17,10 @@ Partial Class UserSearchArchivePanel
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As DataGridViewCellStyle = New DataGridViewCellStyle()
         dgvSearchResults = New DataGridView()
         colDocumentID = New DataGridViewTextBoxColumn()
         colDocID = New DataGridViewTextBoxColumn()
@@ -32,7 +32,6 @@ Partial Class UserSearchArchivePanel
         pnlTop = New Panel()
         lblTitle = New Label()
         pnlSearch = New Panel()
-        lblSearchIcon = New Label()
         txtSearchQuery = New TextBox()
         btnSearch = New Button()
         CType(dgvSearchResults, ComponentModel.ISupportInitialize).BeginInit()
@@ -44,30 +43,30 @@ Partial Class UserSearchArchivePanel
         ' 
         dgvSearchResults.AllowUserToAddRows = False
         dgvSearchResults.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(230), CByte(226), CByte(180))
-        dgvSearchResults.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.BackColor = Color.FromArgb(CByte(230), CByte(226), CByte(180))
+        dgvSearchResults.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         dgvSearchResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvSearchResults.BackgroundColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         dgvSearchResults.BorderStyle = BorderStyle.None
-        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
-        DataGridViewCellStyle2.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        DataGridViewCellStyle2.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.True
-        dgvSearchResults.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        DataGridViewCellStyle6.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        DataGridViewCellStyle6.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        DataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = DataGridViewTriState.True
+        dgvSearchResults.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         dgvSearchResults.ColumnHeadersHeight = 36
         dgvSearchResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         dgvSearchResults.Columns.AddRange(New DataGridViewColumn() {colDocumentID, colDocID, colDocTitle, colDateTime, colRemarks, colStatus, colView})
-        DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        DataGridViewCellStyle4.Font = New Font("Segoe UI", 9F)
-        DataGridViewCellStyle4.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
-        DataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
-        DataGridViewCellStyle4.SelectionForeColor = Color.White
-        DataGridViewCellStyle4.WrapMode = DataGridViewTriState.False
-        dgvSearchResults.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        DataGridViewCellStyle8.Font = New Font("Segoe UI", 9F)
+        DataGridViewCellStyle8.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        DataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        DataGridViewCellStyle8.SelectionForeColor = Color.White
+        DataGridViewCellStyle8.WrapMode = DataGridViewTriState.False
+        dgvSearchResults.DefaultCellStyle = DataGridViewCellStyle8
         dgvSearchResults.Dock = DockStyle.Fill
         dgvSearchResults.EnableHeadersVisualStyles = False
         dgvSearchResults.Font = New Font("Segoe UI", 9F)
@@ -80,18 +79,19 @@ Partial Class UserSearchArchivePanel
         dgvSearchResults.RowHeadersWidth = 45
         dgvSearchResults.RowTemplate.Height = 32
         dgvSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvSearchResults.Size = New Size(880, 492)
+        dgvSearchResults.Size = New Size(1013, 554)
         dgvSearchResults.TabIndex = 2
-        '
-        ' colDocumentID (hidden - stores DocumentID PK)
-        '
+        ' 
+        ' colDocumentID
+        ' 
         colDocumentID.HeaderText = "DocumentID"
+        colDocumentID.MinimumWidth = 6
         colDocumentID.Name = "colDocumentID"
         colDocumentID.ReadOnly = True
         colDocumentID.Visible = False
-        '
+        ' 
         ' colDocID
-        '
+        ' 
         colDocID.FillWeight = 14F
         colDocID.HeaderText = "Document ID"
         colDocID.MinimumWidth = 6
@@ -100,8 +100,8 @@ Partial Class UserSearchArchivePanel
         ' 
         ' colDocTitle
         ' 
-        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
-        colDocTitle.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft
+        colDocTitle.DefaultCellStyle = DataGridViewCellStyle7
         colDocTitle.FillWeight = 34F
         colDocTitle.HeaderText = "Document Title"
         colDocTitle.MinimumWidth = 6
@@ -131,16 +131,17 @@ Partial Class UserSearchArchivePanel
         colStatus.MinimumWidth = 6
         colStatus.Name = "colStatus"
         colStatus.ReadOnly = True
-        '
-        ' colView (button column)
-        '
+        ' 
+        ' colView
+        ' 
         colView.FillWeight = 10F
         colView.HeaderText = "Action"
         colView.MinimumWidth = 64
         colView.Name = "colView"
+        colView.ReadOnly = True
         colView.Text = "View"
         colView.UseColumnTextForButtonValue = True
-        '
+        ' 
         ' pnlTop
         ' 
         pnlTop.BackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
@@ -148,7 +149,7 @@ Partial Class UserSearchArchivePanel
         pnlTop.Dock = DockStyle.Top
         pnlTop.Location = New Point(0, 0)
         pnlTop.Name = "pnlTop"
-        pnlTop.Size = New Size(880, 52)
+        pnlTop.Size = New Size(1013, 52)
         pnlTop.TabIndex = 4
         ' 
         ' lblTitle
@@ -160,7 +161,7 @@ Partial Class UserSearchArchivePanel
         lblTitle.Location = New Point(0, 0)
         lblTitle.Name = "lblTitle"
         lblTitle.Padding = New Padding(16, 0, 0, 0)
-        lblTitle.Size = New Size(880, 52)
+        lblTitle.Size = New Size(1013, 52)
         lblTitle.TabIndex = 0
         lblTitle.Text = "Search Archive"
         lblTitle.TextAlign = ContentAlignment.MiddleLeft
@@ -168,28 +169,14 @@ Partial Class UserSearchArchivePanel
         ' pnlSearch
         ' 
         pnlSearch.BackColor = Color.FromArgb(CByte(230), CByte(226), CByte(180))
-        pnlSearch.Controls.Add(lblSearchIcon)
         pnlSearch.Controls.Add(txtSearchQuery)
         pnlSearch.Controls.Add(btnSearch)
         pnlSearch.Dock = DockStyle.Top
         pnlSearch.Location = New Point(0, 52)
         pnlSearch.Name = "pnlSearch"
         pnlSearch.Padding = New Padding(16, 10, 16, 10)
-        pnlSearch.Size = New Size(880, 52)
+        pnlSearch.Size = New Size(1013, 52)
         pnlSearch.TabIndex = 3
-        ' 
-        ' lblSearchIcon
-        ' 
-        lblSearchIcon.BackColor = Color.Transparent
-        lblSearchIcon.Font = New Font("Segoe UI", 11F)
-        lblSearchIcon.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
-        lblSearchIcon.Location = New Point(16, 10)
-        lblSearchIcon.Name = "lblSearchIcon"
-        lblSearchIcon.Size = New Size(32, 32)
-        lblSearchIcon.TabIndex = 0
-        lblSearchIcon.Text = "??"
-        lblSearchIcon.TextAlign = ContentAlignment.MiddleCenter
-        lblSearchIcon.Visible = False
         ' 
         ' txtSearchQuery
         ' 
@@ -198,10 +185,10 @@ Partial Class UserSearchArchivePanel
         txtSearchQuery.BorderStyle = BorderStyle.FixedSingle
         txtSearchQuery.Font = New Font("Segoe UI", 10F)
         txtSearchQuery.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
-        txtSearchQuery.Location = New Point(52, 10)
+        txtSearchQuery.Location = New Point(3, 12)
         txtSearchQuery.Name = "txtSearchQuery"
         txtSearchQuery.PlaceholderText = "Type to search documents..."
-        txtSearchQuery.Size = New Size(780, 27)
+        txtSearchQuery.Size = New Size(264, 27)
         txtSearchQuery.TabIndex = 0
         ' 
         ' btnSearch
@@ -214,7 +201,7 @@ Partial Class UserSearchArchivePanel
         btnSearch.FlatStyle = FlatStyle.Flat
         btnSearch.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         btnSearch.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnSearch.Location = New Point(680, 0)
+        btnSearch.Location = New Point(273, 11)
         btnSearch.Name = "btnSearch"
         btnSearch.Size = New Size(90, 32)
         btnSearch.TabIndex = 1
@@ -230,7 +217,7 @@ Partial Class UserSearchArchivePanel
         Controls.Add(pnlSearch)
         Controls.Add(pnlTop)
         Name = "UserSearchArchivePanel"
-        Size = New Size(880, 596)
+        Size = New Size(1013, 658)
         CType(dgvSearchResults, ComponentModel.ISupportInitialize).EndInit()
         pnlTop.ResumeLayout(False)
         pnlSearch.ResumeLayout(False)
@@ -249,7 +236,6 @@ Partial Class UserSearchArchivePanel
     Friend WithEvents pnlTop           As System.Windows.Forms.Panel
     Friend WithEvents lblTitle         As System.Windows.Forms.Label
     Friend WithEvents pnlSearch        As System.Windows.Forms.Panel
-    Friend WithEvents lblSearchIcon    As System.Windows.Forms.Label
     Friend WithEvents txtSearchQuery   As System.Windows.Forms.TextBox
     Friend WithEvents btnSearch        As System.Windows.Forms.Button
 
