@@ -59,14 +59,17 @@ Public Module UserRepository
 
     Public Function ValidateSecurityAnswer(username As String,
                                            userType As String,
+                                           question As String,
                                            answer   As String) As Boolean
         Using con As New SqlConnection(dbconstring.Connection)
             con.Open()
             Dim cmd As New SqlCommand(
                 "SELECT COUNT(*) FROM tbl_Users " &
-                "WHERE Username = @username AND UserType = @userType AND SecurityAnswer = @answer", con)
+                "WHERE Username = @username AND UserType = @userType " &
+                "AND SecurityQuestion = @question AND SecurityAnswer = @answer", con)
             cmd.Parameters.AddWithValue("@username", username)
             cmd.Parameters.AddWithValue("@userType", userType)
+            cmd.Parameters.AddWithValue("@question", question)
             cmd.Parameters.AddWithValue("@answer",   answer)
             Return CInt(cmd.ExecuteScalar()) > 0
         End Using

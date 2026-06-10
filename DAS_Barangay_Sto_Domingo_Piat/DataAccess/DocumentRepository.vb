@@ -60,11 +60,11 @@ Public Module DocumentRepository
             Dim sql As String
             Dim cmd As SqlCommand
             If String.IsNullOrEmpty(search) Then
-                sql = "SELECT DocumentCode, Title, DateUploaded, ApprovalStatus, Status " &
+                sql = "SELECT DocumentID, DocumentCode, Title, DateUploaded, ApprovalStatus, Status " &
                       "FROM tbl_Documents WHERE Status = 'Active' ORDER BY DateUploaded DESC"
                 cmd = New SqlCommand(sql, con)
             Else
-                sql = "SELECT DocumentCode, Title, DateUploaded, ApprovalStatus, Status " &
+                sql = "SELECT DocumentID, DocumentCode, Title, DateUploaded, ApprovalStatus, Status " &
                       "FROM tbl_Documents " &
                       "WHERE Status = 'Active' " &
                       "AND (Title LIKE @search OR DocumentType LIKE @search) " &
@@ -72,6 +72,22 @@ Public Module DocumentRepository
                 cmd = New SqlCommand(sql, con)
                 cmd.Parameters.AddWithValue("@search", "%" & search & "%")
             End If
+            Dim adapter As New SqlDataAdapter(cmd)
+            adapter.Fill(dt)
+        End Using
+        Return dt
+    End Function
+
+    Public Function GetByIdFull(documentID As Integer) As DataTable
+        Dim dt As New DataTable()
+        Using con As New SqlConnection(dbconstring.Connection)
+            con.Open()
+            Dim cmd As New SqlCommand(
+                "SELECT DocumentCode, Title, Description, DocumentType, " &
+                "       UploadedBy, DateUploaded, ApprovalStatus, Status, " &
+                "       BannerImage, PDFFile, PDFFileName " &
+                "FROM tbl_Documents WHERE DocumentID = @id", con)
+            cmd.Parameters.AddWithValue("@id", documentID)
             Dim adapter As New SqlDataAdapter(cmd)
             adapter.Fill(dt)
         End Using
