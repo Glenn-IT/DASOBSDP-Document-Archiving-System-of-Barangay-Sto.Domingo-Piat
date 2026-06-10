@@ -22,11 +22,13 @@ Partial Class UserSearchArchivePanel
         Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
         dgvSearchResults = New DataGridView()
+        colDocumentID = New DataGridViewTextBoxColumn()
         colDocID = New DataGridViewTextBoxColumn()
         colDocTitle = New DataGridViewTextBoxColumn()
         colDateTime = New DataGridViewTextBoxColumn()
         colRemarks = New DataGridViewTextBoxColumn()
         colStatus = New DataGridViewTextBoxColumn()
+        colView = New DataGridViewButtonColumn()
         pnlTop = New Panel()
         lblTitle = New Label()
         pnlSearch = New Panel()
@@ -57,7 +59,7 @@ Partial Class UserSearchArchivePanel
         dgvSearchResults.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         dgvSearchResults.ColumnHeadersHeight = 36
         dgvSearchResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        dgvSearchResults.Columns.AddRange(New DataGridViewColumn() {colDocID, colDocTitle, colDateTime, colRemarks, colStatus})
+        dgvSearchResults.Columns.AddRange(New DataGridViewColumn() {colDocumentID, colDocID, colDocTitle, colDateTime, colRemarks, colStatus, colView})
         DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         DataGridViewCellStyle4.Font = New Font("Segoe UI", 9F)
@@ -80,9 +82,16 @@ Partial Class UserSearchArchivePanel
         dgvSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvSearchResults.Size = New Size(880, 492)
         dgvSearchResults.TabIndex = 2
-        ' 
+        '
+        ' colDocumentID (hidden - stores DocumentID PK)
+        '
+        colDocumentID.HeaderText = "DocumentID"
+        colDocumentID.Name = "colDocumentID"
+        colDocumentID.ReadOnly = True
+        colDocumentID.Visible = False
+        '
         ' colDocID
-        ' 
+        '
         colDocID.FillWeight = 14F
         colDocID.HeaderText = "Document ID"
         colDocID.MinimumWidth = 6
@@ -122,7 +131,16 @@ Partial Class UserSearchArchivePanel
         colStatus.MinimumWidth = 6
         colStatus.Name = "colStatus"
         colStatus.ReadOnly = True
-        ' 
+        '
+        ' colView (button column)
+        '
+        colView.FillWeight = 10F
+        colView.HeaderText = "Action"
+        colView.MinimumWidth = 64
+        colView.Name = "colView"
+        colView.Text = "View"
+        colView.UseColumnTextForButtonValue = True
+        '
         ' pnlTop
         ' 
         pnlTop.BackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
@@ -221,11 +239,13 @@ Partial Class UserSearchArchivePanel
     End Sub
 
     Friend WithEvents dgvSearchResults As System.Windows.Forms.DataGridView
+    Friend WithEvents colDocumentID    As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colDocID         As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colDocTitle      As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colDateTime      As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colRemarks       As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colStatus        As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colView          As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents pnlTop           As System.Windows.Forms.Panel
     Friend WithEvents lblTitle         As System.Windows.Forms.Label
     Friend WithEvents pnlSearch        As System.Windows.Forms.Panel
