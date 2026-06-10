@@ -71,8 +71,6 @@ Public Class UserDashboardForm
         If result = DialogResult.Yes Then
             ActivityLogger.Log(SessionManager.Username, "Success", "User logged out.")
             SessionManager.Clear()
-            Dim loginForm As New LoginForm()
-            loginForm.Show()
             Me.Close()
         End If
     End Sub
