@@ -210,12 +210,18 @@ Public Class UserForgotPasswordForm
 
         cmbSecurityQuestion.Items.Clear()
         Try
-            Dim question As String = UserRepository.GetSecurityQuestion(username, UserType_User)
-            If question Is Nothing Then
-                MessageBox.Show("No user account found with that username.", "Forgot Password",
+            Dim dt As DataTable = UserRepository.GetByUsername(username)
+            If dt.Rows.Count = 0 Then
+                MessageBox.Show("No account found with that username.", "Forgot Password",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Else
-                cmbSecurityQuestion.Items.Add(question)
+                cmbSecurityQuestion.Items.AddRange(New String() {
+                    "What is your mother's maiden name?",
+                    "What was the name of your first pet?",
+                    "What is your elementary school name?",
+                    "What city were you born in?",
+                    "What is your favorite childhood nickname?"
+                })
                 cmbSecurityQuestion.SelectedIndex = 0
             End If
         Catch ex As Exception
@@ -241,9 +247,17 @@ Public Class UserForgotPasswordForm
             Return
         End If
 
+        Dim selectedQuestion As String = If(cmbSecurityQuestion.SelectedItem IsNot Nothing,
+                                            cmbSecurityQuestion.SelectedItem.ToString(), "")
+        If selectedQuestion = "" Then
+            MessageBox.Show("Please select a security question.", "Forgot Password",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         Try
-            If Not UserRepository.ValidateSecurityAnswer(username, UserType_User, answer) Then
-                MessageBox.Show("Incorrect security answer.", "Forgot Password",
+            If Not UserRepository.ValidateSecurityAnswer(username, UserType_User, selectedQuestion, answer) Then
+                MessageBox.Show("Incorrect security question or answer.", "Forgot Password",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
@@ -255,8 +269,6 @@ Public Class UserForgotPasswordForm
             MessageBox.Show("Password reset successfully!", "Forgot Password",
                             MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            Dim loginForm As New LoginForm()
-            loginForm.Show()
             Me.Close()
         Catch ex As Exception
             MessageBox.Show("Error resetting password: " & ex.Message,
@@ -265,8 +277,6 @@ Public Class UserForgotPasswordForm
     End Sub
 
     Private Sub btnBackToLogin_Click(sender As Object, e As EventArgs)
-        Dim loginForm As New LoginForm()
-        loginForm.Show()
         Me.Close()
     End Sub
 
