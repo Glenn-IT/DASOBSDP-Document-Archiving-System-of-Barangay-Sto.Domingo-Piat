@@ -56,12 +56,6 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub btnViewProfile_Click(sender As Object, e As EventArgs) Handles btnViewProfile.Click
-        ' GATE — remove when unlocking for v1.08
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnViewProfile)
-        lblPageTitle.Text = "View Profile"
-        Return
-        ' END GATE
         LoadPanel(New UserViewProfilePanel())
         HighlightButton(btnViewProfile)
         lblPageTitle.Text = "View Profile"
