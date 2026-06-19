@@ -50,12 +50,6 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub btnSearchArchive_Click(sender As Object, e As EventArgs) Handles btnSearchArchive.Click
-        ' GATE — remove when unlocking for v1.07
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnSearchArchive)
-        lblPageTitle.Text = "Search Archive"
-        Return
-        ' END GATE
         LoadPanel(New UserSearchArchivePanel())
         HighlightButton(btnSearchArchive)
         lblPageTitle.Text = "Search Archive"
