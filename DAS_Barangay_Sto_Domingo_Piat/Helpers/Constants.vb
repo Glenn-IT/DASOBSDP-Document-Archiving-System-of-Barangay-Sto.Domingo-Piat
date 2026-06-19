@@ -1,6 +1,6 @@
 Public Module Constants
 
-    Public Const CURRENT_VERSION As String = "v1.04"
+    Public Const CURRENT_VERSION As String = "v1.05"
 
     Public Const UserType_Admin As String = "Admin"
     Public Const UserType_User  As String = "User"

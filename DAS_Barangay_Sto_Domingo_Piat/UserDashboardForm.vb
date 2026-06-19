@@ -6,12 +6,6 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub UserDashboardForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ' GATE — remove when unlocking for v1.05
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnDashboard)
-        lblPageTitle.Text = "Dashboard"
-        Return
-        ' END GATE
         LoadPanel(New UserDashboardPanel())
         HighlightButton(btnDashboard)
         lblPageTitle.Text = "Dashboard"
@@ -44,12 +38,6 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
-        ' GATE — remove when unlocking for v1.05
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnDashboard)
-        lblPageTitle.Text = "Dashboard"
-        Return
-        ' END GATE
         LoadPanel(New UserDashboardPanel())
         HighlightButton(btnDashboard)
         lblPageTitle.Text = "Dashboard"
