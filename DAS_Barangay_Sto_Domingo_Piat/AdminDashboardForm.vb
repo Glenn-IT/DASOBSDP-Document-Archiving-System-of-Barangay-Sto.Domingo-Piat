@@ -6,16 +6,10 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub AdminDashboardForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        lblWelcomeUser.Text = $"Welcome, {SessionManager.Username}!"
-        ' GATE — remove when unlocking for v1.01
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnArchiveList)
-        lblPageTitle.Text = "Archive List"
-        Return
-        ' END GATE
         LoadPanel(New AdminArchiveListPanel())
         HighlightButton(btnArchiveList)
-        lblPageTitle.Text = "Archive List"
+        lblPageTitle.Text   = "Archive List"
+        lblWelcomeUser.Text = $"Welcome, {SessionManager.Username}!"
     End Sub
 
     Private Sub LoadPanel(panel As UserControl)
@@ -45,12 +39,6 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub btnArchiveList_Click(sender As Object, e As EventArgs) Handles btnArchiveList.Click
-        ' GATE — remove when unlocking for v1.01
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnArchiveList)
-        lblPageTitle.Text = "Archive List"
-        Return
-        ' END GATE
         LoadPanel(New AdminArchiveListPanel())
         HighlightButton(btnArchiveList)
         lblPageTitle.Text = "Archive List"
