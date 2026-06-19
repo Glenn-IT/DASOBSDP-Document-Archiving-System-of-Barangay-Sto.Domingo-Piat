@@ -36,13 +36,13 @@ Partial Class AdminForgotPasswordForm
 
         Me.SuspendLayout()
 
-        ' ?? pnlBackground  (#346739 — Dark Green) ?????????????????
+        ' ?? pnlBackground  (#346739 ï¿½ Dark Green) ?????????????????
         pnlBackground.BackColor = System.Drawing.Color.FromArgb(52, 103, 57)
         pnlBackground.Dock      = System.Windows.Forms.DockStyle.Fill
         pnlBackground.Name      = "pnlBackground"
         pnlBackground.TabIndex  = 0
 
-        ' ?? pnlHeader  (#79AE6F — Mid Green) ??????????????????????
+        ' ?? pnlHeader  (#79AE6F ï¿½ Mid Green) ??????????????????????
         pnlHeader.BackColor = System.Drawing.Color.FromArgb(121, 174, 111)
         pnlHeader.Dock      = System.Windows.Forms.DockStyle.Top
         pnlHeader.Height    = 100
@@ -59,7 +59,7 @@ Partial Class AdminForgotPasswordForm
         lblSystemTitle.Height    = 50
         lblSystemTitle.Name      = "lblSystemTitle"
 
-        ' ?? lblSubTitle  (#F2EDC2 — Cream on Mid Green) ???????????
+        ' ?? lblSubTitle  (#F2EDC2 ï¿½ Cream on Mid Green) ???????????
         lblSubTitle.AutoSize   = False
         lblSubTitle.Dock       = System.Windows.Forms.DockStyle.Top
         lblSubTitle.ForeColor  = System.Drawing.Color.FromArgb(242, 237, 194)
@@ -197,7 +197,7 @@ Partial Class AdminForgotPasswordForm
         btnBackToLogin.Cursor                            = System.Windows.Forms.Cursors.Hand
         btnBackToLogin.TabIndex                          = 5
 
-        ' ?? pnlCard  (#F2EDC2 — Cream card) ???????????????????????
+        ' ?? pnlCard  (#F2EDC2 ï¿½ Cream card) ???????????????????????
         pnlCard.BackColor = System.Drawing.Color.FromArgb(242, 237, 194)
         pnlCard.Location  = New System.Drawing.Point(230, 50)
         pnlCard.Name      = "pnlCard"
@@ -216,9 +216,9 @@ Partial Class AdminForgotPasswordForm
         pnlCard.Controls.Add(btnConfirm)
         pnlCard.Controls.Add(btnBackToLogin)
 
-        ' ?? lblFooter  (#9FCB98 — Light Green) ????????????????????
+        ' ?? lblFooter  (#9FCB98 ï¿½ Light Green) ????????????????????
         lblFooter.AutoSize  = False
-        lblFooter.Text      = "© 2025 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
+        lblFooter.Text      = "ï¿½ 2026 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
         lblFooter.Font      = New System.Drawing.Font("Segoe UI", 8)
         lblFooter.ForeColor = System.Drawing.Color.FromArgb(159, 203, 152)
         lblFooter.BackColor = System.Drawing.Color.Transparent
@@ -239,7 +239,7 @@ Partial Class AdminForgotPasswordForm
         Me.MaximizeBox         = False
         Me.Name                = "AdminForgotPasswordForm"
         Me.StartPosition       = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text                = "Document Archiving System — Forgot Password"
+        Me.Text                = "Document Archiving System ï¿½ Forgot Password"
 
         Me.ResumeLayout(False)
     End Sub

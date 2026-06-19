@@ -18,6 +18,8 @@ Partial Class LoginForm
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LoginForm))
         pnlBackground = New Panel()
+        Panel1 = New Panel()
+        PictureBox1 = New PictureBox()
         pnlCard = New Panel()
         pnlHeader = New Panel()
         lblSubTitle = New Label()
@@ -30,13 +32,11 @@ Partial Class LoginForm
         btnLogin = New Button()
         btnForgotPassword = New Button()
         lblFooter = New Label()
-        Panel1 = New Panel()
-        PictureBox1 = New PictureBox()
         pnlBackground.SuspendLayout()
-        pnlCard.SuspendLayout()
-        pnlHeader.SuspendLayout()
         Panel1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        pnlCard.SuspendLayout()
+        pnlHeader.SuspendLayout()
         SuspendLayout()
         ' 
         ' pnlBackground
@@ -50,6 +50,26 @@ Partial Class LoginForm
         pnlBackground.Name = "pnlBackground"
         pnlBackground.Size = New Size(900, 753)
         pnlBackground.TabIndex = 0
+        ' 
+        ' Panel1
+        ' 
+        Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom
+        Panel1.Controls.Add(PictureBox1)
+        Panel1.Location = New Point(357, 12)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New Size(204, 195)
+        Panel1.TabIndex = 2
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Dock = DockStyle.Fill
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(0, 0)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(204, 195)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 0
+        PictureBox1.TabStop = False
         ' 
         ' pnlCard
         ' 
@@ -203,28 +223,8 @@ Partial Class LoginForm
         lblFooter.Name = "lblFooter"
         lblFooter.Size = New Size(900, 29)
         lblFooter.TabIndex = 1
-        lblFooter.Text = "© 2025 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
+        lblFooter.Text = "ï¿½ 2026 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
         lblFooter.TextAlign = ContentAlignment.MiddleCenter
-        ' 
-        ' Panel1
-        ' 
-        Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom
-        Panel1.Controls.Add(PictureBox1)
-        Panel1.Location = New Point(357, 28)
-        Panel1.Name = "Panel1"
-        Panel1.Size = New Size(204, 179)
-        Panel1.TabIndex = 2
-        ' 
-        ' PictureBox1
-        ' 
-        PictureBox1.Dock = DockStyle.Fill
-        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(0, 0)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(204, 179)
-        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
-        PictureBox1.TabIndex = 0
-        PictureBox1.TabStop = False
         ' 
         ' LoginForm
         ' 
@@ -236,13 +236,13 @@ Partial Class LoginForm
         MaximizeBox = False
         Name = "LoginForm"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "Document Archiving System — Login"
+        Text = "Document Archiving System ï¿½ Login"
         pnlBackground.ResumeLayout(False)
+        Panel1.ResumeLayout(False)
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         pnlCard.ResumeLayout(False)
         pnlCard.PerformLayout()
         pnlHeader.ResumeLayout(False)
-        Panel1.ResumeLayout(False)
-        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 

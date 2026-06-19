@@ -148,7 +148,7 @@ Public Class UserForgotPasswordForm
 
         With lblFooter
             .AutoSize  = False
-            .Text      = "© 2025 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
+            .Text      = "© 2026 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
             .Font      = New System.Drawing.Font("Segoe UI", 8)
             .ForeColor = light
             .BackColor = System.Drawing.Color.Transparent

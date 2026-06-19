@@ -16,160 +16,35 @@ Partial Class AdminDashboardForm
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        pnlSidebar      = New System.Windows.Forms.Panel()
-        pnlSidebarTop   = New System.Windows.Forms.Panel()
-        lblSysTitle     = New System.Windows.Forms.Label()
-        lblSysSubTitle  = New System.Windows.Forms.Label()
-        lblMenuLabel    = New System.Windows.Forms.Label()
-        btnArchiveList  = New System.Windows.Forms.Button()
-        btnUsersList    = New System.Windows.Forms.Button()
-        btnActivityLogs = New System.Windows.Forms.Button()
-        btnViewProfile  = New System.Windows.Forms.Button()
-        pnlSidebarBottom = New System.Windows.Forms.Panel()
-        btnLogout       = New System.Windows.Forms.Button()
-        pnlRight        = New System.Windows.Forms.Panel()
-        pnlHeader       = New System.Windows.Forms.Panel()
-        lblPageTitle    = New System.Windows.Forms.Label()
-        lblWelcomeUser  = New System.Windows.Forms.Label()
-        pnlMainContent  = New System.Windows.Forms.Panel()
-
-        Me.SuspendLayout()
-
-        ' ?? pnlSidebar  (#346739 — Dark Green, left 220px) ????????
-        pnlSidebar.BackColor = System.Drawing.Color.FromArgb(52, 103, 57)
-        pnlSidebar.Dock      = System.Windows.Forms.DockStyle.Left
-        pnlSidebar.Width     = 220
-        pnlSidebar.Name      = "pnlSidebar"
-        pnlSidebar.TabIndex  = 0
-
-        ' ?? pnlSidebarTop  (brand header, docked Top) ?????????????
-        pnlSidebarTop.BackColor = System.Drawing.Color.FromArgb(40, 80, 44)
-        pnlSidebarTop.Dock      = System.Windows.Forms.DockStyle.Top
-        pnlSidebarTop.Height    = 110
-        pnlSidebarTop.Name      = "pnlSidebarTop"
-
-        lblSysTitle.AutoSize  = False
-        lblSysTitle.Dock      = System.Windows.Forms.DockStyle.Top
-        lblSysTitle.Text      = "Document Archiving System"
-        lblSysTitle.Font      = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
-        lblSysTitle.ForeColor = System.Drawing.Color.White
-        lblSysTitle.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        lblSysTitle.Height    = 60
-        lblSysTitle.Name      = "lblSysTitle"
-        lblSysTitle.Padding   = New System.Windows.Forms.Padding(6, 0, 6, 0)
-
-        lblSysSubTitle.AutoSize  = False
-        lblSysSubTitle.Dock      = System.Windows.Forms.DockStyle.Top
-        lblSysSubTitle.Text      = "Brgy. Sto. Domingo - Piat"
-        lblSysSubTitle.Font      = New System.Drawing.Font("Segoe UI", 7.5, System.Drawing.FontStyle.Regular)
-        lblSysSubTitle.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
-        lblSysSubTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        lblSysSubTitle.Height    = 28
-        lblSysSubTitle.Name      = "lblSysSubTitle"
-
-        pnlSidebarTop.Controls.Add(lblSysSubTitle)
-        pnlSidebarTop.Controls.Add(lblSysTitle)
-
-        ' ?? lblMenuLabel ??????????????????????????????????????????
-        lblMenuLabel.AutoSize  = False
-        lblMenuLabel.Text      = "MAIN MENU"
-        lblMenuLabel.Font      = New System.Drawing.Font("Segoe UI", 7.5, System.Drawing.FontStyle.Bold)
-        lblMenuLabel.ForeColor = System.Drawing.Color.FromArgb(159, 203, 152)
-        lblMenuLabel.BackColor = System.Drawing.Color.Transparent
-        lblMenuLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        lblMenuLabel.Size      = New System.Drawing.Size(220, 28)
-        lblMenuLabel.Location  = New System.Drawing.Point(0, 118)
-        lblMenuLabel.Padding   = New System.Windows.Forms.Padding(16, 0, 0, 0)
-        lblMenuLabel.Name      = "lblMenuLabel"
-
-        Dim sbSize As New System.Drawing.Size(220, 48)
-        Dim sbFont As New System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Regular)
-
-        ' ?? Menu buttons (Top-anchored, fixed positions) ???????????
-        btnArchiveList.Text                              = "  Archive List"
-        btnArchiveList.Font                              = sbFont
-        btnArchiveList.BackColor                         = System.Drawing.Color.FromArgb(52, 103, 57)
-        btnArchiveList.ForeColor                         = System.Drawing.Color.FromArgb(242, 237, 194)
-        btnArchiveList.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
-        btnArchiveList.FlatAppearance.BorderSize         = 0
-        btnArchiveList.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(121, 174, 111)
-        btnArchiveList.Size                              = sbSize
-        btnArchiveList.Location                          = New System.Drawing.Point(0, 150)
-        btnArchiveList.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
-        btnArchiveList.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
-        btnArchiveList.Cursor                            = System.Windows.Forms.Cursors.Hand
-        btnArchiveList.Name                              = "btnArchiveList"
-        btnArchiveList.TabIndex                          = 0
-
-        btnUsersList.Text                              = "  Users List"
-        btnUsersList.Font                              = sbFont
-        btnUsersList.BackColor                         = System.Drawing.Color.FromArgb(52, 103, 57)
-        btnUsersList.ForeColor                         = System.Drawing.Color.FromArgb(242, 237, 194)
-        btnUsersList.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
-        btnUsersList.FlatAppearance.BorderSize         = 0
-        btnUsersList.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(121, 174, 111)
-        btnUsersList.Size                              = sbSize
-        btnUsersList.Location                          = New System.Drawing.Point(0, 198)
-        btnUsersList.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
-        btnUsersList.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
-        btnUsersList.Cursor                            = System.Windows.Forms.Cursors.Hand
-        btnUsersList.Name                              = "btnUsersList"
-        btnUsersList.TabIndex                          = 1
-
-        btnActivityLogs.Text                              = "  Activity Logs"
-        btnActivityLogs.Font                              = sbFont
-        btnActivityLogs.BackColor                         = System.Drawing.Color.FromArgb(52, 103, 57)
-        btnActivityLogs.ForeColor                         = System.Drawing.Color.FromArgb(242, 237, 194)
-        btnActivityLogs.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
-        btnActivityLogs.FlatAppearance.BorderSize         = 0
-        btnActivityLogs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(121, 174, 111)
-        btnActivityLogs.Size                              = sbSize
-        btnActivityLogs.Location                          = New System.Drawing.Point(0, 246)
-        btnActivityLogs.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
-        btnActivityLogs.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
-        btnActivityLogs.Cursor                            = System.Windows.Forms.Cursors.Hand
-        btnActivityLogs.Name                              = "btnActivityLogs"
-        btnActivityLogs.TabIndex                          = 2
-
-        btnViewProfile.Text                              = "  View Profile"
-        btnViewProfile.Font                              = sbFont
-        btnViewProfile.BackColor                         = System.Drawing.Color.FromArgb(52, 103, 57)
-        btnViewProfile.ForeColor                         = System.Drawing.Color.FromArgb(242, 237, 194)
-        btnViewProfile.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
-        btnViewProfile.FlatAppearance.BorderSize         = 0
-        btnViewProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(121, 174, 111)
-        btnViewProfile.Size                              = sbSize
-        btnViewProfile.Location                          = New System.Drawing.Point(0, 294)
-        btnViewProfile.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
-        btnViewProfile.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
-        btnViewProfile.Cursor                            = System.Windows.Forms.Cursors.Hand
-        btnViewProfile.Name                              = "btnViewProfile"
-        btnViewProfile.TabIndex                          = 3
-
-        ' ?? pnlSidebarBottom  (Dock=Bottom — always visible) ??????
-        pnlSidebarBottom.BackColor = System.Drawing.Color.FromArgb(40, 80, 44)
-        pnlSidebarBottom.Dock      = System.Windows.Forms.DockStyle.Bottom
-        pnlSidebarBottom.Height    = 56
-        pnlSidebarBottom.Name      = "pnlSidebarBottom"
-
-        ' ?? btnLogout  (inside pnlSidebarBottom, Dock=Fill) ???????
-        btnLogout.Text                              = "  Logout"
-        btnLogout.Font                              = sbFont
-        btnLogout.BackColor                         = System.Drawing.Color.FromArgb(40, 80, 44)
-        btnLogout.ForeColor                         = System.Drawing.Color.FromArgb(242, 237, 194)
-        btnLogout.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
-        btnLogout.FlatAppearance.BorderSize         = 0
-        btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(180, 60, 60)
-        btnLogout.Dock                              = System.Windows.Forms.DockStyle.Fill
-        btnLogout.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
-        btnLogout.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
-        btnLogout.Cursor                            = System.Windows.Forms.Cursors.Hand
-        btnLogout.Name                              = "btnLogout"
-        btnLogout.TabIndex                          = 0
-
-        pnlSidebarBottom.Controls.Add(btnLogout)
-
-        ' Assemble sidebar
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminDashboardForm))
+        pnlSidebar = New Panel()
+        pnlSidebarTop = New Panel()
+        lblSysSubTitle = New Label()
+        lblSysTitle = New Label()
+        lblMenuLabel = New Label()
+        btnArchiveList = New Button()
+        btnUsersList = New Button()
+        btnActivityLogs = New Button()
+        btnViewProfile = New Button()
+        pnlSidebarBottom = New Panel()
+        btnLogout = New Button()
+        pnlRight = New Panel()
+        pnlMainContent = New Panel()
+        pnlHeader = New Panel()
+        lblPageTitle = New Label()
+        lblWelcomeUser = New Label()
+        PictureBox1 = New PictureBox()
+        pnlSidebar.SuspendLayout()
+        pnlSidebarTop.SuspendLayout()
+        pnlSidebarBottom.SuspendLayout()
+        pnlRight.SuspendLayout()
+        pnlHeader.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' pnlSidebar
+        ' 
+        pnlSidebar.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
         pnlSidebar.Controls.Add(pnlSidebarTop)
         pnlSidebar.Controls.Add(lblMenuLabel)
         pnlSidebar.Controls.Add(btnArchiveList)
@@ -177,68 +52,248 @@ Partial Class AdminDashboardForm
         pnlSidebar.Controls.Add(btnActivityLogs)
         pnlSidebar.Controls.Add(btnViewProfile)
         pnlSidebar.Controls.Add(pnlSidebarBottom)
-
-        ' ?? pnlRight ??????????????????????????????????????????????
-        pnlRight.BackColor = System.Drawing.Color.FromArgb(242, 237, 194)
-        pnlRight.Dock      = System.Windows.Forms.DockStyle.Fill
-        pnlRight.Name      = "pnlRight"
-        pnlRight.TabIndex  = 1
-
-        ' ?? pnlHeader ?????????????????????????????????????????????
-        pnlHeader.BackColor = System.Drawing.Color.FromArgb(121, 174, 111)
-        pnlHeader.Dock      = System.Windows.Forms.DockStyle.Top
-        pnlHeader.Height    = 64
-        pnlHeader.Name      = "pnlHeader"
-
-        lblPageTitle.AutoSize  = False
-        lblPageTitle.Text      = "Admin Dashboard"
-        lblPageTitle.Font      = New System.Drawing.Font("Segoe UI", 13, System.Drawing.FontStyle.Bold)
-        lblPageTitle.ForeColor = System.Drawing.Color.White
-        lblPageTitle.BackColor = System.Drawing.Color.Transparent
-        lblPageTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        lblPageTitle.Size      = New System.Drawing.Size(500, 64)
-        lblPageTitle.Location  = New System.Drawing.Point(20, 0)
-        lblPageTitle.Anchor    = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left
-        lblPageTitle.Name      = "lblPageTitle"
-
-        lblWelcomeUser.AutoSize  = False
-        lblWelcomeUser.Text      = "Welcome, Admin"
-        lblWelcomeUser.Font      = New System.Drawing.Font("Segoe UI", 9)
-        lblWelcomeUser.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
-        lblWelcomeUser.BackColor = System.Drawing.Color.Transparent
-        lblWelcomeUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        lblWelcomeUser.Size      = New System.Drawing.Size(240, 64)
-        lblWelcomeUser.Location  = New System.Drawing.Point(640, 0)
-        lblWelcomeUser.Anchor    = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right
-        lblWelcomeUser.Name      = "lblWelcomeUser"
-
-        pnlHeader.Controls.Add(lblPageTitle)
-        pnlHeader.Controls.Add(lblWelcomeUser)
-
-        ' ?? pnlMainContent ????????????????????????????????????????
-        pnlMainContent.BackColor = System.Drawing.Color.FromArgb(242, 237, 194)
-        pnlMainContent.Dock      = System.Windows.Forms.DockStyle.Fill
-        pnlMainContent.Name      = "pnlMainContent"
-        pnlMainContent.TabIndex  = 0
-        pnlMainContent.Padding   = New System.Windows.Forms.Padding(16)
-
+        pnlSidebar.Dock = DockStyle.Left
+        pnlSidebar.Location = New Point(0, 0)
+        pnlSidebar.Name = "pnlSidebar"
+        pnlSidebar.Size = New Size(220, 748)
+        pnlSidebar.TabIndex = 0
+        ' 
+        ' pnlSidebarTop
+        ' 
+        pnlSidebarTop.BackColor = Color.FromArgb(CByte(40), CByte(80), CByte(44))
+        pnlSidebarTop.Controls.Add(PictureBox1)
+        pnlSidebarTop.Controls.Add(lblSysSubTitle)
+        pnlSidebarTop.Controls.Add(lblSysTitle)
+        pnlSidebarTop.Dock = DockStyle.Top
+        pnlSidebarTop.Location = New Point(0, 0)
+        pnlSidebarTop.Name = "pnlSidebarTop"
+        pnlSidebarTop.Size = New Size(220, 173)
+        pnlSidebarTop.TabIndex = 0
+        ' 
+        ' lblSysSubTitle
+        ' 
+        lblSysSubTitle.Font = New Font("Segoe UI", 7.5F)
+        lblSysSubTitle.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        lblSysSubTitle.Location = New Point(0, 68)
+        lblSysSubTitle.Name = "lblSysSubTitle"
+        lblSysSubTitle.Size = New Size(220, 32)
+        lblSysSubTitle.TabIndex = 0
+        lblSysSubTitle.Text = "Brgy. Sto. Domingo - Piat"
+        lblSysSubTitle.TextAlign = ContentAlignment.TopCenter
+        ' 
+        ' lblSysTitle
+        ' 
+        lblSysTitle.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        lblSysTitle.ForeColor = Color.White
+        lblSysTitle.Location = New Point(0, 0)
+        lblSysTitle.Name = "lblSysTitle"
+        lblSysTitle.Padding = New Padding(6, 0, 6, 0)
+        lblSysTitle.Size = New Size(220, 68)
+        lblSysTitle.TabIndex = 1
+        lblSysTitle.Text = "Document Archiving System"
+        lblSysTitle.TextAlign = ContentAlignment.BottomCenter
+        ' 
+        ' lblMenuLabel
+        ' 
+        lblMenuLabel.BackColor = Color.Transparent
+        lblMenuLabel.Font = New Font("Segoe UI", 7.5F, FontStyle.Bold)
+        lblMenuLabel.ForeColor = Color.FromArgb(CByte(159), CByte(203), CByte(152))
+        lblMenuLabel.Location = New Point(0, 176)
+        lblMenuLabel.Name = "lblMenuLabel"
+        lblMenuLabel.Padding = New Padding(16, 0, 0, 0)
+        lblMenuLabel.Size = New Size(220, 32)
+        lblMenuLabel.TabIndex = 1
+        lblMenuLabel.Text = "MAIN MENU"
+        lblMenuLabel.TextAlign = ContentAlignment.MiddleLeft
+        ' 
+        ' btnArchiveList
+        ' 
+        btnArchiveList.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        btnArchiveList.Cursor = Cursors.Hand
+        btnArchiveList.FlatAppearance.BorderSize = 0
+        btnArchiveList.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnArchiveList.FlatStyle = FlatStyle.Flat
+        btnArchiveList.Font = New Font("Segoe UI", 10F)
+        btnArchiveList.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnArchiveList.Location = New Point(0, 212)
+        btnArchiveList.Name = "btnArchiveList"
+        btnArchiveList.Padding = New Padding(16, 0, 0, 0)
+        btnArchiveList.Size = New Size(220, 54)
+        btnArchiveList.TabIndex = 0
+        btnArchiveList.Text = "  Archive List"
+        btnArchiveList.TextAlign = ContentAlignment.MiddleLeft
+        btnArchiveList.UseVisualStyleBackColor = False
+        ' 
+        ' btnUsersList
+        ' 
+        btnUsersList.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        btnUsersList.Cursor = Cursors.Hand
+        btnUsersList.FlatAppearance.BorderSize = 0
+        btnUsersList.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnUsersList.FlatStyle = FlatStyle.Flat
+        btnUsersList.Font = New Font("Segoe UI", 10F)
+        btnUsersList.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnUsersList.Location = New Point(0, 266)
+        btnUsersList.Name = "btnUsersList"
+        btnUsersList.Padding = New Padding(16, 0, 0, 0)
+        btnUsersList.Size = New Size(220, 54)
+        btnUsersList.TabIndex = 1
+        btnUsersList.Text = "  Users List"
+        btnUsersList.TextAlign = ContentAlignment.MiddleLeft
+        btnUsersList.UseVisualStyleBackColor = False
+        ' 
+        ' btnActivityLogs
+        ' 
+        btnActivityLogs.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        btnActivityLogs.Cursor = Cursors.Hand
+        btnActivityLogs.FlatAppearance.BorderSize = 0
+        btnActivityLogs.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnActivityLogs.FlatStyle = FlatStyle.Flat
+        btnActivityLogs.Font = New Font("Segoe UI", 10F)
+        btnActivityLogs.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnActivityLogs.Location = New Point(0, 321)
+        btnActivityLogs.Name = "btnActivityLogs"
+        btnActivityLogs.Padding = New Padding(16, 0, 0, 0)
+        btnActivityLogs.Size = New Size(220, 54)
+        btnActivityLogs.TabIndex = 2
+        btnActivityLogs.Text = "  Activity Logs"
+        btnActivityLogs.TextAlign = ContentAlignment.MiddleLeft
+        btnActivityLogs.UseVisualStyleBackColor = False
+        ' 
+        ' btnViewProfile
+        ' 
+        btnViewProfile.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        btnViewProfile.Cursor = Cursors.Hand
+        btnViewProfile.FlatAppearance.BorderSize = 0
+        btnViewProfile.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnViewProfile.FlatStyle = FlatStyle.Flat
+        btnViewProfile.Font = New Font("Segoe UI", 10F)
+        btnViewProfile.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnViewProfile.Location = New Point(0, 375)
+        btnViewProfile.Name = "btnViewProfile"
+        btnViewProfile.Padding = New Padding(16, 0, 0, 0)
+        btnViewProfile.Size = New Size(220, 54)
+        btnViewProfile.TabIndex = 3
+        btnViewProfile.Text = "  View Profile"
+        btnViewProfile.TextAlign = ContentAlignment.MiddleLeft
+        btnViewProfile.UseVisualStyleBackColor = False
+        ' 
+        ' pnlSidebarBottom
+        ' 
+        pnlSidebarBottom.BackColor = Color.FromArgb(CByte(40), CByte(80), CByte(44))
+        pnlSidebarBottom.Controls.Add(btnLogout)
+        pnlSidebarBottom.Dock = DockStyle.Bottom
+        pnlSidebarBottom.Location = New Point(0, 685)
+        pnlSidebarBottom.Name = "pnlSidebarBottom"
+        pnlSidebarBottom.Size = New Size(220, 63)
+        pnlSidebarBottom.TabIndex = 4
+        ' 
+        ' btnLogout
+        ' 
+        btnLogout.BackColor = Color.FromArgb(CByte(40), CByte(80), CByte(44))
+        btnLogout.Cursor = Cursors.Hand
+        btnLogout.Dock = DockStyle.Fill
+        btnLogout.FlatAppearance.BorderSize = 0
+        btnLogout.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(180), CByte(60), CByte(60))
+        btnLogout.FlatStyle = FlatStyle.Flat
+        btnLogout.Font = New Font("Segoe UI", 10F)
+        btnLogout.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnLogout.Location = New Point(0, 0)
+        btnLogout.Name = "btnLogout"
+        btnLogout.Padding = New Padding(16, 0, 0, 0)
+        btnLogout.Size = New Size(220, 63)
+        btnLogout.TabIndex = 0
+        btnLogout.Text = "  Logout"
+        btnLogout.TextAlign = ContentAlignment.MiddleLeft
+        btnLogout.UseVisualStyleBackColor = False
+        ' 
+        ' pnlRight
+        ' 
+        pnlRight.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         pnlRight.Controls.Add(pnlMainContent)
         pnlRight.Controls.Add(pnlHeader)
-
-        ' ?? Form ??????????????????????????????????????????????????
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
-        Me.AutoScaleMode       = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize          = New System.Drawing.Size(1100, 660)
-        Me.Controls.Add(pnlRight)
-        Me.Controls.Add(pnlSidebar)
-        Me.FormBorderStyle     = System.Windows.Forms.FormBorderStyle.Sizable
-        Me.MaximizeBox         = True
-        Me.WindowState         = System.Windows.Forms.FormWindowState.Maximized
-        Me.Name                = "AdminDashboardForm"
-        Me.StartPosition       = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text                = "Document Archiving System — Admin Dashboard"
-
-        Me.ResumeLayout(False)
+        pnlRight.Dock = DockStyle.Fill
+        pnlRight.Location = New Point(220, 0)
+        pnlRight.Name = "pnlRight"
+        pnlRight.Size = New Size(880, 748)
+        pnlRight.TabIndex = 1
+        ' 
+        ' pnlMainContent
+        ' 
+        pnlMainContent.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        pnlMainContent.Dock = DockStyle.Fill
+        pnlMainContent.Location = New Point(0, 73)
+        pnlMainContent.Name = "pnlMainContent"
+        pnlMainContent.Padding = New Padding(16, 18, 16, 18)
+        pnlMainContent.Size = New Size(880, 675)
+        pnlMainContent.TabIndex = 0
+        ' 
+        ' pnlHeader
+        ' 
+        pnlHeader.BackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        pnlHeader.Controls.Add(lblPageTitle)
+        pnlHeader.Controls.Add(lblWelcomeUser)
+        pnlHeader.Dock = DockStyle.Top
+        pnlHeader.Location = New Point(0, 0)
+        pnlHeader.Name = "pnlHeader"
+        pnlHeader.Size = New Size(880, 73)
+        pnlHeader.TabIndex = 1
+        ' 
+        ' lblPageTitle
+        ' 
+        lblPageTitle.BackColor = Color.Transparent
+        lblPageTitle.Font = New Font("Segoe UI", 13F, FontStyle.Bold)
+        lblPageTitle.ForeColor = Color.White
+        lblPageTitle.Location = New Point(20, 0)
+        lblPageTitle.Name = "lblPageTitle"
+        lblPageTitle.Size = New Size(500, 73)
+        lblPageTitle.TabIndex = 0
+        lblPageTitle.Text = "Admin Dashboard"
+        lblPageTitle.TextAlign = ContentAlignment.MiddleLeft
+        lblPageTitle.Visible = False
+        ' 
+        ' lblWelcomeUser
+        ' 
+        lblWelcomeUser.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        lblWelcomeUser.BackColor = Color.Transparent
+        lblWelcomeUser.Font = New Font("Segoe UI", 9F)
+        lblWelcomeUser.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        lblWelcomeUser.Location = New Point(1320, 0)
+        lblWelcomeUser.Name = "lblWelcomeUser"
+        lblWelcomeUser.Size = New Size(240, 73)
+        lblWelcomeUser.TabIndex = 1
+        lblWelcomeUser.Text = "Welcome, Admin"
+        lblWelcomeUser.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Dock = DockStyle.Fill
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(0, 0)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(220, 173)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 0
+        PictureBox1.TabStop = False
+        ' 
+        ' AdminDashboardForm
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 17F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(1100, 748)
+        Controls.Add(pnlRight)
+        Controls.Add(pnlSidebar)
+        Name = "AdminDashboardForm"
+        StartPosition = FormStartPosition.CenterScreen
+        Text = "Document Archiving System — Admin Dashboard"
+        WindowState = FormWindowState.Maximized
+        pnlSidebar.ResumeLayout(False)
+        pnlSidebarTop.ResumeLayout(False)
+        pnlSidebarBottom.ResumeLayout(False)
+        pnlRight.ResumeLayout(False)
+        pnlHeader.ResumeLayout(False)
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
     End Sub
 
     Friend WithEvents pnlSidebar        As System.Windows.Forms.Panel
@@ -257,5 +312,6 @@ Partial Class AdminDashboardForm
     Friend WithEvents lblPageTitle      As System.Windows.Forms.Label
     Friend WithEvents lblWelcomeUser    As System.Windows.Forms.Label
     Friend WithEvents pnlMainContent    As System.Windows.Forms.Panel
+    Friend WithEvents PictureBox1 As PictureBox
 
 End Class
