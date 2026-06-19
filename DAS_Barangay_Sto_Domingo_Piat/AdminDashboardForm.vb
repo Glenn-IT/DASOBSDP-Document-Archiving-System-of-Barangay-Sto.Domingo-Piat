@@ -6,10 +6,16 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub AdminDashboardForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        lblWelcomeUser.Text = $"Welcome, {SessionManager.Username}!"
+        ' GATE — remove when unlocking for v1.01
+        LoadPanel(New UnderConstructionPanel())
+        HighlightButton(btnArchiveList)
+        lblPageTitle.Text = "Archive List"
+        Return
+        ' END GATE
         LoadPanel(New AdminArchiveListPanel())
         HighlightButton(btnArchiveList)
-        lblPageTitle.Text   = "Archive List"
-        lblWelcomeUser.Text = $"Welcome, {SessionManager.Username}!"
+        lblPageTitle.Text = "Archive List"
     End Sub
 
     Private Sub LoadPanel(panel As UserControl)
@@ -39,24 +45,48 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub btnArchiveList_Click(sender As Object, e As EventArgs) Handles btnArchiveList.Click
+        ' GATE — remove when unlocking for v1.01
+        LoadPanel(New UnderConstructionPanel())
+        HighlightButton(btnArchiveList)
+        lblPageTitle.Text = "Archive List"
+        Return
+        ' END GATE
         LoadPanel(New AdminArchiveListPanel())
         HighlightButton(btnArchiveList)
         lblPageTitle.Text = "Archive List"
     End Sub
 
     Private Sub btnUsersList_Click(sender As Object, e As EventArgs) Handles btnUsersList.Click
+        ' GATE — remove when unlocking for v1.02
+        LoadPanel(New UnderConstructionPanel())
+        HighlightButton(btnUsersList)
+        lblPageTitle.Text = "Users List"
+        Return
+        ' END GATE
         LoadPanel(New AdminUsersListPanel())
         HighlightButton(btnUsersList)
         lblPageTitle.Text = "Users List"
     End Sub
 
     Private Sub btnActivityLogs_Click(sender As Object, e As EventArgs) Handles btnActivityLogs.Click
+        ' GATE — remove when unlocking for v1.03
+        LoadPanel(New UnderConstructionPanel())
+        HighlightButton(btnActivityLogs)
+        lblPageTitle.Text = "Activity Logs"
+        Return
+        ' END GATE
         LoadPanel(New AdminActivityLogsPanel())
         HighlightButton(btnActivityLogs)
         lblPageTitle.Text = "Activity Logs"
     End Sub
 
     Private Sub btnViewProfile_Click(sender As Object, e As EventArgs) Handles btnViewProfile.Click
+        ' GATE — remove when unlocking for v1.04
+        LoadPanel(New UnderConstructionPanel())
+        HighlightButton(btnViewProfile)
+        lblPageTitle.Text = "View Profile"
+        Return
+        ' END GATE
         LoadPanel(New AdminViewProfilePanel())
         HighlightButton(btnViewProfile)
         lblPageTitle.Text = "View Profile"
