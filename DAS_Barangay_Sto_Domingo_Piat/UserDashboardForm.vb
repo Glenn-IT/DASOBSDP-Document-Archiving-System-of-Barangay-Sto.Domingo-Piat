@@ -44,12 +44,6 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub btnUploadDocument_Click(sender As Object, e As EventArgs) Handles btnUploadDocument.Click
-        ' GATE — remove when unlocking for v1.06
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnUploadDocument)
-        lblPageTitle.Text = "Upload Document"
-        Return
-        ' END GATE
         LoadPanel(New UserUploadDocumentPanel())
         HighlightButton(btnUploadDocument)
         lblPageTitle.Text = "Upload Document"
