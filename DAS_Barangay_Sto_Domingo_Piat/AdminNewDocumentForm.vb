@@ -12,10 +12,7 @@ Public Class AdminNewDocumentForm
     End Sub
 
     Private Sub AdminNewDocumentForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        cmbStatus.Items.AddRange(New String() {
-            "Ordinance", "Resolution", "Budget Report",
-            "Health Report", "Infrastructure", "Livelihood", "Others"
-        })
+        cmbStatus.Items.AddRange(DocumentTypes)
         cmbStatus.SelectedIndex = 0
         txtDocumentID.Text     = "Auto-generated"
         dtpDateTime.Value      = Now

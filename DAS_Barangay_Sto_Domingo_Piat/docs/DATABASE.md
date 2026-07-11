@@ -213,13 +213,13 @@ IF NOT EXISTS (SELECT 1 FROM tbl_Documents)
 BEGIN
     INSERT INTO tbl_Documents (DocumentCode, Title, DocumentType, UploadedBy, DateUploaded, ApprovalStatus, Status)
     VALUES
-        ('DOC-0001', 'Barangay Resolution No. 01',  'Resolution',    'admin',   '2025-01-10 08:30', 'Approved',   'Active'),
-        ('DOC-0002', 'Community Development Plan',   'Ordinance',     'jdela',   '2025-01-15 09:00', 'Approved',   'Active'),
-        ('DOC-0003', 'Infrastructure Project Docs',  'Infrastructure','mreyes',  '2025-02-03 10:15', 'Approved',   'Active'),
-        ('DOC-0004', 'Health Program Report 2024',   'Health Report', 'admin',   '2025-02-20 11:00', 'Archived',   'Archived'),
-        ('DOC-0005', 'Livelihood Program Proposal',  'Livelihood',    'rsantos', '2025-03-05 14:30', 'For Review', 'Active'),
-        ('DOC-0006', 'Solid Waste Management Plan',  'Others',        'jdela',   '2025-03-18 09:45', 'Archived',   'Archived'),
-        ('DOC-0007', 'Barangay Budget FY 2025',      'Budget Report', 'admin',   '2025-04-01 08:00', 'Approved',   'Active');
+        ('DOC-0001', 'Barangay Resolution No. 01',  'Legal Documents',                 'admin',   '2025-01-10 08:30', 'Approved',   'Active'),
+        ('DOC-0002', 'Community Development Plan',   'Legal Documents',                 'jdela',   '2025-01-15 09:00', 'Approved',   'Active'),
+        ('DOC-0003', 'Infrastructure Project Docs',  'Project & Operational Documents', 'mreyes',  '2025-02-03 10:15', 'Approved',   'Active'),
+        ('DOC-0004', 'Health Program Report 2024',   'Technical & Medical Records',     'admin',   '2025-02-20 11:00', 'Archived',   'Archived'),
+        ('DOC-0005', 'Livelihood Program Proposal',  'Project & Operational Documents', 'rsantos', '2025-03-05 14:30', 'For Review', 'Active'),
+        ('DOC-0006', 'Solid Waste Management Plan',  'Correspondence',                  'jdela',   '2025-03-18 09:45', 'Archived',   'Archived'),
+        ('DOC-0007', 'Barangay Budget FY 2025',      'Financial Documents',             'admin',   '2025-04-01 08:00', 'Approved',   'Active');
 END
 GO
 
@@ -268,18 +268,19 @@ Used in both profile update and forgot password forms:
 
 ## Document Types List
 
-Used in the `UserUploadDocumentPanel` dropdown:
+Defined in `Helpers/Constants.vb` (`DocumentTypes`) and shared by the `AdminNewDocumentForm`, `AdminUpdateDocumentForm`, and `UserUploadDocumentPanel` dropdowns:
 
-| Value           |
-|-----------------|
-| `Ordinance`     |
-| `Resolution`    |
-| `Budget Report` |
-| `Health Report` |
-| `Infrastructure`|
-| `Livelihood`    |
-| `Others`        |
+| Value                              |
+|-------------------------------------|
+| `Financial Documents`               |
+| `Legal Documents`                   |
+| `Human Resources (HR) Documents`    |
+| `Project & Operational Documents`   |
+| `Correspondence`                    |
+| `Intellectual Property`             |
+| `Customer & Client Records`         |
+| `Technical & Medical Records`       |
 
 ---
 
-*Last updated: 2025*
+*Last updated: 2026*

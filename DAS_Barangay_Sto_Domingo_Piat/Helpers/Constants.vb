@@ -12,4 +12,15 @@ Public Module Constants
     Public Const Approval_Approved  As String = "Approved"
     Public Const Approval_Archived  As String = "Archived"
 
+    Public ReadOnly DocumentTypes As String() = {
+        "Financial Documents",
+        "Legal Documents",
+        "Human Resources (HR) Documents",
+        "Project & Operational Documents",
+        "Correspondence",
+        "Intellectual Property",
+        "Customer & Client Records",
+        "Technical & Medical Records"
+    }
+
 End Module

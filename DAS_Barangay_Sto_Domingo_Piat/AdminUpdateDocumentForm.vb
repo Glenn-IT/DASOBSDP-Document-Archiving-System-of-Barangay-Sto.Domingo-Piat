@@ -12,10 +12,7 @@ Public Class AdminUpdateDocumentForm
     End Sub
 
     Private Sub AdminUpdateDocumentForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        cmbStatus.Items.AddRange(New String() {
-            "Ordinance", "Resolution", "Budget Report",
-            "Health Report", "Infrastructure", "Livelihood", "Others"
-        })
+        cmbStatus.Items.AddRange(DocumentTypes)
         txtUploadedBy.ReadOnly = True
 
         Try
