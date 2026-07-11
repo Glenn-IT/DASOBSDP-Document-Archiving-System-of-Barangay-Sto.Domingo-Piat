@@ -21,6 +21,7 @@ Partial Class LoginForm
         Panel1 = New Panel()
         PictureBox1 = New PictureBox()
         pnlCard = New Panel()
+        btnExit = New Button()
         pnlHeader = New Panel()
         lblSubTitle = New Label()
         lblSystemTitle = New Label()
@@ -75,6 +76,7 @@ Partial Class LoginForm
         ' pnlCard
         ' 
         pnlCard.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        pnlCard.Controls.Add(btnExit)
         pnlCard.Controls.Add(pnlHeader)
         pnlCard.Controls.Add(lblWelcome)
         pnlCard.Controls.Add(lblUsername)
@@ -88,6 +90,22 @@ Partial Class LoginForm
         pnlCard.Name = "pnlCard"
         pnlCard.Size = New Size(400, 487)
         pnlCard.TabIndex = 0
+        ' 
+        ' btnExit
+        ' 
+        btnExit.BackColor = Color.DarkRed
+        btnExit.Cursor = Cursors.Hand
+        btnExit.FlatAppearance.BorderSize = 0
+        btnExit.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnExit.FlatStyle = FlatStyle.Flat
+        btnExit.Font = New Font("Segoe UI", 10F, FontStyle.Bold)
+        btnExit.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnExit.Location = New Point(30, 404)
+        btnExit.Name = "btnExit"
+        btnExit.Size = New Size(340, 48)
+        btnExit.TabIndex = 5
+        btnExit.Text = "EXIT"
+        btnExit.UseVisualStyleBackColor = False
         ' 
         ' pnlHeader
         ' 
@@ -165,7 +183,7 @@ Partial Class LoginForm
         lblPassword.BackColor = Color.Transparent
         lblPassword.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         lblPassword.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
-        lblPassword.Location = New Point(30, 274)
+        lblPassword.Location = New Point(30, 256)
         lblPassword.Name = "lblPassword"
         lblPassword.Size = New Size(340, 23)
         lblPassword.TabIndex = 3
@@ -177,28 +195,28 @@ Partial Class LoginForm
         txtPassword.BorderStyle = BorderStyle.FixedSingle
         txtPassword.Font = New Font("Segoe UI", 10F)
         txtPassword.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
-        txtPassword.Location = New Point(30, 299)
+        txtPassword.Location = New Point(30, 281)
         txtPassword.Name = "txtPassword"
         txtPassword.PasswordChar = "*"c
         txtPassword.PlaceholderText = "Enter password"
         txtPassword.Size = New Size(340, 27)
         txtPassword.TabIndex = 1
-        '
+        ' 
         ' chkShowPassword
-        '
+        ' 
         chkShowPassword.BackColor = Color.Transparent
         chkShowPassword.Cursor = Cursors.Hand
         chkShowPassword.Font = New Font("Segoe UI", 8.5F)
         chkShowPassword.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
-        chkShowPassword.Location = New Point(30, 329)
+        chkShowPassword.Location = New Point(30, 314)
         chkShowPassword.Name = "chkShowPassword"
         chkShowPassword.Size = New Size(150, 24)
         chkShowPassword.TabIndex = 2
         chkShowPassword.Text = "Show Password"
         chkShowPassword.UseVisualStyleBackColor = False
-        '
+        ' 
         ' btnLogin
-        '
+        ' 
         btnLogin.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
         btnLogin.Cursor = Cursors.Hand
         btnLogin.FlatAppearance.BorderSize = 0
@@ -206,15 +224,15 @@ Partial Class LoginForm
         btnLogin.FlatStyle = FlatStyle.Flat
         btnLogin.Font = New Font("Segoe UI", 10F, FontStyle.Bold)
         btnLogin.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnLogin.Location = New Point(30, 365)
+        btnLogin.Location = New Point(30, 350)
         btnLogin.Name = "btnLogin"
         btnLogin.Size = New Size(340, 48)
         btnLogin.TabIndex = 3
         btnLogin.Text = "LOGIN"
         btnLogin.UseVisualStyleBackColor = False
-        '
+        ' 
         ' btnForgotPassword
-        '
+        ' 
         btnForgotPassword.BackColor = Color.Transparent
         btnForgotPassword.Cursor = Cursors.Hand
         btnForgotPassword.FlatAppearance.BorderSize = 0
@@ -222,7 +240,7 @@ Partial Class LoginForm
         btnForgotPassword.FlatStyle = FlatStyle.Flat
         btnForgotPassword.Font = New Font("Segoe UI", 9F, FontStyle.Underline)
         btnForgotPassword.ForeColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
-        btnForgotPassword.Location = New Point(30, 428)
+        btnForgotPassword.Location = New Point(30, 452)
         btnForgotPassword.Name = "btnForgotPassword"
         btnForgotPassword.Size = New Size(340, 32)
         btnForgotPassword.TabIndex = 4
@@ -238,7 +256,7 @@ Partial Class LoginForm
         lblFooter.Name = "lblFooter"
         lblFooter.Size = New Size(900, 29)
         lblFooter.TabIndex = 1
-        lblFooter.Text = "� 2026 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
+        lblFooter.Text = "@2026 Barangay Sto. Domingo - Piat  |  All Rights Reserved"
         lblFooter.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' LoginForm
@@ -246,12 +264,12 @@ Partial Class LoginForm
         AutoScaleDimensions = New SizeF(7F, 17F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(900, 753)
+        ControlBox = False
         Controls.Add(pnlBackground)
         FormBorderStyle = FormBorderStyle.FixedSingle
         MaximizeBox = False
         Name = "LoginForm"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "Document Archiving System � Login"
         pnlBackground.ResumeLayout(False)
         Panel1.ResumeLayout(False)
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
@@ -277,5 +295,6 @@ Partial Class LoginForm
     Friend WithEvents lblFooter         As System.Windows.Forms.Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnExit As Button
 
 End Class
