@@ -12,10 +12,7 @@ Public Class UserUploadDocumentPanel
     End Sub
 
     Private Sub UserUploadDocumentPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        cmbDocumentType.Items.AddRange(New String() {
-            "Ordinance", "Resolution", "Budget Report",
-            "Health Report", "Infrastructure", "Livelihood", "Others"
-        })
+        cmbDocumentType.Items.AddRange(DocumentTypes)
         cmbDocumentType.SelectedIndex = 0
         cmbStatus.Items.AddRange(New String() {Status_Active, Approval_Archived})
         cmbStatus.SelectedIndex = 0
