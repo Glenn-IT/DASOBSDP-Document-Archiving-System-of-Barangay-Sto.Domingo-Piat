@@ -73,7 +73,7 @@ git checkout master
 | Version | Tag Name | Commit Hash |
 |---------|----------|-------------|
 | v1.00 | v1.00 | d3f49c7f8164e0a2970ab0610433423c131cf214 |
-| v1.01 | v1.01 | b0245b841001509d520847a0a126a83388b97c4b |
+| v1.01 | v1.01 | abfe65ec654eb4125c07631133824da7fb687bef |
 | v1.02 | v1.02 | abfac5e88c771e366b42ca1cb16146ffc8483daa |
 | v1.03 | v1.03 | 5dc26d1f1ed828dcdc35fa20962aa62aa2ab216f |
 | v1.04 | v1.04 | e7cbe379730f393ec8fc9a67aae813042c0676dc |
