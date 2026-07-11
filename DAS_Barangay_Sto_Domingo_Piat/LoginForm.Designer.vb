@@ -29,6 +29,7 @@ Partial Class LoginForm
         txtUsername = New TextBox()
         lblPassword = New Label()
         txtPassword = New TextBox()
+        chkShowPassword = New CheckBox()
         btnLogin = New Button()
         btnForgotPassword = New Button()
         lblFooter = New Label()
@@ -80,6 +81,7 @@ Partial Class LoginForm
         pnlCard.Controls.Add(txtUsername)
         pnlCard.Controls.Add(lblPassword)
         pnlCard.Controls.Add(txtPassword)
+        pnlCard.Controls.Add(chkShowPassword)
         pnlCard.Controls.Add(btnLogin)
         pnlCard.Controls.Add(btnForgotPassword)
         pnlCard.Location = New Point(250, 226)
@@ -181,9 +183,22 @@ Partial Class LoginForm
         txtPassword.PlaceholderText = "Enter password"
         txtPassword.Size = New Size(340, 27)
         txtPassword.TabIndex = 1
-        ' 
+        '
+        ' chkShowPassword
+        '
+        chkShowPassword.BackColor = Color.Transparent
+        chkShowPassword.Cursor = Cursors.Hand
+        chkShowPassword.Font = New Font("Segoe UI", 8.5F)
+        chkShowPassword.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        chkShowPassword.Location = New Point(30, 329)
+        chkShowPassword.Name = "chkShowPassword"
+        chkShowPassword.Size = New Size(150, 24)
+        chkShowPassword.TabIndex = 2
+        chkShowPassword.Text = "Show Password"
+        chkShowPassword.UseVisualStyleBackColor = False
+        '
         ' btnLogin
-        ' 
+        '
         btnLogin.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
         btnLogin.Cursor = Cursors.Hand
         btnLogin.FlatAppearance.BorderSize = 0
@@ -194,12 +209,12 @@ Partial Class LoginForm
         btnLogin.Location = New Point(30, 365)
         btnLogin.Name = "btnLogin"
         btnLogin.Size = New Size(340, 48)
-        btnLogin.TabIndex = 2
+        btnLogin.TabIndex = 3
         btnLogin.Text = "LOGIN"
         btnLogin.UseVisualStyleBackColor = False
-        ' 
+        '
         ' btnForgotPassword
-        ' 
+        '
         btnForgotPassword.BackColor = Color.Transparent
         btnForgotPassword.Cursor = Cursors.Hand
         btnForgotPassword.FlatAppearance.BorderSize = 0
@@ -210,7 +225,7 @@ Partial Class LoginForm
         btnForgotPassword.Location = New Point(30, 428)
         btnForgotPassword.Name = "btnForgotPassword"
         btnForgotPassword.Size = New Size(340, 32)
-        btnForgotPassword.TabIndex = 3
+        btnForgotPassword.TabIndex = 4
         btnForgotPassword.Text = "Forgot Password?"
         btnForgotPassword.UseVisualStyleBackColor = False
         ' 
@@ -256,6 +271,7 @@ Partial Class LoginForm
     Friend WithEvents txtUsername       As System.Windows.Forms.TextBox
     Friend WithEvents lblPassword       As System.Windows.Forms.Label
     Friend WithEvents txtPassword       As System.Windows.Forms.TextBox
+    Friend WithEvents chkShowPassword   As System.Windows.Forms.CheckBox
     Friend WithEvents btnLogin          As System.Windows.Forms.Button
     Friend WithEvents btnForgotPassword As System.Windows.Forms.Button
     Friend WithEvents lblFooter         As System.Windows.Forms.Label

@@ -2,7 +2,8 @@ Public Class LoginForm
     Inherits System.Windows.Forms.Form
 
     Private _failedAttempts As New Dictionary(Of String, Integer)
-    Private Const MaxAttempts As Integer = 5
+    Private Const MaxAttempts As Integer = 3
+    Private Const LockoutSeconds As Integer = 30
     Private _lockoutTimer As New System.Windows.Forms.Timer()
     Private _lockoutSecondsLeft As Integer = 0
     Private _lockedUsername As String = ""
@@ -99,7 +100,7 @@ Public Class LoginForm
 
         If _failedAttempts(username) >= MaxAttempts Then
             _lockedUsername = username
-            _lockoutSecondsLeft = 15
+            _lockoutSecondsLeft = LockoutSeconds
             btnLogin.Enabled = False
             btnLogin.Text = $"Please wait ({_lockoutSecondsLeft}s)..."
             _lockoutTimer.Start()
@@ -129,6 +130,14 @@ Public Class LoginForm
     Private Sub txtPassword_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPassword.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnLogin_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub chkShowPassword_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowPassword.CheckedChanged
+        If chkShowPassword.Checked Then
+            txtPassword.PasswordChar = Chr(0)
+        Else
+            txtPassword.PasswordChar = "*"c
         End If
     End Sub
 
