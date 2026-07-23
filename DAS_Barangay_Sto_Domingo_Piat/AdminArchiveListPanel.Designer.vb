@@ -27,6 +27,7 @@ Partial Class AdminArchiveListPanel
         colUploadedBy = New DataGridViewTextBoxColumn()
         colDateTime = New DataGridViewTextBoxColumn()
         colStatus = New DataGridViewTextBoxColumn()
+        colView = New DataGridViewButtonColumn()
         pnlTop = New Panel()
         lblTitle = New Label()
         pnlSearch = New Panel()
@@ -61,7 +62,7 @@ Partial Class AdminArchiveListPanel
         dgvArchiveList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         dgvArchiveList.ColumnHeadersHeight = 36
         dgvArchiveList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        dgvArchiveList.Columns.AddRange(New DataGridViewColumn() {colDocID, colDocTitle, colUploadedBy, colDateTime, colStatus})
+        dgvArchiveList.Columns.AddRange(New DataGridViewColumn() {colDocID, colDocTitle, colUploadedBy, colDateTime, colStatus, colView})
         DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         DataGridViewCellStyle4.Font = New Font("Segoe UI", 9F)
@@ -126,6 +127,16 @@ Partial Class AdminArchiveListPanel
         colStatus.MinimumWidth = 6
         colStatus.Name = "colStatus"
         colStatus.ReadOnly = True
+        ' 
+        ' colView
+        ' 
+        colView.FillWeight = 10F
+        colView.HeaderText = "Action"
+        colView.MinimumWidth = 64
+        colView.Name = "colView"
+        colView.ReadOnly = True
+        colView.Text = "View"
+        colView.UseColumnTextForButtonValue = True
         ' 
         ' pnlTop
         ' 
@@ -252,6 +263,7 @@ Partial Class AdminArchiveListPanel
         btnDeleteDocument.TabIndex = 4
         btnDeleteDocument.Text = "Delete"
         btnDeleteDocument.UseVisualStyleBackColor = False
+        btnDeleteDocument.Visible = False
         ' 
         ' AdminArchiveListPanel
         ' 
@@ -278,6 +290,7 @@ Partial Class AdminArchiveListPanel
     Friend WithEvents colUploadedBy     As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colDateTime       As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colStatus         As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colView           As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents pnlTop            As System.Windows.Forms.Panel
     Friend WithEvents lblTitle          As System.Windows.Forms.Label
     Friend WithEvents pnlSearch         As System.Windows.Forms.Panel

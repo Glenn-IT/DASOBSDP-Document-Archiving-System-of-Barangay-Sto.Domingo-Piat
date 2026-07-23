@@ -16,7 +16,7 @@ Public Class AdminUpdateDocumentForm
         txtUploadedBy.ReadOnly = True
 
         Try
-            Dim dt As DataTable = DocumentRepository.GetById(DocumentID)
+            Dim dt As DataTable = DocumentRepository.GetByIdFull(DocumentID)
             If dt.Rows.Count > 0 Then
                 Dim row As DataRow = dt.Rows(0)
                 txtDocumentID.Text    = row("DocumentCode").ToString()
@@ -27,6 +27,18 @@ Public Class AdminUpdateDocumentForm
                 lblPDFFile.Text       = If(row("PDFFileName") Is DBNull.Value,
                                            "No file", row("PDFFileName").ToString())
                 cmbStatus.SelectedItem = row("DocumentType").ToString()
+
+                If Not IsDBNull(row("BannerImage")) Then
+                    Dim bannerBytes As Byte() = CType(row("BannerImage"), Byte())
+                    If bannerBytes.Length > 0 Then
+                        Using ms As New System.IO.MemoryStream(bannerBytes)
+                            Using loadedImage As System.Drawing.Image = System.Drawing.Image.FromStream(ms)
+                                picBanner.Image = New System.Drawing.Bitmap(loadedImage)
+                            End Using
+                        End Using
+                        picBanner.SizeMode = PictureBoxSizeMode.Zoom
+                    End If
+                End If
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading document: " & ex.Message,
@@ -65,6 +77,11 @@ Public Class AdminUpdateDocumentForm
 
         If title = "" Then
             MessageBox.Show("Please enter a document title.", "Update Document",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        If _selectedPdfPath = "" AndAlso lblPDFFile.Text = "No file" Then
+            MessageBox.Show("Please upload a document file.", "Update Document",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If

@@ -71,6 +71,11 @@ Public Class AdminNewDocumentForm
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
+        If _selectedPdfPath = "" Then
+            MessageBox.Show("Please upload a document file.", "New Document",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
         Dim bannerBytes As Byte() = If(_selectedImagePath <> "",
             System.IO.File.ReadAllBytes(_selectedImagePath), Nothing)
