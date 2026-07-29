@@ -86,7 +86,7 @@ git checkout master
 | v1.08 | v1.08 | 4b43209e4cbbb1d220caa7c7a06b15c2d0abc51e |
 | v2.00 | v2.00 | 8757824ac37bf8adc9f01185667b9fe2f9c310b1 |
 | v3.00 | v3.00 | ea6217927743db4767cc0e5e78d42426e120a30d |
-| v4.00 | v4.00 | (fill in after commit) |
+| v4.00 | v4.00 | 8b033b6c981f883ddd3c45993519057a0585a86a |
 
 ---
 
