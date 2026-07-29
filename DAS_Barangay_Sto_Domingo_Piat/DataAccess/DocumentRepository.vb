@@ -78,6 +78,93 @@ Public Module DocumentRepository
         Return dt
     End Function
 
+    Public Function GetTypeCounts() As Dictionary(Of String, Integer)
+        Dim dt As New DataTable()
+        Using con As New SqlConnection(dbconstring.Connection)
+            con.Open()
+            Dim cmd As New SqlCommand(
+                "SELECT DocumentType, COUNT(*) AS Cnt FROM tbl_Documents GROUP BY DocumentType", con)
+            Dim adapter As New SqlDataAdapter(cmd)
+            adapter.Fill(dt)
+        End Using
+        Dim result As New Dictionary(Of String, Integer)
+        For Each row As DataRow In dt.Rows
+            result(row("DocumentType").ToString()) = CInt(row("Cnt"))
+        Next
+        Return result
+    End Function
+
+    Public Function GetActiveTypeCounts() As Dictionary(Of String, Integer)
+        Dim dt As New DataTable()
+        Using con As New SqlConnection(dbconstring.Connection)
+            con.Open()
+            Dim cmd As New SqlCommand(
+                "SELECT DocumentType, COUNT(*) AS Cnt FROM tbl_Documents " &
+                "WHERE Status = 'Active' GROUP BY DocumentType", con)
+            Dim adapter As New SqlDataAdapter(cmd)
+            adapter.Fill(dt)
+        End Using
+        Dim result As New Dictionary(Of String, Integer)
+        For Each row As DataRow In dt.Rows
+            result(row("DocumentType").ToString()) = CInt(row("Cnt"))
+        Next
+        Return result
+    End Function
+
+    Public Function GetByType(docType As String, Optional search As String = Nothing) As DataTable
+        Dim dt As New DataTable()
+        Using con As New SqlConnection(dbconstring.Connection)
+            con.Open()
+            Dim sql As String
+            Dim cmd As SqlCommand
+            If String.IsNullOrEmpty(search) Then
+                sql = "SELECT DocumentID, DocumentCode, Title, UploadedBy, DateUploaded, Status " &
+                      "FROM tbl_Documents WHERE DocumentType = @type ORDER BY DateUploaded DESC"
+                cmd = New SqlCommand(sql, con)
+                cmd.Parameters.AddWithValue("@type", docType)
+            Else
+                sql = "SELECT DocumentID, DocumentCode, Title, UploadedBy, DateUploaded, Status " &
+                      "FROM tbl_Documents " &
+                      "WHERE DocumentType = @type AND (Title LIKE @search OR DocumentType LIKE @search) " &
+                      "ORDER BY DateUploaded DESC"
+                cmd = New SqlCommand(sql, con)
+                cmd.Parameters.AddWithValue("@type", docType)
+                cmd.Parameters.AddWithValue("@search", "%" & search & "%")
+            End If
+            Dim adapter As New SqlDataAdapter(cmd)
+            adapter.Fill(dt)
+        End Using
+        Return dt
+    End Function
+
+    Public Function GetActiveByType(docType As String, Optional search As String = Nothing) As DataTable
+        Dim dt As New DataTable()
+        Using con As New SqlConnection(dbconstring.Connection)
+            con.Open()
+            Dim sql As String
+            Dim cmd As SqlCommand
+            If String.IsNullOrEmpty(search) Then
+                sql = "SELECT DocumentID, DocumentCode, Title, DateUploaded, ApprovalStatus, Status " &
+                      "FROM tbl_Documents WHERE Status = 'Active' AND DocumentType = @type " &
+                      "ORDER BY DateUploaded DESC"
+                cmd = New SqlCommand(sql, con)
+                cmd.Parameters.AddWithValue("@type", docType)
+            Else
+                sql = "SELECT DocumentID, DocumentCode, Title, DateUploaded, ApprovalStatus, Status " &
+                      "FROM tbl_Documents " &
+                      "WHERE Status = 'Active' AND DocumentType = @type " &
+                      "AND (Title LIKE @search OR DocumentType LIKE @search) " &
+                      "ORDER BY DateUploaded DESC"
+                cmd = New SqlCommand(sql, con)
+                cmd.Parameters.AddWithValue("@type", docType)
+                cmd.Parameters.AddWithValue("@search", "%" & search & "%")
+            End If
+            Dim adapter As New SqlDataAdapter(cmd)
+            adapter.Fill(dt)
+        End Using
+        Return dt
+    End Function
+
     Public Function GetByIdFull(documentID As Integer) As DataTable
         Dim dt As New DataTable()
         Using con As New SqlConnection(dbconstring.Connection)

@@ -6,12 +6,6 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub UserDashboardForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ' GATE — remove when unlocking for vX.XX
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnDashboard)
-        lblPageTitle.Text = "Dashboard"
-        Return
-        ' END GATE
         LoadPanel(New UserDashboardPanel())
         HighlightButton(btnDashboard)
         lblPageTitle.Text = "Dashboard"
@@ -34,7 +28,7 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub HighlightButton(active As Button)
-        Dim sidebarButtons As Button() = {btnDashboard, btnUploadDocument, btnSearchArchive, btnViewProfile}
+        Dim sidebarButtons As Button() = {btnDashboard, btnUploadDocument, btnSearchArchive, btnDocumentTypes, btnViewProfile}
         For Each btn In sidebarButtons
             btn.BackColor = System.Drawing.Color.FromArgb(52, 103, 57)
             btn.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
@@ -44,48 +38,47 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
-        ' GATE — remove when unlocking for vX.XX
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnDashboard)
-        lblPageTitle.Text = "Dashboard"
-        Return
-        ' END GATE
         LoadPanel(New UserDashboardPanel())
         HighlightButton(btnDashboard)
         lblPageTitle.Text = "Dashboard"
     End Sub
 
     Private Sub btnUploadDocument_Click(sender As Object, e As EventArgs) Handles btnUploadDocument.Click
-        ' GATE — remove when unlocking for vX.XX
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnUploadDocument)
-        lblPageTitle.Text = "Upload Document"
-        Return
-        ' END GATE
         LoadPanel(New UserUploadDocumentPanel())
         HighlightButton(btnUploadDocument)
         lblPageTitle.Text = "Upload Document"
     End Sub
 
     Private Sub btnSearchArchive_Click(sender As Object, e As EventArgs) Handles btnSearchArchive.Click
-        ' GATE — remove when unlocking for vX.XX
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnSearchArchive)
-        lblPageTitle.Text = "Search Archive"
-        Return
-        ' END GATE
         LoadPanel(New UserSearchArchivePanel())
         HighlightButton(btnSearchArchive)
         lblPageTitle.Text = "Search Archive"
     End Sub
 
+    Private Sub btnDocumentTypes_Click(sender As Object, e As EventArgs) Handles btnDocumentTypes.Click
+        ShowDocumentTypesGrid()
+    End Sub
+
+    Private Sub ShowDocumentTypesGrid()
+        Dim panel As New UserDocumentTypesPanel()
+        AddHandler panel.TypeSelected, AddressOf OnUserTypeSelected
+        LoadPanel(panel)
+        HighlightButton(btnDocumentTypes)
+        lblPageTitle.Text = "Document Types"
+    End Sub
+
+    Private Sub OnUserTypeSelected(sender As Object, e As DocumentTypeEventArgs)
+        Dim listPanel As New UserDocumentTypeListPanel(e.DocumentType)
+        AddHandler listPanel.BackRequested, AddressOf OnUserTypeBackRequested
+        LoadPanel(listPanel)
+        lblPageTitle.Text = e.DocumentType
+    End Sub
+
+    Private Sub OnUserTypeBackRequested(sender As Object, e As EventArgs)
+        ShowDocumentTypesGrid()
+    End Sub
+
     Private Sub btnViewProfile_Click(sender As Object, e As EventArgs) Handles btnViewProfile.Click
-        ' GATE — remove when unlocking for vX.XX
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnViewProfile)
-        lblPageTitle.Text = "View Profile"
-        Return
-        ' END GATE
         Dim panel As New UserViewProfilePanel()
         AddHandler panel.RequestLogout, AddressOf ForcedLogout
         LoadPanel(panel)

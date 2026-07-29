@@ -24,6 +24,7 @@ Partial Class UserDashboardForm
         btnDashboard      = New System.Windows.Forms.Button()
         btnUploadDocument = New System.Windows.Forms.Button()
         btnSearchArchive  = New System.Windows.Forms.Button()
+        btnDocumentTypes  = New System.Windows.Forms.Button()
         btnViewProfile    = New System.Windows.Forms.Button()
         pnlSidebarBottom  = New System.Windows.Forms.Panel()
         btnLogout         = New System.Windows.Forms.Button()
@@ -136,6 +137,21 @@ Partial Class UserDashboardForm
         btnSearchArchive.Name                              = "btnSearchArchive"
         btnSearchArchive.TabIndex                          = 2
 
+        btnDocumentTypes.Text                              = "  Document Types"
+        btnDocumentTypes.Font                              = sbFont
+        btnDocumentTypes.BackColor                         = dark
+        btnDocumentTypes.ForeColor                         = cream
+        btnDocumentTypes.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
+        btnDocumentTypes.FlatAppearance.BorderSize         = 0
+        btnDocumentTypes.FlatAppearance.MouseOverBackColor = mid
+        btnDocumentTypes.Size                              = sbSize
+        btnDocumentTypes.Location                          = New System.Drawing.Point(0, 294)
+        btnDocumentTypes.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
+        btnDocumentTypes.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
+        btnDocumentTypes.Cursor                            = System.Windows.Forms.Cursors.Hand
+        btnDocumentTypes.Name                              = "btnDocumentTypes"
+        btnDocumentTypes.TabIndex                          = 3
+
         btnViewProfile.Text                              = "  View Profile"
         btnViewProfile.Font                              = sbFont
         btnViewProfile.BackColor                         = dark
@@ -144,14 +160,14 @@ Partial Class UserDashboardForm
         btnViewProfile.FlatAppearance.BorderSize         = 0
         btnViewProfile.FlatAppearance.MouseOverBackColor = mid
         btnViewProfile.Size                              = sbSize
-        btnViewProfile.Location                          = New System.Drawing.Point(0, 294)
+        btnViewProfile.Location                          = New System.Drawing.Point(0, 342)
         btnViewProfile.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
         btnViewProfile.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
         btnViewProfile.Cursor                            = System.Windows.Forms.Cursors.Hand
         btnViewProfile.Name                              = "btnViewProfile"
-        btnViewProfile.TabIndex                          = 3
+        btnViewProfile.TabIndex                          = 4
 
-        ' ?? pnlSidebarBottom (Logout — always pinned at bottom) ???
+        ' ?? pnlSidebarBottom (Logout ï¿½ always pinned at bottom) ???
         pnlSidebarBottom.BackColor = darker
         pnlSidebarBottom.Dock      = System.Windows.Forms.DockStyle.Bottom
         pnlSidebarBottom.Height    = 56
@@ -178,6 +194,7 @@ Partial Class UserDashboardForm
         pnlSidebar.Controls.Add(btnDashboard)
         pnlSidebar.Controls.Add(btnUploadDocument)
         pnlSidebar.Controls.Add(btnSearchArchive)
+        pnlSidebar.Controls.Add(btnDocumentTypes)
         pnlSidebar.Controls.Add(btnViewProfile)
         pnlSidebar.Controls.Add(pnlSidebarBottom)
 
@@ -239,7 +256,7 @@ Partial Class UserDashboardForm
         Me.WindowState         = System.Windows.Forms.FormWindowState.Maximized
         Me.Name                = "UserDashboardForm"
         Me.StartPosition       = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text                = "Document Archiving System — User Dashboard"
+        Me.Text                = "Document Archiving System ï¿½ User Dashboard"
 
         Me.ResumeLayout(False)
     End Sub
@@ -252,6 +269,7 @@ Partial Class UserDashboardForm
     Friend WithEvents btnDashboard      As System.Windows.Forms.Button
     Friend WithEvents btnUploadDocument As System.Windows.Forms.Button
     Friend WithEvents btnSearchArchive  As System.Windows.Forms.Button
+    Friend WithEvents btnDocumentTypes  As System.Windows.Forms.Button
     Friend WithEvents btnViewProfile    As System.Windows.Forms.Button
     Friend WithEvents pnlSidebarBottom  As System.Windows.Forms.Panel
     Friend WithEvents btnLogout         As System.Windows.Forms.Button

@@ -29,7 +29,7 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub HighlightButton(active As Button)
-        Dim sidebarButtons As Button() = {btnArchiveList, btnUsersList, btnActivityLogs, btnViewProfile, btnLogout}
+        Dim sidebarButtons As Button() = {btnArchiveList, btnDocumentTypes, btnUsersList, btnActivityLogs, btnViewProfile, btnLogout}
         For Each btn In sidebarButtons
             btn.BackColor = System.Drawing.Color.FromArgb(52, 103, 57)
             btn.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
@@ -44,25 +44,36 @@ Public Class AdminDashboardForm
         lblPageTitle.Text = "Archive List"
     End Sub
 
+    Private Sub btnDocumentTypes_Click(sender As Object, e As EventArgs) Handles btnDocumentTypes.Click
+        ShowDocumentTypesGrid()
+    End Sub
+
+    Private Sub ShowDocumentTypesGrid()
+        Dim panel As New AdminDocumentTypesPanel()
+        AddHandler panel.TypeSelected, AddressOf OnAdminTypeSelected
+        LoadPanel(panel)
+        HighlightButton(btnDocumentTypes)
+        lblPageTitle.Text = "Document Types"
+    End Sub
+
+    Private Sub OnAdminTypeSelected(sender As Object, e As DocumentTypeEventArgs)
+        Dim listPanel As New AdminDocumentTypeListPanel(e.DocumentType)
+        AddHandler listPanel.BackRequested, AddressOf OnAdminTypeBackRequested
+        LoadPanel(listPanel)
+        lblPageTitle.Text = e.DocumentType
+    End Sub
+
+    Private Sub OnAdminTypeBackRequested(sender As Object, e As EventArgs)
+        ShowDocumentTypesGrid()
+    End Sub
+
     Private Sub btnUsersList_Click(sender As Object, e As EventArgs) Handles btnUsersList.Click
-        ' GATE — remove when unlocking for vX.XX
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnUsersList)
-        lblPageTitle.Text = "Users List"
-        Return
-        ' END GATE
         LoadPanel(New AdminUsersListPanel())
         HighlightButton(btnUsersList)
         lblPageTitle.Text = "Users List"
     End Sub
 
     Private Sub btnActivityLogs_Click(sender As Object, e As EventArgs) Handles btnActivityLogs.Click
-        ' GATE — remove when unlocking for vX.XX
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnActivityLogs)
-        lblPageTitle.Text = "Activity Logs"
-        Return
-        ' END GATE
         LoadPanel(New AdminActivityLogsPanel())
         HighlightButton(btnActivityLogs)
         lblPageTitle.Text = "Activity Logs"
