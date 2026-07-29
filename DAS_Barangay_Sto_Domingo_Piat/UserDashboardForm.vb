@@ -86,9 +86,17 @@ Public Class UserDashboardForm
         lblPageTitle.Text = "View Profile"
         Return
         ' END GATE
-        LoadPanel(New UserViewProfilePanel())
+        Dim panel As New UserViewProfilePanel()
+        AddHandler panel.RequestLogout, AddressOf ForcedLogout
+        LoadPanel(panel)
         HighlightButton(btnViewProfile)
         lblPageTitle.Text = "View Profile"
+    End Sub
+
+    ' Fired when the profile panel updates the user's own credentials — force re-login for security.
+    Private Sub ForcedLogout(sender As Object, e As EventArgs)
+        SessionManager.Clear()
+        Me.Close()
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click

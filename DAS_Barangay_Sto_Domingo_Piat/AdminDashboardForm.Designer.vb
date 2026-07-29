@@ -19,6 +19,7 @@ Partial Class AdminDashboardForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminDashboardForm))
         pnlSidebar = New Panel()
         pnlSidebarTop = New Panel()
+        PictureBox1 = New PictureBox()
         lblSysSubTitle = New Label()
         lblSysTitle = New Label()
         lblMenuLabel = New Label()
@@ -33,13 +34,12 @@ Partial Class AdminDashboardForm
         pnlHeader = New Panel()
         lblPageTitle = New Label()
         lblWelcomeUser = New Label()
-        PictureBox1 = New PictureBox()
         pnlSidebar.SuspendLayout()
         pnlSidebarTop.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         pnlSidebarBottom.SuspendLayout()
         pnlRight.SuspendLayout()
         pnlHeader.SuspendLayout()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' pnlSidebar
@@ -69,6 +69,17 @@ Partial Class AdminDashboardForm
         pnlSidebarTop.Name = "pnlSidebarTop"
         pnlSidebarTop.Size = New Size(220, 173)
         pnlSidebarTop.TabIndex = 0
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Dock = DockStyle.Fill
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(0, 0)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(220, 173)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 0
+        PictureBox1.TabStop = False
         ' 
         ' lblSysSubTitle
         ' 
@@ -174,7 +185,7 @@ Partial Class AdminDashboardForm
         btnViewProfile.Padding = New Padding(16, 0, 0, 0)
         btnViewProfile.Size = New Size(220, 54)
         btnViewProfile.TabIndex = 3
-        btnViewProfile.Text = "  View Profile"
+        btnViewProfile.Text = "  Account Settings"
         btnViewProfile.TextAlign = ContentAlignment.MiddleLeft
         btnViewProfile.UseVisualStyleBackColor = False
         ' 
@@ -265,17 +276,6 @@ Partial Class AdminDashboardForm
         lblWelcomeUser.Text = "Welcome, Admin"
         lblWelcomeUser.TextAlign = ContentAlignment.MiddleRight
         ' 
-        ' PictureBox1
-        ' 
-        PictureBox1.Dock = DockStyle.Fill
-        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(0, 0)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(220, 173)
-        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
-        PictureBox1.TabIndex = 0
-        PictureBox1.TabStop = False
-        ' 
         ' AdminDashboardForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 17F)
@@ -289,10 +289,10 @@ Partial Class AdminDashboardForm
         WindowState = FormWindowState.Maximized
         pnlSidebar.ResumeLayout(False)
         pnlSidebarTop.ResumeLayout(False)
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         pnlSidebarBottom.ResumeLayout(False)
         pnlRight.ResumeLayout(False)
         pnlHeader.ResumeLayout(False)
-        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 

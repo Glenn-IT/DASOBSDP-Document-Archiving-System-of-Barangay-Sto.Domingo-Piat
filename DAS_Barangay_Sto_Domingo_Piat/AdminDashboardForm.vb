@@ -69,9 +69,17 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub btnViewProfile_Click(sender As Object, e As EventArgs) Handles btnViewProfile.Click
-        LoadPanel(New AdminViewProfilePanel())
+        Dim panel As New AdminViewProfilePanel()
+        AddHandler panel.RequestLogout, AddressOf ForcedLogout
+        LoadPanel(panel)
         HighlightButton(btnViewProfile)
         lblPageTitle.Text = "View Profile"
+    End Sub
+
+    ' Fired when the profile panel updates the user's own credentials — force re-login for security.
+    Private Sub ForcedLogout(sender As Object, e As EventArgs)
+        SessionManager.Clear()
+        Me.Close()
     End Sub
 
     ' ?? E � Logout ?????????????????????????????????????????????????

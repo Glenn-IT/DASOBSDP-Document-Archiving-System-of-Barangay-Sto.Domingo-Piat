@@ -1,6 +1,9 @@
 Public Class UserViewProfilePanel
     Inherits System.Windows.Forms.UserControl
 
+    ''' <summary>Raised after a successful credential update so the hosting dashboard can force a logout.</summary>
+    Public Event RequestLogout As EventHandler
+
     Private _isDirty As Boolean = False
     Public ReadOnly Property HasUnsavedChanges As Boolean
         Get
@@ -70,9 +73,9 @@ Public Class UserViewProfilePanel
                                          securityAnswer, hashedPassword)
             ActivityLogger.Log(SessionManager.Username, "Success",
                 "User updated their profile.")
-            MessageBox.Show("Profile updated successfully!", "View Profile",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information)
-            LoadProfileFromDB()
+            MessageBox.Show("Profile updated successfully! You will now be logged out for security purposes.",
+                            "View Profile", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            RaiseEvent RequestLogout(Me, EventArgs.Empty)
         Catch ex As Exception
             MessageBox.Show("Error updating profile: " & ex.Message,
                             "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
