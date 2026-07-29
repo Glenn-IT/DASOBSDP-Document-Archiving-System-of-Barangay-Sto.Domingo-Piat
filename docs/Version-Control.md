@@ -15,7 +15,7 @@
 | v1.08 | User: View Profile (Full System) | `UserViewProfilePanel` | — |
 | v2.00 | Login / Forgot Password + Admin: Archive List | `LoginForm`, `AdminForgotPasswordForm`, `UserForgotPasswordForm`, `AdminArchiveListPanel` | Admin Users, Activity Logs, Profile; entire User side (Dashboard, Upload Document, Search/Archive List, View Profile) |
 | v3.00 | Login / Forgot Password + Admin: Archive List + View Profile | `LoginForm`, `AdminForgotPasswordForm`, `UserForgotPasswordForm`, `AdminArchiveListPanel`, `AdminViewProfilePanel` | Admin Users, Activity Logs; entire User side (Dashboard, Upload Document, Search/Archive List, View Profile) |
-| v4.00 | Full System | All forms/panels (`AdminUsersListPanel`, `AdminActivityLogsPanel`, `UserDashboardForm`/`UserDashboardPanel`, `UserUploadDocumentPanel`, `UserSearchArchivePanel`, `UserViewProfilePanel`) | — |
+| v4.00 | Login / Forgot Password + Admin: Archive List + View Profile + Document Types (Admin & User) | `LoginForm`, `AdminForgotPasswordForm`, `UserForgotPasswordForm`, `AdminArchiveListPanel`, `AdminViewProfilePanel`, `AdminDocumentTypesPanel`, `AdminDocumentTypeListPanel`, `UserDocumentTypesPanel`, `UserDocumentTypeListPanel` | Admin Users, Activity Logs; User Dashboard, Upload Document, Search Archive, View Profile |
 
 ---
 
