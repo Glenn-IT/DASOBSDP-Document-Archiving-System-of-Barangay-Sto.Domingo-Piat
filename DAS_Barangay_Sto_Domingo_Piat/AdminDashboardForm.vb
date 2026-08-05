@@ -80,12 +80,6 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub btnActivityLogs_Click(sender As Object, e As EventArgs) Handles btnActivityLogs.Click
-        ' GATE — remove when unlocking for vX.XX
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnActivityLogs)
-        lblPageTitle.Text = "Activity Logs"
-        Return
-        ' END GATE
         LoadPanel(New AdminActivityLogsPanel())
         HighlightButton(btnActivityLogs)
         lblPageTitle.Text = "Activity Logs"

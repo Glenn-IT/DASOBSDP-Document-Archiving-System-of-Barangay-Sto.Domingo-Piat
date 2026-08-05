@@ -16,6 +16,7 @@
 | v2.00 | Login / Forgot Password + Admin: Archive List | `LoginForm`, `AdminForgotPasswordForm`, `UserForgotPasswordForm`, `AdminArchiveListPanel` | Admin Users, Activity Logs, Profile; entire User side (Dashboard, Upload Document, Search/Archive List, View Profile) |
 | v3.00 | Login / Forgot Password + Admin: Archive List + View Profile | `LoginForm`, `AdminForgotPasswordForm`, `UserForgotPasswordForm`, `AdminArchiveListPanel`, `AdminViewProfilePanel` | Admin Users, Activity Logs; entire User side (Dashboard, Upload Document, Search/Archive List, View Profile) |
 | v4.00 | Login / Forgot Password + Admin: Archive List + View Profile + Document Types (Admin & User) | `LoginForm`, `AdminForgotPasswordForm`, `UserForgotPasswordForm`, `AdminArchiveListPanel`, `AdminViewProfilePanel`, `AdminDocumentTypesPanel`, `AdminDocumentTypeListPanel`, `UserDocumentTypesPanel`, `UserDocumentTypeListPanel` | Admin Users, Activity Logs; User Dashboard, Upload Document, Search Archive, View Profile |
+| v5.00 | Login / Forgot Password + Admin: Archive List + View Profile + Document Types ("Others" added) + Activity Logs (Admin) | `LoginForm`, `AdminForgotPasswordForm`, `UserForgotPasswordForm`, `AdminArchiveListPanel`, `AdminViewProfilePanel`, `AdminDocumentTypesPanel`, `AdminDocumentTypeListPanel`, `AdminActivityLogsPanel`, `UserDocumentTypesPanel`, `UserDocumentTypeListPanel` | Admin Users; User Dashboard, Upload Document, Search Archive, View Profile |
 
 ---
 
@@ -87,6 +88,7 @@ git checkout master
 | v2.00 | v2.00 | 8757824ac37bf8adc9f01185667b9fe2f9c310b1 |
 | v3.00 | v3.00 | ea6217927743db4767cc0e5e78d42426e120a30d |
 | v4.00 | v4.00 | 8b033b6c981f883ddd3c45993519057a0585a86a |
+| v5.00 | v5.00 | 9e0b4af8bf8825c3e5a1c481fc158f735d4fc696 |
 
 ---
 
