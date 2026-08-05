@@ -1,4 +1,4 @@
-﻿# DAS Barangay Sto. Domingo Piat — Database Documentation
+# DAS Barangay Sto. Domingo Piat — Database Documentation
 
 ## Connection Details
 
@@ -280,6 +280,7 @@ Defined in `Helpers/Constants.vb` (`DocumentTypes`) and shared by the `AdminNewD
 | `Intellectual Property`             |
 | `Customer & Client Records`         |
 | `Technical & Medical Records`       |
+| `Others`                            |
 
 ---
 

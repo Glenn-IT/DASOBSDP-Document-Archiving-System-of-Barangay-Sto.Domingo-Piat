@@ -20,7 +20,8 @@ Public Module Constants
         "Correspondence",
         "Intellectual Property",
         "Customer & Client Records",
-        "Technical & Medical Records"
+        "Technical & Medical Records",
+        "Others"
     }
 
 End Module
