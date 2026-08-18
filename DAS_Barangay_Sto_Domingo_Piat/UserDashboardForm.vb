@@ -44,18 +44,36 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub btnUploadDocument_Click(sender As Object, e As EventArgs) Handles btnUploadDocument.Click
+        ' GATE — remove when unlocking for vX.XX
+        LoadPanel(New UnderConstructionPanel())
+        HighlightButton(btnUploadDocument)
+        lblPageTitle.Text = "Upload Document"
+        Return
+        ' END GATE
         LoadPanel(New UserUploadDocumentPanel())
         HighlightButton(btnUploadDocument)
         lblPageTitle.Text = "Upload Document"
     End Sub
 
     Private Sub btnSearchArchive_Click(sender As Object, e As EventArgs) Handles btnSearchArchive.Click
+        ' GATE — remove when unlocking for vX.XX
+        LoadPanel(New UnderConstructionPanel())
+        HighlightButton(btnSearchArchive)
+        lblPageTitle.Text = "Search Archive"
+        Return
+        ' END GATE
         LoadPanel(New UserSearchArchivePanel())
         HighlightButton(btnSearchArchive)
         lblPageTitle.Text = "Search Archive"
     End Sub
 
     Private Sub btnDocumentTypes_Click(sender As Object, e As EventArgs) Handles btnDocumentTypes.Click
+        ' GATE — remove when unlocking for vX.XX
+        LoadPanel(New UnderConstructionPanel())
+        HighlightButton(btnDocumentTypes)
+        lblPageTitle.Text = "Document Types"
+        Return
+        ' END GATE
         ShowDocumentTypesGrid()
     End Sub
 
@@ -79,6 +97,12 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub btnViewProfile_Click(sender As Object, e As EventArgs) Handles btnViewProfile.Click
+        ' GATE — remove when unlocking for vX.XX
+        LoadPanel(New UnderConstructionPanel())
+        HighlightButton(btnViewProfile)
+        lblPageTitle.Text = "View Profile"
+        Return
+        ' END GATE
         Dim panel As New UserViewProfilePanel()
         AddHandler panel.RequestLogout, AddressOf ForcedLogout
         LoadPanel(panel)
