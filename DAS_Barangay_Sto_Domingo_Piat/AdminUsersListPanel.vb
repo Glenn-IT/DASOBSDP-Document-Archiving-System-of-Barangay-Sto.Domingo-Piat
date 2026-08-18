@@ -63,6 +63,18 @@ Public Class AdminUsersListPanel
         Dim userId      As Integer = CInt(selectedRow.Tag)
         Dim username    As String  = selectedRow.Cells(1).Value.ToString()
 
+        If String.Equals(username, "admin", StringComparison.OrdinalIgnoreCase) Then
+            MessageBox.Show("The main admin account ('admin') cannot be deleted.", "Action Denied",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        If String.Equals(username, SessionManager.Username, StringComparison.OrdinalIgnoreCase) Then
+            MessageBox.Show("You cannot delete your currently logged-in account.", "Action Denied",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         Dim frm As New AdminDeleteUserForm()
         frm.UserID   = userId
         frm.Username = username

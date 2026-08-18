@@ -14,6 +14,18 @@ Public Class AdminDeleteUserForm
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If String.Equals(Username, "admin", StringComparison.OrdinalIgnoreCase) Then
+            MessageBox.Show("The main admin account ('admin') cannot be deleted.", "Action Denied",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        If String.Equals(Username, SessionManager.Username, StringComparison.OrdinalIgnoreCase) Then
+            MessageBox.Show("You cannot delete your currently logged-in account.", "Action Denied",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         Try
             UserRepository.Delete(UserID)
             ActivityLogger.Log(SessionManager.Username, "Success",

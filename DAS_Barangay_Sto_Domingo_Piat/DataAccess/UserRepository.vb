@@ -187,10 +187,44 @@ Public Module UserRepository
     Public Sub Delete(userID As Integer)
         Using con As New SqlConnection(dbconstring.Connection)
             con.Open()
-            Dim cmd As New SqlCommand(
-                "DELETE FROM tbl_Users WHERE UserID = @id", con)
-            cmd.Parameters.AddWithValue("@id", userID)
-            cmd.ExecuteNonQuery()
+            Using tran As SqlTransaction = con.BeginTransaction()
+                Try
+                    Dim username As String = Nothing
+                    Using getCmd As New SqlCommand("SELECT Username FROM tbl_Users WHERE UserID = @id", con, tran)
+                        getCmd.Parameters.AddWithValue("@id", userID)
+                        Dim obj As Object = getCmd.ExecuteScalar()
+                        If obj IsNot Nothing AndAlso Not IsDBNull(obj) Then
+                            username = obj.ToString()
+                        End If
+                    End Using
+
+                    If Not String.IsNullOrEmpty(username) Then
+                        If String.Equals(username, "admin", StringComparison.OrdinalIgnoreCase) Then
+                            Throw New InvalidOperationException("The main admin account ('admin') cannot be deleted.")
+                        End If
+
+                        Using delLogsCmd As New SqlCommand("DELETE FROM tbl_ActivityLogs WHERE Username = @username", con, tran)
+                            delLogsCmd.Parameters.AddWithValue("@username", username)
+                            delLogsCmd.ExecuteNonQuery()
+                        End Using
+
+                        Using delDocsCmd As New SqlCommand("DELETE FROM tbl_Documents WHERE UploadedBy = @username", con, tran)
+                            delDocsCmd.Parameters.AddWithValue("@username", username)
+                            delDocsCmd.ExecuteNonQuery()
+                        End Using
+                    End If
+
+                    Using delUserCmd As New SqlCommand("DELETE FROM tbl_Users WHERE UserID = @id", con, tran)
+                        delUserCmd.Parameters.AddWithValue("@id", userID)
+                        delUserCmd.ExecuteNonQuery()
+                    End Using
+
+                    tran.Commit()
+                Catch ex As Exception
+                    tran.Rollback()
+                    Throw
+                End Try
+            End Using
         End Using
     End Sub
 

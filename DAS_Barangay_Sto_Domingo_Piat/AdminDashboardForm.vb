@@ -68,12 +68,6 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub btnUsersList_Click(sender As Object, e As EventArgs) Handles btnUsersList.Click
-        ' GATE — remove when unlocking for vX.XX
-        LoadPanel(New UnderConstructionPanel())
-        HighlightButton(btnUsersList)
-        lblPageTitle.Text = "Users List"
-        Return
-        ' END GATE
         LoadPanel(New AdminUsersListPanel())
         HighlightButton(btnUsersList)
         lblPageTitle.Text = "Users List"
