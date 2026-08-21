@@ -25,6 +25,7 @@ Partial Class AdminUpdateAccountForm
         txtNewPassword      = New System.Windows.Forms.TextBox()
         lblConfirmPassword  = New System.Windows.Forms.Label()
         txtConfirmPassword  = New System.Windows.Forms.TextBox()
+        chkShowPassword     = New System.Windows.Forms.CheckBox()
         lblUserType         = New System.Windows.Forms.Label()
         cmbUserType         = New System.Windows.Forms.ComboBox()
         lblSecQuestion      = New System.Windows.Forms.Label()
@@ -137,41 +138,49 @@ Partial Class AdminUpdateAccountForm
         txtConfirmPassword.PlaceholderText = "Re-enter password"
         txtConfirmPassword.Name = "txtConfirmPassword" : txtConfirmPassword.TabIndex = 2
 
+        ' Show Password
+        chkShowPassword.AutoSize = False : chkShowPassword.Text = "Show Password"
+        chkShowPassword.Font = New System.Drawing.Font("Segoe UI", 9.0F)
+        chkShowPassword.ForeColor = dark : chkShowPassword.BackColor = System.Drawing.Color.Transparent
+        chkShowPassword.Size = New System.Drawing.Size(180, 24) : chkShowPassword.Location = New System.Drawing.Point(30, 206)
+        chkShowPassword.Cursor = System.Windows.Forms.Cursors.Hand
+        chkShowPassword.Name = "chkShowPassword" : chkShowPassword.TabIndex = 3
+
         lblUserType.AutoSize = False : lblUserType.Text = "User Type"
         lblUserType.Font = lbFont : lblUserType.ForeColor = dark : lblUserType.BackColor = System.Drawing.Color.Transparent
-        lblUserType.Size = New System.Drawing.Size(420, 20) : lblUserType.Location = New System.Drawing.Point(30, 214)
+        lblUserType.Size = New System.Drawing.Size(420, 20) : lblUserType.Location = New System.Drawing.Point(30, 238)
         lblUserType.Name = "lblUserType"
 
         cmbUserType.Font = tbFont : cmbUserType.Size = New System.Drawing.Size(420, 32)
-        cmbUserType.Location = New System.Drawing.Point(30, 236)
+        cmbUserType.Location = New System.Drawing.Point(30, 260)
         cmbUserType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         cmbUserType.BackColor = cream : cmbUserType.ForeColor = dark
         cmbUserType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        cmbUserType.Name = "cmbUserType" : cmbUserType.TabIndex = 3
+        cmbUserType.Name = "cmbUserType" : cmbUserType.TabIndex = 4
 
         lblSecQuestion.AutoSize = False : lblSecQuestion.Text = "Security Question"
         lblSecQuestion.Font = lbFont : lblSecQuestion.ForeColor = dark : lblSecQuestion.BackColor = System.Drawing.Color.Transparent
-        lblSecQuestion.Size = New System.Drawing.Size(420, 20) : lblSecQuestion.Location = New System.Drawing.Point(30, 280)
+        lblSecQuestion.Size = New System.Drawing.Size(420, 20) : lblSecQuestion.Location = New System.Drawing.Point(30, 304)
         lblSecQuestion.Name = "lblSecQuestion"
 
         cmbSecurityQuestion.Font = tbFont : cmbSecurityQuestion.Size = New System.Drawing.Size(420, 32)
-        cmbSecurityQuestion.Location = New System.Drawing.Point(30, 302)
+        cmbSecurityQuestion.Location = New System.Drawing.Point(30, 326)
         cmbSecurityQuestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         cmbSecurityQuestion.BackColor = cream : cmbSecurityQuestion.ForeColor = dark
         cmbSecurityQuestion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        cmbSecurityQuestion.Name = "cmbSecurityQuestion" : cmbSecurityQuestion.TabIndex = 4
+        cmbSecurityQuestion.Name = "cmbSecurityQuestion" : cmbSecurityQuestion.TabIndex = 5
 
         lblSecAnswer.AutoSize = False : lblSecAnswer.Text = "Security Answer"
         lblSecAnswer.Font = lbFont : lblSecAnswer.ForeColor = dark : lblSecAnswer.BackColor = System.Drawing.Color.Transparent
-        lblSecAnswer.Size = New System.Drawing.Size(420, 20) : lblSecAnswer.Location = New System.Drawing.Point(30, 346)
+        lblSecAnswer.Size = New System.Drawing.Size(420, 20) : lblSecAnswer.Location = New System.Drawing.Point(30, 370)
         lblSecAnswer.Name = "lblSecAnswer"
 
         txtSecurityAnswer.Font = tbFont : txtSecurityAnswer.Size = New System.Drawing.Size(420, 32)
-        txtSecurityAnswer.Location = New System.Drawing.Point(30, 368)
+        txtSecurityAnswer.Location = New System.Drawing.Point(30, 392)
         txtSecurityAnswer.BackColor = cream : txtSecurityAnswer.ForeColor = dark
         txtSecurityAnswer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         txtSecurityAnswer.PlaceholderText = "Enter your answer"
-        txtSecurityAnswer.Name = "txtSecurityAnswer" : txtSecurityAnswer.TabIndex = 5
+        txtSecurityAnswer.Name = "txtSecurityAnswer" : txtSecurityAnswer.TabIndex = 6
 
         pnlBody.Controls.Add(lblUsername)
         pnlBody.Controls.Add(txtUsername)
@@ -179,6 +188,7 @@ Partial Class AdminUpdateAccountForm
         pnlBody.Controls.Add(txtNewPassword)
         pnlBody.Controls.Add(lblConfirmPassword)
         pnlBody.Controls.Add(txtConfirmPassword)
+        pnlBody.Controls.Add(chkShowPassword)
         pnlBody.Controls.Add(lblUserType)
         pnlBody.Controls.Add(cmbUserType)
         pnlBody.Controls.Add(lblSecQuestion)
@@ -189,7 +199,7 @@ Partial Class AdminUpdateAccountForm
         ' ?? Form ??????????????????????????????????????????????????
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode       = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize          = New System.Drawing.Size(480, 500)
+        Me.ClientSize          = New System.Drawing.Size(480, 540)
         Me.Controls.Add(pnlBody)
         Me.Controls.Add(pnlFooter)
         Me.Controls.Add(pnlHeader)
@@ -212,6 +222,7 @@ Partial Class AdminUpdateAccountForm
     Friend WithEvents txtNewPassword      As System.Windows.Forms.TextBox
     Friend WithEvents lblConfirmPassword  As System.Windows.Forms.Label
     Friend WithEvents txtConfirmPassword  As System.Windows.Forms.TextBox
+    Friend WithEvents chkShowPassword     As System.Windows.Forms.CheckBox
     Friend WithEvents lblUserType         As System.Windows.Forms.Label
     Friend WithEvents cmbUserType         As System.Windows.Forms.ComboBox
     Friend WithEvents lblSecQuestion      As System.Windows.Forms.Label

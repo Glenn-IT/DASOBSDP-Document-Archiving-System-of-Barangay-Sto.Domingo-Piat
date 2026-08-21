@@ -76,4 +76,14 @@ Public Class AdminUpdateAccountForm
         Me.Close()
     End Sub
 
+    Private Sub chkShowPassword_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowPassword.CheckedChanged
+        If chkShowPassword.Checked Then
+            txtNewPassword.PasswordChar = Chr(0)
+            txtConfirmPassword.PasswordChar = Chr(0)
+        Else
+            txtNewPassword.PasswordChar = "*"c
+            txtConfirmPassword.PasswordChar = "*"c
+        End If
+    End Sub
+
 End Class
