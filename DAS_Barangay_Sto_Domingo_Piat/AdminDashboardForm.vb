@@ -29,7 +29,7 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub HighlightButton(active As Button)
-        Dim sidebarButtons As Button() = {btnArchiveList, btnDocumentTypes, btnUsersList, btnActivityLogs, btnViewProfile, btnLogout}
+        Dim sidebarButtons As Button() = {btnArchiveList, btnDocumentTypes, btnUsersList, btnActivityLogs, btnViewProfile, btnSystemManual, btnDevelopers, btnLogout}
         For Each btn In sidebarButtons
             btn.BackColor = System.Drawing.Color.FromArgb(52, 103, 57)
             btn.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
@@ -85,6 +85,18 @@ Public Class AdminDashboardForm
         LoadPanel(panel)
         HighlightButton(btnViewProfile)
         lblPageTitle.Text = "View Profile"
+    End Sub
+
+    Private Sub btnSystemManual_Click(sender As Object, e As EventArgs) Handles btnSystemManual.Click
+        LoadPanel(New SystemManualPanel())
+        HighlightButton(btnSystemManual)
+        lblPageTitle.Text = "System Manual"
+    End Sub
+
+    Private Sub btnDevelopers_Click(sender As Object, e As EventArgs) Handles btnDevelopers.Click
+        LoadPanel(New DevelopersPanel())
+        HighlightButton(btnDevelopers)
+        lblPageTitle.Text = "Developers"
     End Sub
 
     ' Fired when the profile panel updates the user's own credentials — force re-login for security.

@@ -28,6 +28,8 @@ Partial Class AdminDashboardForm
         btnUsersList = New Button()
         btnActivityLogs = New Button()
         btnViewProfile = New Button()
+        btnSystemManual = New Button()
+        btnDevelopers = New Button()
         pnlSidebarBottom = New Panel()
         btnLogout = New Button()
         pnlRight = New Panel()
@@ -53,6 +55,8 @@ Partial Class AdminDashboardForm
         pnlSidebar.Controls.Add(btnUsersList)
         pnlSidebar.Controls.Add(btnActivityLogs)
         pnlSidebar.Controls.Add(btnViewProfile)
+        pnlSidebar.Controls.Add(btnSystemManual)
+        pnlSidebar.Controls.Add(btnDevelopers)
         pnlSidebar.Controls.Add(pnlSidebarBottom)
         pnlSidebar.Dock = DockStyle.Left
         pnlSidebar.Location = New Point(0, 0)
@@ -209,6 +213,42 @@ Partial Class AdminDashboardForm
         btnViewProfile.TextAlign = ContentAlignment.MiddleLeft
         btnViewProfile.UseVisualStyleBackColor = False
         ' 
+        ' btnSystemManual
+        ' 
+        btnSystemManual.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        btnSystemManual.Cursor = Cursors.Hand
+        btnSystemManual.FlatAppearance.BorderSize = 0
+        btnSystemManual.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnSystemManual.FlatStyle = FlatStyle.Flat
+        btnSystemManual.Font = New Font("Segoe UI", 10F)
+        btnSystemManual.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnSystemManual.Location = New Point(0, 483)
+        btnSystemManual.Name = "btnSystemManual"
+        btnSystemManual.Padding = New Padding(16, 0, 0, 0)
+        btnSystemManual.Size = New Size(220, 54)
+        btnSystemManual.TabIndex = 5
+        btnSystemManual.Text = "  System Manual"
+        btnSystemManual.TextAlign = ContentAlignment.MiddleLeft
+        btnSystemManual.UseVisualStyleBackColor = False
+        ' 
+        ' btnDevelopers
+        ' 
+        btnDevelopers.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        btnDevelopers.Cursor = Cursors.Hand
+        btnDevelopers.FlatAppearance.BorderSize = 0
+        btnDevelopers.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnDevelopers.FlatStyle = FlatStyle.Flat
+        btnDevelopers.Font = New Font("Segoe UI", 10F)
+        btnDevelopers.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnDevelopers.Location = New Point(0, 537)
+        btnDevelopers.Name = "btnDevelopers"
+        btnDevelopers.Padding = New Padding(16, 0, 0, 0)
+        btnDevelopers.Size = New Size(220, 54)
+        btnDevelopers.TabIndex = 6
+        btnDevelopers.Text = "  Developers"
+        btnDevelopers.TextAlign = ContentAlignment.MiddleLeft
+        btnDevelopers.UseVisualStyleBackColor = False
+        ' 
         ' pnlSidebarBottom
         ' 
         pnlSidebarBottom.BackColor = Color.FromArgb(CByte(40), CByte(80), CByte(44))
@@ -217,7 +257,7 @@ Partial Class AdminDashboardForm
         pnlSidebarBottom.Location = New Point(0, 685)
         pnlSidebarBottom.Name = "pnlSidebarBottom"
         pnlSidebarBottom.Size = New Size(220, 63)
-        pnlSidebarBottom.TabIndex = 4
+        pnlSidebarBottom.TabIndex = 7
         ' 
         ' btnLogout
         ' 
@@ -305,7 +345,7 @@ Partial Class AdminDashboardForm
         Controls.Add(pnlSidebar)
         Name = "AdminDashboardForm"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "Document Archiving System � Admin Dashboard"
+        Text = "Document Archiving System  Admin Dashboard"
         WindowState = FormWindowState.Maximized
         pnlSidebar.ResumeLayout(False)
         pnlSidebarTop.ResumeLayout(False)
@@ -326,6 +366,8 @@ Partial Class AdminDashboardForm
     Friend WithEvents btnUsersList      As System.Windows.Forms.Button
     Friend WithEvents btnActivityLogs   As System.Windows.Forms.Button
     Friend WithEvents btnViewProfile    As System.Windows.Forms.Button
+    Friend WithEvents btnSystemManual   As System.Windows.Forms.Button
+    Friend WithEvents btnDevelopers     As System.Windows.Forms.Button
     Friend WithEvents pnlSidebarBottom  As System.Windows.Forms.Panel
     Friend WithEvents btnLogout         As System.Windows.Forms.Button
     Friend WithEvents pnlRight          As System.Windows.Forms.Panel
