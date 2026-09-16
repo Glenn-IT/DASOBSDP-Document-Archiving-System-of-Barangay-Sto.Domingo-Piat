@@ -122,7 +122,7 @@ Public Class SystemManualPanel
             "• Database Connection Error: Ensure SQL Server service (LocalDB or MSSQL) is running and 'config.txt' has valid credentials." & vbCrLf &
             "• Duplicate Entries: Search before uploading to prevent redundant document archiving." & vbCrLf &
             "• File Sizes: Keep scanned documents under 25MB for optimal database and network performance." & vbCrLf &
-            "• Technical Support: Contact the designated system developers or Barangay IT Administrator for assistance.",
+            "• Technical Support: Refer to the Developers page in the sidebar for contact information (Aemyra Jenn Ignacio & Racquel Dela Cruz), or contact the Barangay IT Administrator.",
             darkGreen, cardBg, textDark, 175))
 
         pnlBody.Controls.Add(flowContainer)
