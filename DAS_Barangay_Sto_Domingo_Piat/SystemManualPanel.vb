@@ -68,27 +68,34 @@ Public Class SystemManualPanel
         flowContainer.Padding = New Padding(0)
 
         ' Navigation Bar with Quick Jump Buttons
-        Dim pnlNav As New Panel()
+        Dim pnlNav As New FlowLayoutPanel()
         pnlNav.Width = 830
-        pnlNav.Height = 82
+        pnlNav.AutoSize = True
+        pnlNav.AutoSizeMode = AutoSizeMode.GrowAndShrink
+        pnlNav.FlowDirection = FlowDirection.TopDown
+        pnlNav.WrapContents = False
         pnlNav.BackColor = Color.FromArgb(220, 216, 170)
-        pnlNav.Margin = New Padding(0, 0, 0, 18)
-        pnlNav.Padding = New Padding(12, 8, 12, 8)
+        pnlNav.Margin = New Padding(0, 0, 0, 20)
+        pnlNav.Padding = New Padding(14, 12, 14, 12)
 
         Dim lblNavTitle As New Label()
         lblNavTitle.Text = "📑 Quick Jump to Tab Guide (Click any button below to jump to instructions & screenshots):"
-        lblNavTitle.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        lblNavTitle.Font = New Font("Segoe UI", 9.5F, FontStyle.Bold)
         lblNavTitle.ForeColor = darkerGreen
-        lblNavTitle.Dock = DockStyle.Top
-        lblNavTitle.Height = 20
+        lblNavTitle.Width = 800
+        lblNavTitle.Height = 24
+        lblNavTitle.Margin = New Padding(0, 0, 0, 10)
         pnlNav.Controls.Add(lblNavTitle)
 
         Dim flowNavButtons As New FlowLayoutPanel()
-        flowNavButtons.Dock = DockStyle.Fill
+        flowNavButtons.Width = 800
+        flowNavButtons.AutoSize = True
+        flowNavButtons.AutoSizeMode = AutoSizeMode.GrowAndShrink
         flowNavButtons.FlowDirection = FlowDirection.LeftToRight
         flowNavButtons.WrapContents = True
         flowNavButtons.BackColor = Color.Transparent
-        flowNavButtons.Padding = New Padding(0, 4, 0, 0)
+        flowNavButtons.Margin = New Padding(0)
+        flowNavButtons.Padding = New Padding(0)
         pnlNav.Controls.Add(flowNavButtons)
 
         ' Section 1: Dashboard
@@ -225,8 +232,9 @@ Public Class SystemManualPanel
         btn.FlatStyle = FlatStyle.Flat
         btn.FlatAppearance.BorderSize = 0
         btn.AutoSize = True
-        btn.Height = 28
-        btn.Margin = New Padding(0, 0, 6, 6)
+        btn.Height = 32
+        btn.Margin = New Padding(0, 0, 8, 8)
+        btn.Padding = New Padding(10, 2, 10, 2)
         btn.Cursor = Cursors.Hand
         AddHandler btn.Click, Sub(s, e)
             pnlBody.ScrollControlIntoView(targetSection)
