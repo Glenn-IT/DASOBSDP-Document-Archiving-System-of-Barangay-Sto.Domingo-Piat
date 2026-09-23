@@ -52,7 +52,7 @@ Partial Class UserViewProfilePanel
         pnlTop.Name      = "pnlTop"
 
         lblTitle.AutoSize  = False
-        lblTitle.Text      = "View Profile"
+        lblTitle.Text      = "Account Settings"
         lblTitle.Font      = New System.Drawing.Font("Segoe UI", 13, System.Drawing.FontStyle.Bold)
         lblTitle.ForeColor = System.Drawing.Color.White
         lblTitle.BackColor = System.Drawing.Color.Transparent

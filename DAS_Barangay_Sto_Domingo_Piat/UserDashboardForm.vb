@@ -6,9 +6,11 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub UserDashboardForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        lblPageTitle.Visible = False
         LoadPanel(New UserDashboardPanel())
         HighlightButton(btnDashboard)
-        lblPageTitle.Text = "Dashboard"
+        lblPageTitle.Text   = "Dashboard"
+        lblWelcomeUser.Text = $"Welcome, {SessionManager.Username}!"
     End Sub
 
     Private Sub LoadPanel(panel As UserControl)
@@ -17,7 +19,7 @@ Public Class UserDashboardForm
                 TryCast(pnlMainContent.Controls(0), UserViewProfilePanel)
             If current IsNot Nothing AndAlso current.HasUnsavedChanges Then
                 Dim answer As DialogResult = MessageBox.Show(
-                    "You have unsaved profile changes. Discard and leave?",
+                    "You have unsaved account settings changes. Discard and leave?",
                     "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
                 If answer <> DialogResult.Yes Then Return
             End If
@@ -83,7 +85,7 @@ Public Class UserDashboardForm
         AddHandler panel.RequestLogout, AddressOf ForcedLogout
         LoadPanel(panel)
         HighlightButton(btnViewProfile)
-        lblPageTitle.Text = "View Profile"
+        lblPageTitle.Text = "Account Settings"
     End Sub
 
     Private Sub btnSystemManual_Click(sender As Object, e As EventArgs) Handles btnSystemManual.Click

@@ -154,7 +154,7 @@ Partial Class UserDashboardForm
         btnDocumentTypes.Name                              = "btnDocumentTypes"
         btnDocumentTypes.TabIndex                          = 3
 
-        btnViewProfile.Text                              = "  View Profile"
+        btnViewProfile.Text                              = "  Account Settings"
         btnViewProfile.Font                              = sbFont
         btnViewProfile.BackColor                         = dark
         btnViewProfile.ForeColor                         = cream
@@ -245,7 +245,7 @@ Partial Class UserDashboardForm
         pnlHeader.Name      = "pnlHeader"
 
         lblPageTitle.AutoSize  = False
-        lblPageTitle.Text      = "Archive List"
+        lblPageTitle.Text      = "Dashboard"
         lblPageTitle.Font      = New System.Drawing.Font("Segoe UI", 13, System.Drawing.FontStyle.Bold)
         lblPageTitle.ForeColor = System.Drawing.Color.White
         lblPageTitle.BackColor = System.Drawing.Color.Transparent
@@ -254,6 +254,7 @@ Partial Class UserDashboardForm
         lblPageTitle.Location  = New System.Drawing.Point(20, 0)
         lblPageTitle.Anchor    = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left
         lblPageTitle.Name      = "lblPageTitle"
+        lblPageTitle.Visible   = False
 
         lblWelcomeUser.AutoSize  = False
         lblWelcomeUser.Text      = "Welcome, User"

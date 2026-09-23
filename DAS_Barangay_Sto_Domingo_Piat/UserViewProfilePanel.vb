@@ -61,7 +61,7 @@ Public Class UserViewProfilePanel
         Dim confirmPassword  As String = txtConfirmPassword.Text.Trim()
 
         If newPassword <> "" AndAlso newPassword <> confirmPassword Then
-            MessageBox.Show("Passwords do not match.", "View Profile",
+            MessageBox.Show("Passwords do not match.", "Account Settings",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
@@ -72,9 +72,9 @@ Public Class UserViewProfilePanel
             UserRepository.UpdateProfile(SessionManager.Username, securityQuestion,
                                          securityAnswer, hashedPassword)
             ActivityLogger.Log(SessionManager.Username, "Success",
-                "User updated their profile.")
+                "User updated their account settings.")
             MessageBox.Show("Profile updated successfully! You will now be logged out for security purposes.",
-                            "View Profile", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            "Account Settings", MessageBoxButtons.OK, MessageBoxIcon.Information)
             RaiseEvent RequestLogout(Me, EventArgs.Empty)
         Catch ex As Exception
             MessageBox.Show("Error updating profile: " & ex.Message,

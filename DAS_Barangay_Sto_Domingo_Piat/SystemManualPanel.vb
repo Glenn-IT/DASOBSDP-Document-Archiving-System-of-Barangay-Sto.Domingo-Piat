@@ -180,7 +180,7 @@ Public Class SystemManualPanel
             "• Forgot Password Recovery: Recover access from the login screen without needing an administrator." & vbCrLf &
             "• Always remember to click 'Logout' in the bottom sidebar before leaving your workstation.",
             "tab_profile.png",
-            "View Profile Tab",
+            "Account Settings Tab",
             darkGreen, cardBg, textDark, 420)
 
         ' Section 8: Developers
@@ -202,7 +202,7 @@ Public Class SystemManualPanel
         AddNavButton(flowNavButtons, "📁 Document Types", sec4, darkGreen)
         AddNavButton(flowNavButtons, "👥 Users List", sec5, darkGreen)
         AddNavButton(flowNavButtons, "📜 Activity Logs", sec6, darkGreen)
-        AddNavButton(flowNavButtons, "🔒 View Profile", sec7, darkGreen)
+        AddNavButton(flowNavButtons, "🔒 Account Settings", sec7, darkGreen)
         AddNavButton(flowNavButtons, "👨‍💻 Developers", sec8, darkGreen)
 
         ' Add to Flow Container
