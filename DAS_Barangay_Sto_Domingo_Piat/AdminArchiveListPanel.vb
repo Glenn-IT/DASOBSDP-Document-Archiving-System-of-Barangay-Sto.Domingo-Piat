@@ -1,12 +1,16 @@
 Public Class AdminArchiveListPanel
     Inherits System.Windows.Forms.UserControl
 
-    Public Sub New()
+    Private _initialFilter As String = "All Documents"
+
+    Public Sub New(Optional initialFilter As String = "All Documents")
         InitializeComponent()
+        _initialFilter = initialFilter
     End Sub
 
     Private Sub AdminArchiveListPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetupApprovalMenu()
+        SetupStatusFilter()
         LoadDocumentsFromDB()
     End Sub
 
@@ -18,20 +22,50 @@ Public Class AdminArchiveListPanel
         dgvArchiveList.ContextMenuStrip = cms
     End Sub
 
+    Private Sub SetupStatusFilter()
+        cmbStatusFilter.Items.Clear()
+        cmbStatusFilter.Items.Add("All Documents")
+        cmbStatusFilter.Items.Add("For Review")
+        cmbStatusFilter.Items.Add("Approved")
+
+        If cmbStatusFilter.Items.Contains(_initialFilter) Then
+            cmbStatusFilter.SelectedItem = _initialFilter
+        Else
+            cmbStatusFilter.SelectedIndex = 0
+        End If
+    End Sub
+
+    Private Sub cmbStatusFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStatusFilter.SelectedIndexChanged
+        Dim q As String = InputHelper.SanitizeInput(txtSearch.Text)
+        LoadDocumentsFromDB(If(q = "", Nothing, q))
+    End Sub
+
     Friend Sub LoadDocumentsFromDB(Optional searchQuery As String = Nothing)
         dgvArchiveList.Rows.Clear()
         Try
-            Dim dt As DataTable = DocumentRepository.GetAll(searchQuery)
+            Dim selectedStatus As String = If(cmbStatusFilter.SelectedItem IsNot Nothing, cmbStatusFilter.SelectedItem.ToString(), "All Documents")
+            Dim dt As DataTable = DocumentRepository.GetAll(searchQuery, selectedStatus)
             For Each row As DataRow In dt.Rows
+                Dim appStatus As String = row("ApprovalStatus").ToString()
                 Dim idx As Integer = dgvArchiveList.Rows.Add(
                     row("DocumentCode").ToString(),
                     row("Title").ToString(),
                     row("UploadedBy").ToString(),
                     Convert.ToDateTime(row("DateUploaded")).ToString("yyyy-MM-dd HH:mm"),
+                    appStatus,
                     row("Status").ToString(),
                     "View"
                 )
                 dgvArchiveList.Rows(idx).Tag = CInt(row("DocumentID"))
+
+                Dim cell As DataGridViewCell = dgvArchiveList.Rows(idx).Cells("colApprovalStatus")
+                If appStatus = "For Review" Then
+                    cell.Style.ForeColor = Color.FromArgb(190, 110, 0)
+                    cell.Style.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+                ElseIf appStatus = "Approved" Then
+                    cell.Style.ForeColor = Color.FromArgb(32, 120, 32)
+                    cell.Style.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+                End If
             Next
         Catch ex As Exception
             MessageBox.Show("Error loading documents: " & ex.Message,
@@ -75,8 +109,11 @@ Public Class AdminArchiveListPanel
                 Convert.ToDateTime(dr("DateUploaded")).ToString("yyyy-MM-dd HH:mm"),
                 dr("ApprovalStatus").ToString(),
                 dr("Status").ToString(),
-                bannerBytes, pdfBytes, pdfFileName)
-                viewForm.ShowDialog()
+                bannerBytes, pdfBytes, pdfFileName,
+                documentId)
+                If viewForm.ShowDialog() = DialogResult.OK Then
+                    LoadDocumentsFromDB()
+                End If
             End Using
         Catch ex As Exception
             MessageBox.Show("Error loading document: " & ex.Message,
@@ -109,7 +146,7 @@ Public Class AdminArchiveListPanel
         End If
         Dim selectedRow  As DataGridViewRow = dgvArchiveList.SelectedRows(0)
         Dim documentId   As Integer = CInt(selectedRow.Tag)
-        Dim documentCode As String  = selectedRow.Cells(0).Value.ToString()
+        Dim documentCode As String  = selectedRow.Cells("colDocID").Value.ToString()
 
         Dim frm As New AdminUpdateDocumentForm()
         frm.DocumentID   = documentId
@@ -117,6 +154,10 @@ Public Class AdminArchiveListPanel
         If frm.ShowDialog() = DialogResult.OK Then
             LoadDocumentsFromDB()
         End If
+    End Sub
+
+    Private Sub btnApproveDocument_Click(sender As Object, e As EventArgs) Handles btnApproveDocument.Click
+        ApproveSelectedDocument(sender, e)
     End Sub
 
     Private Sub btnDeleteDocument_Click(sender As Object, e As EventArgs) Handles btnDeleteDocument.Click
@@ -127,7 +168,7 @@ Public Class AdminArchiveListPanel
         End If
         Dim selectedRow  As DataGridViewRow = dgvArchiveList.SelectedRows(0)
         Dim documentId   As Integer = CInt(selectedRow.Tag)
-        Dim documentCode As String  = selectedRow.Cells(0).Value.ToString()
+        Dim documentCode As String  = selectedRow.Cells("colDocID").Value.ToString()
 
         Dim frm As New AdminDeleteDocumentForm()
         frm.DocumentID   = documentId
@@ -145,10 +186,17 @@ Public Class AdminArchiveListPanel
         End If
         Dim selectedRow  As DataGridViewRow = dgvArchiveList.SelectedRows(0)
         Dim documentId   As Integer = CInt(selectedRow.Tag)
-        Dim documentCode As String  = selectedRow.Cells(0).Value.ToString()
+        Dim documentCode As String  = selectedRow.Cells("colDocID").Value.ToString()
+        Dim currentApproval As String = selectedRow.Cells("colApprovalStatus").Value.ToString()
+
+        If currentApproval = "Approved" Then
+            MessageBox.Show($"Document {documentCode} is already approved.",
+                            "Already Approved", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
 
         Dim confirm As DialogResult = MessageBox.Show(
-            $"Approve document {documentCode}?",
+            $"Are you sure you want to approve document '{documentCode}'?{Environment.NewLine}{Environment.NewLine}This will officially verify the document for the archive.",
             "Approve Document", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If confirm <> DialogResult.Yes Then Return
 
@@ -156,7 +204,7 @@ Public Class AdminArchiveListPanel
             DocumentRepository.Approve(documentId)
             ActivityLogger.Log(SessionManager.Username, "Success",
                 $"Admin approved document: {documentCode}")
-            MessageBox.Show("Document approved successfully.", "Approve Document",
+            MessageBox.Show($"Document {documentCode} approved successfully.", "Approve Document",
                             MessageBoxButtons.OK, MessageBoxIcon.Information)
             LoadDocumentsFromDB()
         Catch ex As Exception

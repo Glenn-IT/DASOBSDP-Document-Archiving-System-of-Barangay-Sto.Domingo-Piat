@@ -2,24 +2,27 @@ Imports Microsoft.Data.SqlClient
 
 Public Module DocumentRepository
 
-    Public Function GetAll(Optional search As String = Nothing) As DataTable
+    Public Function GetAll(Optional search As String = Nothing, Optional approvalStatus As String = Nothing) As DataTable
         Dim dt As New DataTable()
         Using con As New SqlConnection(dbconstring.Connection)
             con.Open()
-            Dim sql As String
-            Dim cmd As SqlCommand
-            If String.IsNullOrEmpty(search) Then
-                sql = "SELECT DocumentID, DocumentCode, Title, UploadedBy, DateUploaded, Status " &
-                      "FROM tbl_Documents ORDER BY DateUploaded DESC"
-                cmd = New SqlCommand(sql, con)
-            Else
-                sql = "SELECT DocumentID, DocumentCode, Title, UploadedBy, DateUploaded, Status " &
-                      "FROM tbl_Documents " &
-                      "WHERE Title LIKE @search OR DocumentType LIKE @search " &
-                      "ORDER BY DateUploaded DESC"
-                cmd = New SqlCommand(sql, con)
+            Dim sql As String = "SELECT DocumentID, DocumentCode, Title, DocumentType, UploadedBy, DateUploaded, ApprovalStatus, Status FROM tbl_Documents WHERE 1=1"
+            Dim cmd As New SqlCommand()
+            cmd.Connection = con
+
+            If Not String.IsNullOrEmpty(search) Then
+                sql &= " AND (Title LIKE @search OR DocumentType LIKE @search OR DocumentCode LIKE @search OR UploadedBy LIKE @search)"
                 cmd.Parameters.AddWithValue("@search", "%" & search & "%")
             End If
+
+            If Not String.IsNullOrEmpty(approvalStatus) AndAlso approvalStatus <> "All Documents" AndAlso approvalStatus <> "All" Then
+                sql &= " AND ApprovalStatus = @approvalStatus"
+                cmd.Parameters.AddWithValue("@approvalStatus", approvalStatus)
+            End If
+
+            sql &= " ORDER BY DateUploaded DESC"
+            cmd.CommandText = sql
+
             Dim adapter As New SqlDataAdapter(cmd)
             adapter.Fill(dt)
         End Using
@@ -230,6 +233,34 @@ Public Module DocumentRepository
         End Using
     End Function
 
+    Public Function CountAll() As Integer
+        Using con As New SqlConnection(dbconstring.Connection)
+            con.Open()
+            Dim cmd As New SqlCommand("SELECT COUNT(*) FROM tbl_Documents", con)
+            Return CInt(cmd.ExecuteScalar())
+        End Using
+    End Function
+
+    Public Function CountRecent() As Integer
+        Using con As New SqlConnection(dbconstring.Connection)
+            con.Open()
+            Dim cmd As New SqlCommand(
+                "SELECT COUNT(*) FROM tbl_Documents " &
+                "WHERE DateUploaded >= DATEADD(day, -30, GETDATE())", con)
+            Return CInt(cmd.ExecuteScalar())
+        End Using
+    End Function
+
+    Public Function CountPending() As Integer
+        Using con As New SqlConnection(dbconstring.Connection)
+            con.Open()
+            Dim cmd As New SqlCommand(
+                "SELECT COUNT(*) FROM tbl_Documents " &
+                "WHERE ApprovalStatus = 'For Review'", con)
+            Return CInt(cmd.ExecuteScalar())
+        End Using
+    End Function
+
     Public Function GenerateCode() As String
         Using con As New SqlConnection(dbconstring.Connection)
             con.Open()
@@ -241,7 +272,8 @@ Public Module DocumentRepository
 
     Public Sub Insert(code As String, title As String, description As String,
                       docType As String, bannerBytes As Byte(), pdfFileName As String,
-                      pdfBytes As Byte(), uploadedBy As String, dateUploaded As DateTime)
+                      pdfBytes As Byte(), uploadedBy As String, dateUploaded As DateTime,
+                      Optional approvalStatus As String = "For Review")
         Using con As New SqlConnection(dbconstring.Connection)
             con.Open()
             Dim sql As String =
@@ -249,17 +281,18 @@ Public Module DocumentRepository
                 "(DocumentCode, Title, Description, DocumentType, BannerImage, PDFFileName, PDFFile, " &
                 " UploadedBy, DateUploaded, ApprovalStatus, Status) " &
                 "VALUES (@code, @title, @desc, @type, @image, @pdfName, @pdf, " &
-                "        @uploadedBy, @dateUploaded, 'For Review', 'Active')"
+                "        @uploadedBy, @dateUploaded, @approvalStatus, 'Active')"
             Using cmd As New SqlCommand(sql, con)
-                cmd.Parameters.AddWithValue("@code",         code)
-                cmd.Parameters.AddWithValue("@title",        title)
-                cmd.Parameters.AddWithValue("@desc",         If(String.IsNullOrEmpty(description), DBNull.Value, CObj(description)))
-                cmd.Parameters.AddWithValue("@type",         docType)
-                cmd.Parameters.AddWithValue("@image",        If(bannerBytes Is Nothing, DBNull.Value, CObj(bannerBytes)))
-                cmd.Parameters.AddWithValue("@pdfName",      If(String.IsNullOrEmpty(pdfFileName), DBNull.Value, CObj(pdfFileName)))
-                cmd.Parameters.AddWithValue("@pdf",          If(pdfBytes Is Nothing, DBNull.Value, CObj(pdfBytes)))
-                cmd.Parameters.AddWithValue("@uploadedBy",   uploadedBy)
-                cmd.Parameters.AddWithValue("@dateUploaded", dateUploaded)
+                cmd.Parameters.AddWithValue("@code",           code)
+                cmd.Parameters.AddWithValue("@title",          title)
+                cmd.Parameters.AddWithValue("@desc",           If(String.IsNullOrEmpty(description), DBNull.Value, CObj(description)))
+                cmd.Parameters.AddWithValue("@type",           docType)
+                cmd.Parameters.AddWithValue("@image",          If(bannerBytes Is Nothing, DBNull.Value, CObj(bannerBytes)))
+                cmd.Parameters.AddWithValue("@pdfName",        If(String.IsNullOrEmpty(pdfFileName), DBNull.Value, CObj(pdfFileName)))
+                cmd.Parameters.AddWithValue("@pdf",            If(pdfBytes Is Nothing, DBNull.Value, CObj(pdfBytes)))
+                cmd.Parameters.AddWithValue("@uploadedBy",     uploadedBy)
+                cmd.Parameters.AddWithValue("@dateUploaded",   dateUploaded)
+                cmd.Parameters.AddWithValue("@approvalStatus", approvalStatus)
                 cmd.ExecuteNonQuery()
             End Using
         End Using

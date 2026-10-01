@@ -26,17 +26,20 @@ Partial Class AdminArchiveListPanel
         colDocTitle = New DataGridViewTextBoxColumn()
         colUploadedBy = New DataGridViewTextBoxColumn()
         colDateTime = New DataGridViewTextBoxColumn()
+        colApprovalStatus = New DataGridViewTextBoxColumn()
         colStatus = New DataGridViewTextBoxColumn()
         colView = New DataGridViewButtonColumn()
         pnlTop = New Panel()
         lblTitle = New Label()
         pnlSearch = New Panel()
         txtSearch = New TextBox()
+        cmbStatusFilter = New ComboBox()
         btnSearch = New Button()
         pnlActions = New Panel()
         btnAddDocument = New Button()
         btnUpdateDocument = New Button()
         btnDeleteDocument = New Button()
+        btnApproveDocument = New Button()
         CType(dgvArchiveList, ComponentModel.ISupportInitialize).BeginInit()
         pnlTop.SuspendLayout()
         pnlSearch.SuspendLayout()
@@ -62,7 +65,7 @@ Partial Class AdminArchiveListPanel
         dgvArchiveList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         dgvArchiveList.ColumnHeadersHeight = 36
         dgvArchiveList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        dgvArchiveList.Columns.AddRange(New DataGridViewColumn() {colDocID, colDocTitle, colUploadedBy, colDateTime, colStatus, colView})
+        dgvArchiveList.Columns.AddRange(New DataGridViewColumn() {colDocID, colDocTitle, colUploadedBy, colDateTime, colApprovalStatus, colStatus, colView})
         DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         DataGridViewCellStyle4.Font = New Font("Segoe UI", 9F)
@@ -88,7 +91,7 @@ Partial Class AdminArchiveListPanel
         ' 
         ' colDocID
         ' 
-        colDocID.FillWeight = 15F
+        colDocID.FillWeight = 12F
         colDocID.HeaderText = "Document ID"
         colDocID.MinimumWidth = 6
         colDocID.Name = "colDocID"
@@ -98,7 +101,7 @@ Partial Class AdminArchiveListPanel
         ' 
         DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
         colDocTitle.DefaultCellStyle = DataGridViewCellStyle3
-        colDocTitle.FillWeight = 35F
+        colDocTitle.FillWeight = 28F
         colDocTitle.HeaderText = "Document Title"
         colDocTitle.MinimumWidth = 6
         colDocTitle.Name = "colDocTitle"
@@ -106,7 +109,7 @@ Partial Class AdminArchiveListPanel
         ' 
         ' colUploadedBy
         ' 
-        colUploadedBy.FillWeight = 20F
+        colUploadedBy.FillWeight = 15F
         colUploadedBy.HeaderText = "Uploaded By"
         colUploadedBy.MinimumWidth = 6
         colUploadedBy.Name = "colUploadedBy"
@@ -114,11 +117,19 @@ Partial Class AdminArchiveListPanel
         ' 
         ' colDateTime
         ' 
-        colDateTime.FillWeight = 20F
+        colDateTime.FillWeight = 17F
         colDateTime.HeaderText = "Date and Time"
         colDateTime.MinimumWidth = 6
         colDateTime.Name = "colDateTime"
         colDateTime.ReadOnly = True
+        ' 
+        ' colApprovalStatus
+        ' 
+        colApprovalStatus.FillWeight = 15F
+        colApprovalStatus.HeaderText = "Approval Status"
+        colApprovalStatus.MinimumWidth = 6
+        colApprovalStatus.Name = "colApprovalStatus"
+        colApprovalStatus.ReadOnly = True
         ' 
         ' colStatus
         ' 
@@ -166,6 +177,7 @@ Partial Class AdminArchiveListPanel
         ' 
         pnlSearch.BackColor = Color.FromArgb(CByte(230), CByte(226), CByte(180))
         pnlSearch.Controls.Add(txtSearch)
+        pnlSearch.Controls.Add(cmbStatusFilter)
         pnlSearch.Controls.Add(btnSearch)
         pnlSearch.Dock = DockStyle.Top
         pnlSearch.Location = New Point(0, 52)
@@ -183,8 +195,20 @@ Partial Class AdminArchiveListPanel
         txtSearch.Location = New Point(3, 9)
         txtSearch.Name = "txtSearch"
         txtSearch.PlaceholderText = "Type to search documents..."
-        txtSearch.Size = New Size(1197, 27)
+        txtSearch.Size = New Size(1005, 27)
         txtSearch.TabIndex = 0
+        ' 
+        ' cmbStatusFilter
+        ' 
+        cmbStatusFilter.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        cmbStatusFilter.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        cmbStatusFilter.DropDownStyle = ComboBoxStyle.DropDownList
+        cmbStatusFilter.Font = New Font("Segoe UI", 9.5F)
+        cmbStatusFilter.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        cmbStatusFilter.Location = New Point(1015, 8)
+        cmbStatusFilter.Name = "cmbStatusFilter"
+        cmbStatusFilter.Size = New Size(180, 28)
+        cmbStatusFilter.TabIndex = 1
         ' 
         ' btnSearch
         ' 
@@ -196,10 +220,10 @@ Partial Class AdminArchiveListPanel
         btnSearch.FlatStyle = FlatStyle.Flat
         btnSearch.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         btnSearch.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnSearch.Location = New Point(1205, 6)
+        btnSearch.Location = New Point(1202, 6)
         btnSearch.Name = "btnSearch"
         btnSearch.Size = New Size(90, 32)
-        btnSearch.TabIndex = 1
+        btnSearch.TabIndex = 2
         btnSearch.Text = "Search"
         btnSearch.UseVisualStyleBackColor = False
         ' 
@@ -208,6 +232,7 @@ Partial Class AdminArchiveListPanel
         pnlActions.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         pnlActions.Controls.Add(btnAddDocument)
         pnlActions.Controls.Add(btnUpdateDocument)
+        pnlActions.Controls.Add(btnApproveDocument)
         pnlActions.Controls.Add(btnDeleteDocument)
         pnlActions.Dock = DockStyle.Bottom
         pnlActions.Location = New Point(0, 536)
@@ -248,6 +273,22 @@ Partial Class AdminArchiveListPanel
         btnUpdateDocument.Text = "Update"
         btnUpdateDocument.UseVisualStyleBackColor = False
         ' 
+        ' btnApproveDocument
+        ' 
+        btnApproveDocument.BackColor = Color.FromArgb(CByte(32), CByte(148), CByte(148))
+        btnApproveDocument.Cursor = Cursors.Hand
+        btnApproveDocument.FlatAppearance.BorderSize = 0
+        btnApproveDocument.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(20), CByte(120), CByte(120))
+        btnApproveDocument.FlatStyle = FlatStyle.Flat
+        btnApproveDocument.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        btnApproveDocument.ForeColor = Color.White
+        btnApproveDocument.Location = New Point(276, 11)
+        btnApproveDocument.Name = "btnApproveDocument"
+        btnApproveDocument.Size = New Size(130, 38)
+        btnApproveDocument.TabIndex = 4
+        btnApproveDocument.Text = "Approve"
+        btnApproveDocument.UseVisualStyleBackColor = False
+        ' 
         ' btnDeleteDocument
         ' 
         btnDeleteDocument.BackColor = Color.FromArgb(CByte(192), CByte(57), CByte(43))
@@ -257,10 +298,10 @@ Partial Class AdminArchiveListPanel
         btnDeleteDocument.FlatStyle = FlatStyle.Flat
         btnDeleteDocument.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         btnDeleteDocument.ForeColor = Color.White
-        btnDeleteDocument.Location = New Point(276, 11)
+        btnDeleteDocument.Location = New Point(418, 11)
         btnDeleteDocument.Name = "btnDeleteDocument"
         btnDeleteDocument.Size = New Size(120, 38)
-        btnDeleteDocument.TabIndex = 4
+        btnDeleteDocument.TabIndex = 5
         btnDeleteDocument.Text = "Delete"
         btnDeleteDocument.UseVisualStyleBackColor = False
         btnDeleteDocument.Visible = False
@@ -289,16 +330,19 @@ Partial Class AdminArchiveListPanel
     Friend WithEvents colDocTitle       As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colUploadedBy     As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colDateTime       As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colApprovalStatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colStatus         As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colView           As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents pnlTop            As System.Windows.Forms.Panel
     Friend WithEvents lblTitle          As System.Windows.Forms.Label
     Friend WithEvents pnlSearch         As System.Windows.Forms.Panel
     Friend WithEvents txtSearch         As System.Windows.Forms.TextBox
+    Friend WithEvents cmbStatusFilter   As System.Windows.Forms.ComboBox
     Friend WithEvents btnSearch         As System.Windows.Forms.Button
     Friend WithEvents pnlActions        As System.Windows.Forms.Panel
     Friend WithEvents btnAddDocument    As System.Windows.Forms.Button
     Friend WithEvents btnUpdateDocument As System.Windows.Forms.Button
+    Friend WithEvents btnApproveDocument As System.Windows.Forms.Button
     Friend WithEvents btnDeleteDocument As System.Windows.Forms.Button
 
 End Class

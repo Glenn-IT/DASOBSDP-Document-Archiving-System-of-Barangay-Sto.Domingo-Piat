@@ -6,10 +6,32 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub AdminDashboardForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LoadPanel(New AdminArchiveListPanel())
-        HighlightButton(btnArchiveList)
-        lblPageTitle.Text   = "Archive List"
+        lblPageTitle.Visible = False
+        ShowDashboard()
         lblWelcomeUser.Text = $"Welcome, {SessionManager.Username}!"
+    End Sub
+
+    Private Sub ShowDashboard()
+        Dim pnl As New AdminDashboardPanel()
+        AddHandler pnl.PendingReviewRequested, AddressOf OnPendingReviewRequested
+        AddHandler pnl.TotalDocumentsRequested, AddressOf OnTotalDocumentsRequested
+        LoadPanel(pnl)
+        HighlightButton(btnDashboard)
+        lblPageTitle.Text = "Dashboard"
+    End Sub
+
+    Private Sub OnPendingReviewRequested()
+        Dim pnl As New AdminArchiveListPanel("For Review")
+        LoadPanel(pnl)
+        HighlightButton(btnArchiveList)
+        lblPageTitle.Text = "Archive List"
+    End Sub
+
+    Private Sub OnTotalDocumentsRequested()
+        Dim pnl As New AdminArchiveListPanel("All Documents")
+        LoadPanel(pnl)
+        HighlightButton(btnArchiveList)
+        lblPageTitle.Text = "Archive List"
     End Sub
 
     Private Sub LoadPanel(panel As UserControl)
@@ -29,13 +51,17 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub HighlightButton(active As Button)
-        Dim sidebarButtons As Button() = {btnArchiveList, btnDocumentTypes, btnUsersList, btnActivityLogs, btnViewProfile, btnSystemManual, btnDevelopers, btnLogout}
+        Dim sidebarButtons As Button() = {btnDashboard, btnArchiveList, btnDocumentTypes, btnUsersList, btnActivityLogs, btnViewProfile, btnSystemManual, btnDevelopers}
         For Each btn In sidebarButtons
             btn.BackColor = System.Drawing.Color.FromArgb(52, 103, 57)
             btn.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
         Next
         active.BackColor = System.Drawing.Color.FromArgb(121, 174, 111)
         active.ForeColor = System.Drawing.Color.White
+    End Sub
+
+    Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
+        ShowDashboard()
     End Sub
 
     Private Sub btnArchiveList_Click(sender As Object, e As EventArgs) Handles btnArchiveList.Click

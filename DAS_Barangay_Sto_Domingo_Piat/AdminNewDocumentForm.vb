@@ -90,7 +90,8 @@ Public Class AdminNewDocumentForm
             Dim docCode As String = DocumentRepository.GenerateCode()
             DocumentRepository.Insert(docCode, title, description, documentType,
                                       bannerBytes, pdfFileName, pdfBytes,
-                                      SessionManager.Username, dtpDateTime.Value)
+                                      SessionManager.Username, dtpDateTime.Value,
+                                      "Approved")
             ActivityLogger.Log(SessionManager.Username, "Success",
                 $"Admin added document: {title}")
             MessageBox.Show("Document added successfully!", "New Document",

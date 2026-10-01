@@ -4,14 +4,17 @@ Public Class UserDocumentViewForm
     Private _bannerImage As System.Drawing.Image
     Private _pdfBytes    As Byte()
     Private _pdfFileName As String
+    Private _documentID  As Integer = 0
 
     Public Sub New(documentCode As String, title As String, docType As String,
                    description As String, uploadedBy As String,
                    dateUploaded As String, approvalStatus As String,
                    status As String, bannerBytes As Byte(),
-                   pdfBytes As Byte(), pdfFileName As String)
+                   pdfBytes As Byte(), pdfFileName As String,
+                   Optional documentID As Integer = 0)
         _pdfBytes    = pdfBytes
         _pdfFileName = pdfFileName
+        _documentID  = documentID
         BuildUI(documentCode, title, docType, description, uploadedBy,
                 dateUploaded, approvalStatus, status, bannerBytes)
     End Sub
@@ -24,6 +27,7 @@ Public Class UserDocumentViewForm
         Dim cream As System.Drawing.Color = System.Drawing.Color.FromArgb(242, 237, 194)
         Dim dark  As System.Drawing.Color = System.Drawing.Color.FromArgb(52, 103, 57)
         Dim mid   As System.Drawing.Color = System.Drawing.Color.FromArgb(121, 174, 111)
+        Dim teal  As System.Drawing.Color = System.Drawing.Color.FromArgb(32, 148, 148)
 
         Me.Text            = "Document Details"
         Me.ClientSize      = New System.Drawing.Size(560, 580)
@@ -68,8 +72,113 @@ Public Class UserDocumentViewForm
         }
 
         Dim hasPdf As Boolean = _pdfBytes IsNot Nothing AndAlso _pdfBytes.Length > 0
+        Dim canApprove As Boolean = (SessionManager.UserType = "Admin" AndAlso approvalStatus = "For Review" AndAlso _documentID > 0)
 
-        If hasPdf Then
+        If canApprove AndAlso hasPdf Then
+            ' 3 buttons: View PDF + Approve + Close
+            Dim btnViewPdf As New System.Windows.Forms.Button() With {
+                .Text      = "View PDF",
+                .Font      = New System.Drawing.Font("Segoe UI", 9.5, System.Drawing.FontStyle.Bold),
+                .BackColor = mid,
+                .ForeColor = cream,
+                .FlatStyle = System.Windows.Forms.FlatStyle.Flat,
+                .Size      = New System.Drawing.Size(120, 36),
+                .Location  = New System.Drawing.Point(40, 11),
+                .Cursor    = System.Windows.Forms.Cursors.Hand
+            }
+            btnViewPdf.FlatAppearance.BorderSize = 0
+            AddHandler btnViewPdf.Click, AddressOf OpenPdf
+            pnlBottom.Controls.Add(btnViewPdf)
+
+            Dim btnApprove As New System.Windows.Forms.Button() With {
+                .Text      = "Approve Document",
+                .Font      = New System.Drawing.Font("Segoe UI", 9.5, System.Drawing.FontStyle.Bold),
+                .BackColor = teal,
+                .ForeColor = System.Drawing.Color.White,
+                .FlatStyle = System.Windows.Forms.FlatStyle.Flat,
+                .Size      = New System.Drawing.Size(180, 36),
+                .Location  = New System.Drawing.Point(180, 11),
+                .Cursor    = System.Windows.Forms.Cursors.Hand
+            }
+            btnApprove.FlatAppearance.BorderSize = 0
+            AddHandler btnApprove.Click,
+                Sub()
+                    Dim res = MessageBox.Show($"Approve document '{documentCode}' now?{Environment.NewLine}{Environment.NewLine}This will officially verify the document for the archive.",
+                                              "Approve Document", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    If res = DialogResult.Yes Then
+                        Try
+                            DocumentRepository.Approve(_documentID)
+                            ActivityLogger.Log(SessionManager.Username, "Success", $"Admin approved document: {documentCode}")
+                            MessageBox.Show($"Document {documentCode} approved successfully.", "Approve Document", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            Me.DialogResult = DialogResult.OK
+                            Me.Close()
+                        Catch ex As Exception
+                            MessageBox.Show("Error approving document: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End If
+                End Sub
+            pnlBottom.Controls.Add(btnApprove)
+
+            Dim btnClose As New System.Windows.Forms.Button() With {
+                .Text      = "Close",
+                .Font      = New System.Drawing.Font("Segoe UI", 9.5, System.Drawing.FontStyle.Bold),
+                .BackColor = dark,
+                .ForeColor = cream,
+                .FlatStyle = System.Windows.Forms.FlatStyle.Flat,
+                .Size      = New System.Drawing.Size(120, 36),
+                .Location  = New System.Drawing.Point(380, 11),
+                .Cursor    = System.Windows.Forms.Cursors.Hand
+            }
+            btnClose.FlatAppearance.BorderSize = 0
+            AddHandler btnClose.Click, Sub() Me.Close()
+            pnlBottom.Controls.Add(btnClose)
+
+        ElseIf canApprove AndAlso Not hasPdf Then
+            ' 2 buttons: Approve + Close
+            Dim btnApprove As New System.Windows.Forms.Button() With {
+                .Text      = "Approve Document",
+                .Font      = New System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold),
+                .BackColor = teal,
+                .ForeColor = System.Drawing.Color.White,
+                .FlatStyle = System.Windows.Forms.FlatStyle.Flat,
+                .Size      = New System.Drawing.Size(180, 36),
+                .Location  = New System.Drawing.Point(100, 11),
+                .Cursor    = System.Windows.Forms.Cursors.Hand
+            }
+            btnApprove.FlatAppearance.BorderSize = 0
+            AddHandler btnApprove.Click,
+                Sub()
+                    Dim res = MessageBox.Show($"Approve document '{documentCode}' now?{Environment.NewLine}{Environment.NewLine}This will officially verify the document for the archive.",
+                                              "Approve Document", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    If res = DialogResult.Yes Then
+                        Try
+                            DocumentRepository.Approve(_documentID)
+                            ActivityLogger.Log(SessionManager.Username, "Success", $"Admin approved document: {documentCode}")
+                            MessageBox.Show($"Document {documentCode} approved successfully.", "Approve Document", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            Me.DialogResult = DialogResult.OK
+                            Me.Close()
+                        Catch ex As Exception
+                            MessageBox.Show("Error approving document: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End If
+                End Sub
+            pnlBottom.Controls.Add(btnApprove)
+
+            Dim btnClose As New System.Windows.Forms.Button() With {
+                .Text      = "Close",
+                .Font      = New System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold),
+                .BackColor = dark,
+                .ForeColor = cream,
+                .FlatStyle = System.Windows.Forms.FlatStyle.Flat,
+                .Size      = New System.Drawing.Size(140, 36),
+                .Location  = New System.Drawing.Point(300, 11),
+                .Cursor    = System.Windows.Forms.Cursors.Hand
+            }
+            btnClose.FlatAppearance.BorderSize = 0
+            AddHandler btnClose.Click, Sub() Me.Close()
+            pnlBottom.Controls.Add(btnClose)
+
+        ElseIf hasPdf Then
             ' Two buttons: View PDF + Close
             Dim btnViewPdf As New System.Windows.Forms.Button() With {
                 .Text      = "View PDF",

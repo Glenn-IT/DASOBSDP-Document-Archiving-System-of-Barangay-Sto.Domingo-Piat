@@ -23,6 +23,7 @@ Partial Class AdminDashboardForm
         lblSysSubTitle = New Label()
         lblSysTitle = New Label()
         lblMenuLabel = New Label()
+        btnDashboard = New Button()
         btnArchiveList = New Button()
         btnDocumentTypes = New Button()
         btnUsersList = New Button()
@@ -50,6 +51,7 @@ Partial Class AdminDashboardForm
         pnlSidebar.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
         pnlSidebar.Controls.Add(pnlSidebarTop)
         pnlSidebar.Controls.Add(lblMenuLabel)
+        pnlSidebar.Controls.Add(btnDashboard)
         pnlSidebar.Controls.Add(btnArchiveList)
         pnlSidebar.Controls.Add(btnDocumentTypes)
         pnlSidebar.Controls.Add(btnUsersList)
@@ -123,6 +125,24 @@ Partial Class AdminDashboardForm
         lblMenuLabel.Text = "MAIN MENU"
         lblMenuLabel.TextAlign = ContentAlignment.MiddleLeft
         ' 
+        ' btnDashboard
+        ' 
+        btnDashboard.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        btnDashboard.Cursor = Cursors.Hand
+        btnDashboard.FlatAppearance.BorderSize = 0
+        btnDashboard.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(121), CByte(174), CByte(111))
+        btnDashboard.FlatStyle = FlatStyle.Flat
+        btnDashboard.Font = New Font("Segoe UI", 10F)
+        btnDashboard.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        btnDashboard.Location = New Point(0, 212)
+        btnDashboard.Name = "btnDashboard"
+        btnDashboard.Padding = New Padding(16, 0, 0, 0)
+        btnDashboard.Size = New Size(220, 54)
+        btnDashboard.TabIndex = 0
+        btnDashboard.Text = "  Dashboard"
+        btnDashboard.TextAlign = ContentAlignment.MiddleLeft
+        btnDashboard.UseVisualStyleBackColor = False
+        ' 
         ' btnArchiveList
         ' 
         btnArchiveList.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
@@ -132,11 +152,11 @@ Partial Class AdminDashboardForm
         btnArchiveList.FlatStyle = FlatStyle.Flat
         btnArchiveList.Font = New Font("Segoe UI", 10F)
         btnArchiveList.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnArchiveList.Location = New Point(0, 212)
+        btnArchiveList.Location = New Point(0, 266)
         btnArchiveList.Name = "btnArchiveList"
         btnArchiveList.Padding = New Padding(16, 0, 0, 0)
         btnArchiveList.Size = New Size(220, 54)
-        btnArchiveList.TabIndex = 0
+        btnArchiveList.TabIndex = 1
         btnArchiveList.Text = "  Archive List"
         btnArchiveList.TextAlign = ContentAlignment.MiddleLeft
         btnArchiveList.UseVisualStyleBackColor = False
@@ -150,11 +170,11 @@ Partial Class AdminDashboardForm
         btnDocumentTypes.FlatStyle = FlatStyle.Flat
         btnDocumentTypes.Font = New Font("Segoe UI", 10F)
         btnDocumentTypes.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnDocumentTypes.Location = New Point(0, 266)
+        btnDocumentTypes.Location = New Point(0, 320)
         btnDocumentTypes.Name = "btnDocumentTypes"
         btnDocumentTypes.Padding = New Padding(16, 0, 0, 0)
         btnDocumentTypes.Size = New Size(220, 54)
-        btnDocumentTypes.TabIndex = 1
+        btnDocumentTypes.TabIndex = 2
         btnDocumentTypes.Text = "  Document Types"
         btnDocumentTypes.TextAlign = ContentAlignment.MiddleLeft
         btnDocumentTypes.UseVisualStyleBackColor = False
@@ -168,11 +188,11 @@ Partial Class AdminDashboardForm
         btnUsersList.FlatStyle = FlatStyle.Flat
         btnUsersList.Font = New Font("Segoe UI", 10F)
         btnUsersList.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnUsersList.Location = New Point(0, 320)
+        btnUsersList.Location = New Point(0, 374)
         btnUsersList.Name = "btnUsersList"
         btnUsersList.Padding = New Padding(16, 0, 0, 0)
         btnUsersList.Size = New Size(220, 54)
-        btnUsersList.TabIndex = 2
+        btnUsersList.TabIndex = 3
         btnUsersList.Text = "  Users List"
         btnUsersList.TextAlign = ContentAlignment.MiddleLeft
         btnUsersList.UseVisualStyleBackColor = False
@@ -186,11 +206,11 @@ Partial Class AdminDashboardForm
         btnActivityLogs.FlatStyle = FlatStyle.Flat
         btnActivityLogs.Font = New Font("Segoe UI", 10F)
         btnActivityLogs.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnActivityLogs.Location = New Point(0, 375)
+        btnActivityLogs.Location = New Point(0, 428)
         btnActivityLogs.Name = "btnActivityLogs"
         btnActivityLogs.Padding = New Padding(16, 0, 0, 0)
         btnActivityLogs.Size = New Size(220, 54)
-        btnActivityLogs.TabIndex = 3
+        btnActivityLogs.TabIndex = 4
         btnActivityLogs.Text = "  Activity Logs"
         btnActivityLogs.TextAlign = ContentAlignment.MiddleLeft
         btnActivityLogs.UseVisualStyleBackColor = False
@@ -204,11 +224,11 @@ Partial Class AdminDashboardForm
         btnViewProfile.FlatStyle = FlatStyle.Flat
         btnViewProfile.Font = New Font("Segoe UI", 10F)
         btnViewProfile.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnViewProfile.Location = New Point(0, 429)
+        btnViewProfile.Location = New Point(0, 482)
         btnViewProfile.Name = "btnViewProfile"
         btnViewProfile.Padding = New Padding(16, 0, 0, 0)
         btnViewProfile.Size = New Size(220, 54)
-        btnViewProfile.TabIndex = 4
+        btnViewProfile.TabIndex = 5
         btnViewProfile.Text = "  Account Settings"
         btnViewProfile.TextAlign = ContentAlignment.MiddleLeft
         btnViewProfile.UseVisualStyleBackColor = False
@@ -222,11 +242,11 @@ Partial Class AdminDashboardForm
         btnSystemManual.FlatStyle = FlatStyle.Flat
         btnSystemManual.Font = New Font("Segoe UI", 10F)
         btnSystemManual.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnSystemManual.Location = New Point(0, 483)
+        btnSystemManual.Location = New Point(0, 536)
         btnSystemManual.Name = "btnSystemManual"
         btnSystemManual.Padding = New Padding(16, 0, 0, 0)
         btnSystemManual.Size = New Size(220, 54)
-        btnSystemManual.TabIndex = 5
+        btnSystemManual.TabIndex = 6
         btnSystemManual.Text = "  System Manual"
         btnSystemManual.TextAlign = ContentAlignment.MiddleLeft
         btnSystemManual.UseVisualStyleBackColor = False
@@ -240,11 +260,11 @@ Partial Class AdminDashboardForm
         btnDevelopers.FlatStyle = FlatStyle.Flat
         btnDevelopers.Font = New Font("Segoe UI", 10F)
         btnDevelopers.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnDevelopers.Location = New Point(0, 537)
+        btnDevelopers.Location = New Point(0, 590)
         btnDevelopers.Name = "btnDevelopers"
         btnDevelopers.Padding = New Padding(16, 0, 0, 0)
         btnDevelopers.Size = New Size(220, 54)
-        btnDevelopers.TabIndex = 6
+        btnDevelopers.TabIndex = 7
         btnDevelopers.Text = "  Developers"
         btnDevelopers.TextAlign = ContentAlignment.MiddleLeft
         btnDevelopers.UseVisualStyleBackColor = False
@@ -361,6 +381,7 @@ Partial Class AdminDashboardForm
     Friend WithEvents lblSysTitle       As System.Windows.Forms.Label
     Friend WithEvents lblSysSubTitle    As System.Windows.Forms.Label
     Friend WithEvents lblMenuLabel      As System.Windows.Forms.Label
+    Friend WithEvents btnDashboard      As System.Windows.Forms.Button
     Friend WithEvents btnArchiveList    As System.Windows.Forms.Button
     Friend WithEvents btnDocumentTypes  As System.Windows.Forms.Button
     Friend WithEvents btnUsersList      As System.Windows.Forms.Button
