@@ -136,9 +136,13 @@ Public Class LoginForm
     End Sub
 
     Private Sub btnForgotPassword_Click(sender As Object, e As EventArgs) Handles btnForgotPassword.Click
+        txtUsername.Clear()
+        txtPassword.Clear()
         Dim forgotPw As New AdminForgotPasswordForm()
         Me.Hide()
         forgotPw.ShowDialog()
+        txtUsername.Clear()
+        txtPassword.Clear()
         Me.Show()
     End Sub
 

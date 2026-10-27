@@ -19,7 +19,7 @@ Public Class UserDashboardForm
                 TryCast(pnlMainContent.Controls(0), UserViewProfilePanel)
             If current IsNot Nothing AndAlso current.HasUnsavedChanges Then
                 Dim answer As DialogResult = MessageBox.Show(
-                    "You have unsaved account settings changes. Discard and leave?",
+                    "You have unsaved account management changes. Discard and leave?",
                     "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
                 If answer <> DialogResult.Yes Then Return
             End If
@@ -30,7 +30,7 @@ Public Class UserDashboardForm
     End Sub
 
     Private Sub HighlightButton(active As Button)
-        Dim sidebarButtons As Button() = {btnDashboard, btnUploadDocument, btnSearchArchive, btnDocumentTypes, btnViewProfile, btnSystemManual, btnDevelopers}
+        Dim sidebarButtons As Button() = {btnDashboard, btnUploadDocument, btnSearchArchive, btnViewProfile, btnSystemManual, btnDevelopers}
         For Each btn In sidebarButtons
             btn.BackColor = System.Drawing.Color.FromArgb(52, 103, 57)
             btn.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
@@ -85,7 +85,7 @@ Public Class UserDashboardForm
         AddHandler panel.RequestLogout, AddressOf ForcedLogout
         LoadPanel(panel)
         HighlightButton(btnViewProfile)
-        lblPageTitle.Text = "Account Settings"
+        lblPageTitle.Text = "Account Management"
     End Sub
 
     Private Sub btnSystemManual_Click(sender As Object, e As EventArgs) Handles btnSystemManual.Click

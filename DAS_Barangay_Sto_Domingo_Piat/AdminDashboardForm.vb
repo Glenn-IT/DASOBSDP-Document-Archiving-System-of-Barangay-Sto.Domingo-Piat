@@ -51,7 +51,7 @@ Public Class AdminDashboardForm
     End Sub
 
     Private Sub HighlightButton(active As Button)
-        Dim sidebarButtons As Button() = {btnDashboard, btnArchiveList, btnDocumentTypes, btnUsersList, btnActivityLogs, btnViewProfile, btnSystemManual, btnDevelopers}
+        Dim sidebarButtons As Button() = {btnDashboard, btnArchiveList, btnUsersList, btnActivityLogs, btnViewProfile, btnSystemManual, btnDevelopers}
         For Each btn In sidebarButtons
             btn.BackColor = System.Drawing.Color.FromArgb(52, 103, 57)
             btn.ForeColor = System.Drawing.Color.FromArgb(242, 237, 194)
@@ -110,7 +110,7 @@ Public Class AdminDashboardForm
         AddHandler panel.RequestLogout, AddressOf ForcedLogout
         LoadPanel(panel)
         HighlightButton(btnViewProfile)
-        lblPageTitle.Text = "View Profile"
+        lblPageTitle.Text = "Account Management"
     End Sub
 
     Private Sub btnSystemManual_Click(sender As Object, e As EventArgs) Handles btnSystemManual.Click

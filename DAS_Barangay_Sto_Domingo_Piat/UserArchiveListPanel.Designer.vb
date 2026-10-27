@@ -29,6 +29,15 @@ Partial Class UserArchiveListPanel
         btnSearch          = New System.Windows.Forms.Button()
         pnlActions         = New System.Windows.Forms.Panel()
         btnDeleteDocument  = New System.Windows.Forms.Button()
+        btnPrintDocument   = New System.Windows.Forms.Button()
+        btnViewDocument    = New System.Windows.Forms.Button()
+        lblTotalDocs       = New System.Windows.Forms.Label()
+        cmbDocTypeFilter   = New System.Windows.Forms.ComboBox()
+        chkFilterDate      = New System.Windows.Forms.CheckBox()
+        dtpDateFrom        = New System.Windows.Forms.DateTimePicker()
+        lblDateTo          = New System.Windows.Forms.Label()
+        dtpDateTo          = New System.Windows.Forms.DateTimePicker()
+        btnResetFilter     = New System.Windows.Forms.Button()
 
         Me.SuspendLayout()
 
@@ -101,7 +110,38 @@ Partial Class UserArchiveListPanel
         btnDeleteDocument.Name                              = "btnDeleteDocument"
         btnDeleteDocument.TabIndex                          = 0
 
+        btnPrintDocument.Text = "🖨️ Print"
+        btnPrintDocument.Font = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
+        btnPrintDocument.BackColor = System.Drawing.Color.FromArgb(70, 130, 80)
+        btnPrintDocument.ForeColor = System.Drawing.Color.White
+        btnPrintDocument.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnPrintDocument.FlatAppearance.BorderSize = 0
+        btnPrintDocument.Size = New System.Drawing.Size(110, 38)
+        btnPrintDocument.Location = New System.Drawing.Point(140, 11)
+        btnPrintDocument.Cursor = System.Windows.Forms.Cursors.Hand
+
+        btnViewDocument.Text = "View"
+        btnViewDocument.Font = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
+        btnViewDocument.BackColor = mid
+        btnViewDocument.ForeColor = System.Drawing.Color.White
+        btnViewDocument.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnViewDocument.FlatAppearance.BorderSize = 0
+        btnViewDocument.Size = New System.Drawing.Size(100, 38)
+        btnViewDocument.Location = New System.Drawing.Point(258, 11)
+        btnViewDocument.Cursor = System.Windows.Forms.Cursors.Hand
+
+        lblTotalDocs.Anchor = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right
+        lblTotalDocs.Font = New System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold)
+        lblTotalDocs.ForeColor = dark
+        lblTotalDocs.Location = New System.Drawing.Point(540, 16)
+        lblTotalDocs.Size = New System.Drawing.Size(320, 28)
+        lblTotalDocs.Text = "Total Documents: 0"
+        lblTotalDocs.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+
         pnlActions.Controls.Add(btnDeleteDocument)
+        pnlActions.Controls.Add(btnPrintDocument)
+        pnlActions.Controls.Add(btnViewDocument)
+        pnlActions.Controls.Add(lblTotalDocs)
 
         ' ?? dgvUserArchiveList ????????????????????????????????????
         dgvUserArchiveList.Dock                  = System.Windows.Forms.DockStyle.Fill
@@ -169,5 +209,14 @@ Partial Class UserArchiveListPanel
     Friend WithEvents btnSearch          As System.Windows.Forms.Button
     Friend WithEvents pnlActions         As System.Windows.Forms.Panel
     Friend WithEvents btnDeleteDocument  As System.Windows.Forms.Button
+    Friend WithEvents btnPrintDocument   As System.Windows.Forms.Button
+    Friend WithEvents btnViewDocument    As System.Windows.Forms.Button
+    Friend WithEvents lblTotalDocs       As System.Windows.Forms.Label
+    Friend WithEvents cmbDocTypeFilter   As System.Windows.Forms.ComboBox
+    Friend WithEvents chkFilterDate      As System.Windows.Forms.CheckBox
+    Friend WithEvents dtpDateFrom        As System.Windows.Forms.DateTimePicker
+    Friend WithEvents lblDateTo          As System.Windows.Forms.Label
+    Friend WithEvents dtpDateTo          As System.Windows.Forms.DateTimePicker
+    Friend WithEvents btnResetFilter     As System.Windows.Forms.Button
 
 End Class

@@ -20,7 +20,7 @@ Public Module UserRepository
         Using con As New SqlConnection(dbconstring.Connection)
             con.Open()
             Dim cmd As New SqlCommand(
-                "SELECT Username, UserType, SecurityQuestion, SecurityAnswer " &
+                "SELECT Username, UserType, SecurityQuestion, SecurityAnswer, Status " &
                 "FROM tbl_Users WHERE UserID = @id", con)
             cmd.Parameters.AddWithValue("@id", userID)
             Dim adapter As New SqlDataAdapter(cmd)
@@ -116,22 +116,27 @@ Public Module UserRepository
 
     Public Sub Update(userID As Integer, username As String, userType As String,
                       securityQuestion As String, securityAnswer As String,
-                      Optional passwordHash As String = Nothing)
+                      Optional passwordHash As String = Nothing,
+                      Optional status As String = Nothing)
         Using con As New SqlConnection(dbconstring.Connection)
             con.Open()
             Dim sql As String
             Dim cmd As SqlCommand
 
+            sql = "UPDATE tbl_Users SET Username=@username, UserType=@type, SecurityQuestion=@question, SecurityAnswer=@answer"
             If Not String.IsNullOrEmpty(passwordHash) Then
-                sql = "UPDATE tbl_Users SET Username=@username, PasswordHash=@password, " &
-                      "UserType=@type, SecurityQuestion=@question, SecurityAnswer=@answer " &
-                      "WHERE UserID=@id"
-                cmd = New SqlCommand(sql, con)
+                sql &= ", PasswordHash=@password"
+            End If
+            If Not String.IsNullOrEmpty(status) Then
+                sql &= ", Status=@status"
+            End If
+            sql &= " WHERE UserID=@id"
+            cmd = New SqlCommand(sql, con)
+            If Not String.IsNullOrEmpty(passwordHash) Then
                 cmd.Parameters.AddWithValue("@password", passwordHash)
-            Else
-                sql = "UPDATE tbl_Users SET Username=@username, UserType=@type, " &
-                      "SecurityQuestion=@question, SecurityAnswer=@answer WHERE UserID=@id"
-                cmd = New SqlCommand(sql, con)
+            End If
+            If Not String.IsNullOrEmpty(status) Then
+                cmd.Parameters.AddWithValue("@status", status)
             End If
 
             cmd.Parameters.AddWithValue("@username", username)
@@ -180,6 +185,17 @@ Public Module UserRepository
             cmd.Parameters.AddWithValue("@hash",     passwordHash)
             cmd.Parameters.AddWithValue("@username", username)
             cmd.Parameters.AddWithValue("@userType", userType)
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    Public Sub UpdateStatus(userID As Integer, status As String)
+        Using con As New SqlConnection(dbconstring.Connection)
+            con.Open()
+            Dim cmd As New SqlCommand(
+                "UPDATE tbl_Users SET Status = @status WHERE UserID = @id", con)
+            cmd.Parameters.AddWithValue("@status", status)
+            cmd.Parameters.AddWithValue("@id",     userID)
             cmd.ExecuteNonQuery()
         End Using
     End Sub

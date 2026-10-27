@@ -2,7 +2,11 @@ Imports Microsoft.Data.SqlClient
 
 Public Module DocumentRepository
 
-    Public Function GetAll(Optional search As String = Nothing, Optional approvalStatus As String = Nothing) As DataTable
+    Public Function GetAll(Optional search As String = Nothing,
+                           Optional approvalStatus As String = Nothing,
+                           Optional documentType As String = Nothing,
+                           Optional dateFrom As Nullable(Of DateTime) = Nothing,
+                           Optional dateTo As Nullable(Of DateTime) = Nothing) As DataTable
         Dim dt As New DataTable()
         Using con As New SqlConnection(dbconstring.Connection)
             con.Open()
@@ -20,6 +24,21 @@ Public Module DocumentRepository
                 cmd.Parameters.AddWithValue("@approvalStatus", approvalStatus)
             End If
 
+            If Not String.IsNullOrEmpty(documentType) AndAlso documentType <> "All Types" AndAlso documentType <> "All Document Types" AndAlso documentType <> "All" Then
+                sql &= " AND DocumentType = @docType"
+                cmd.Parameters.AddWithValue("@docType", documentType)
+            End If
+
+            If dateFrom.HasValue AndAlso dateFrom.Value.Year >= 1753 Then
+                sql &= " AND DateUploaded >= @dateFrom"
+                cmd.Parameters.AddWithValue("@dateFrom", dateFrom.Value.Date)
+            End If
+
+            If dateTo.HasValue AndAlso dateTo.Value.Year >= 1753 Then
+                sql &= " AND DateUploaded < @dateTo"
+                cmd.Parameters.AddWithValue("@dateTo", dateTo.Value.Date.AddDays(1))
+            End If
+
             sql &= " ORDER BY DateUploaded DESC"
             cmd.CommandText = sql
 
@@ -29,27 +48,48 @@ Public Module DocumentRepository
         Return dt
     End Function
 
-    Public Function GetByUser(username As String, Optional search As String = Nothing) As DataTable
+    Public Function GetByUser(username As String,
+                              Optional search As String = Nothing,
+                              Optional approvalStatus As String = Nothing,
+                              Optional documentType As String = Nothing,
+                              Optional dateFrom As Nullable(Of DateTime) = Nothing,
+                              Optional dateTo As Nullable(Of DateTime) = Nothing) As DataTable
         Dim dt As New DataTable()
         Using con As New SqlConnection(dbconstring.Connection)
             con.Open()
-            Dim sql As String
-            Dim cmd As SqlCommand
-            If String.IsNullOrEmpty(search) Then
-                sql = "SELECT DocumentID, DocumentCode, Title, DateUploaded, ApprovalStatus, Status " &
-                      "FROM tbl_Documents WHERE UploadedBy = @username ORDER BY DateUploaded DESC"
-                cmd = New SqlCommand(sql, con)
-                cmd.Parameters.AddWithValue("@username", username)
-            Else
-                sql = "SELECT DocumentID, DocumentCode, Title, DateUploaded, ApprovalStatus, Status " &
-                      "FROM tbl_Documents " &
-                      "WHERE UploadedBy = @username " &
-                      "AND (Title LIKE @search OR DocumentType LIKE @search) " &
-                      "ORDER BY DateUploaded DESC"
-                cmd = New SqlCommand(sql, con)
-                cmd.Parameters.AddWithValue("@username", username)
-                cmd.Parameters.AddWithValue("@search",   "%" & search & "%")
+            Dim sql As String = "SELECT DocumentID, DocumentCode, Title, DocumentType, DateUploaded, ApprovalStatus, Status " &
+                                "FROM tbl_Documents WHERE UploadedBy = @username"
+            Dim cmd As New SqlCommand()
+            cmd.Connection = con
+            cmd.Parameters.AddWithValue("@username", username)
+
+            If Not String.IsNullOrEmpty(search) Then
+                sql &= " AND (Title LIKE @search OR DocumentType LIKE @search OR DocumentCode LIKE @search)"
+                cmd.Parameters.AddWithValue("@search", "%" & search & "%")
             End If
+
+            If Not String.IsNullOrEmpty(approvalStatus) AndAlso approvalStatus <> "All Documents" AndAlso approvalStatus <> "All" Then
+                sql &= " AND ApprovalStatus = @approvalStatus"
+                cmd.Parameters.AddWithValue("@approvalStatus", approvalStatus)
+            End If
+
+            If Not String.IsNullOrEmpty(documentType) AndAlso documentType <> "All Types" AndAlso documentType <> "All Document Types" AndAlso documentType <> "All" Then
+                sql &= " AND DocumentType = @docType"
+                cmd.Parameters.AddWithValue("@docType", documentType)
+            End If
+
+            If dateFrom.HasValue AndAlso dateFrom.Value.Year >= 1753 Then
+                sql &= " AND DateUploaded >= @dateFrom"
+                cmd.Parameters.AddWithValue("@dateFrom", dateFrom.Value.Date)
+            End If
+
+            If dateTo.HasValue AndAlso dateTo.Value.Year >= 1753 Then
+                sql &= " AND DateUploaded < @dateTo"
+                cmd.Parameters.AddWithValue("@dateTo", dateTo.Value.Date.AddDays(1))
+            End If
+
+            sql &= " ORDER BY DateUploaded DESC"
+            cmd.CommandText = sql
             Dim adapter As New SqlDataAdapter(cmd)
             adapter.Fill(dt)
         End Using

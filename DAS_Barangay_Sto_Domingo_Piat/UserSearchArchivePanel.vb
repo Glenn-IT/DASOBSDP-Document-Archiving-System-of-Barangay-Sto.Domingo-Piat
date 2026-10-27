@@ -24,6 +24,7 @@ Public Class UserSearchArchivePanel
                     "View"
                 )
             Next
+            lblTotalDocs.Text = $"Total Documents: {dgvSearchResults.Rows.Count}"
         Catch ex As Exception
             MessageBox.Show("Error loading documents: " & ex.Message,
                             "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -76,7 +77,8 @@ Public Class UserSearchArchivePanel
                 Convert.ToDateTime(dr("DateUploaded")).ToString("yyyy-MM-dd HH:mm"),
                 dr("ApprovalStatus").ToString(),
                 dr("Status").ToString(),
-                bannerBytes, pdfBytes, pdfFileName)
+                bannerBytes, pdfBytes, pdfFileName,
+                docId)
                 viewForm.ShowDialog()
             End Using
         Catch ex As Exception

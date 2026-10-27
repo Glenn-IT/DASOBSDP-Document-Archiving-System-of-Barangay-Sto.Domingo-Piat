@@ -33,13 +33,21 @@ Partial Class AdminArchiveListPanel
         lblTitle = New Label()
         pnlSearch = New Panel()
         txtSearch = New TextBox()
+        cmbDocTypeFilter = New ComboBox()
         cmbStatusFilter = New ComboBox()
         btnSearch = New Button()
+        chkFilterDate = New CheckBox()
+        dtpDateFrom = New DateTimePicker()
+        lblDateTo = New Label()
+        dtpDateTo = New DateTimePicker()
+        btnResetFilter = New Button()
         pnlActions = New Panel()
         btnAddDocument = New Button()
         btnUpdateDocument = New Button()
         btnDeleteDocument = New Button()
         btnApproveDocument = New Button()
+        btnPrintDocument = New Button()
+        lblTotalDocs = New Label()
         CType(dgvArchiveList, ComponentModel.ISupportInitialize).BeginInit()
         pnlTop.SuspendLayout()
         pnlSearch.SuspendLayout()
@@ -78,7 +86,7 @@ Partial Class AdminArchiveListPanel
         dgvArchiveList.EnableHeadersVisualStyles = False
         dgvArchiveList.Font = New Font("Segoe UI", 9F)
         dgvArchiveList.GridColor = Color.FromArgb(CByte(159), CByte(203), CByte(152))
-        dgvArchiveList.Location = New Point(0, 104)
+        dgvArchiveList.Location = New Point(0, 134)
         dgvArchiveList.MultiSelect = False
         dgvArchiveList.Name = "dgvArchiveList"
         dgvArchiveList.ReadOnly = True
@@ -86,7 +94,7 @@ Partial Class AdminArchiveListPanel
         dgvArchiveList.RowHeadersWidth = 45
         dgvArchiveList.RowTemplate.Height = 32
         dgvArchiveList.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvArchiveList.Size = New Size(1297, 432)
+        dgvArchiveList.Size = New Size(1297, 402)
         dgvArchiveList.TabIndex = 5
         ' 
         ' colDocID
@@ -177,42 +185,56 @@ Partial Class AdminArchiveListPanel
         ' 
         pnlSearch.BackColor = Color.FromArgb(CByte(230), CByte(226), CByte(180))
         pnlSearch.Controls.Add(txtSearch)
+        pnlSearch.Controls.Add(cmbDocTypeFilter)
         pnlSearch.Controls.Add(cmbStatusFilter)
         pnlSearch.Controls.Add(btnSearch)
+        pnlSearch.Controls.Add(chkFilterDate)
+        pnlSearch.Controls.Add(dtpDateFrom)
+        pnlSearch.Controls.Add(lblDateTo)
+        pnlSearch.Controls.Add(dtpDateTo)
+        pnlSearch.Controls.Add(btnResetFilter)
         pnlSearch.Dock = DockStyle.Top
         pnlSearch.Location = New Point(0, 52)
         pnlSearch.Name = "pnlSearch"
-        pnlSearch.Size = New Size(1297, 52)
+        pnlSearch.Size = New Size(1297, 82)
         pnlSearch.TabIndex = 7
         ' 
         ' txtSearch
         ' 
-        txtSearch.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         txtSearch.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         txtSearch.BorderStyle = BorderStyle.FixedSingle
-        txtSearch.Font = New Font("Segoe UI", 10F)
+        txtSearch.Font = New Font("Segoe UI", 9.5F)
         txtSearch.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
-        txtSearch.Location = New Point(3, 9)
+        txtSearch.Location = New Point(12, 10)
         txtSearch.Name = "txtSearch"
-        txtSearch.PlaceholderText = "Type to search documents..."
-        txtSearch.Size = New Size(1005, 27)
+        txtSearch.PlaceholderText = "Search by code, title, user..."
+        txtSearch.Size = New Size(360, 27)
         txtSearch.TabIndex = 0
+        ' 
+        ' cmbDocTypeFilter
+        ' 
+        cmbDocTypeFilter.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
+        cmbDocTypeFilter.DropDownStyle = ComboBoxStyle.DropDownList
+        cmbDocTypeFilter.Font = New Font("Segoe UI", 9.5F)
+        cmbDocTypeFilter.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        cmbDocTypeFilter.Location = New Point(382, 9)
+        cmbDocTypeFilter.Name = "cmbDocTypeFilter"
+        cmbDocTypeFilter.Size = New Size(220, 28)
+        cmbDocTypeFilter.TabIndex = 1
         ' 
         ' cmbStatusFilter
         ' 
-        cmbStatusFilter.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         cmbStatusFilter.BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         cmbStatusFilter.DropDownStyle = ComboBoxStyle.DropDownList
         cmbStatusFilter.Font = New Font("Segoe UI", 9.5F)
         cmbStatusFilter.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
-        cmbStatusFilter.Location = New Point(1015, 8)
+        cmbStatusFilter.Location = New Point(610, 9)
         cmbStatusFilter.Name = "cmbStatusFilter"
-        cmbStatusFilter.Size = New Size(180, 28)
-        cmbStatusFilter.TabIndex = 1
+        cmbStatusFilter.Size = New Size(170, 28)
+        cmbStatusFilter.TabIndex = 2
         ' 
         ' btnSearch
         ' 
-        btnSearch.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         btnSearch.BackColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
         btnSearch.Cursor = Cursors.Hand
         btnSearch.FlatAppearance.BorderSize = 0
@@ -220,12 +242,71 @@ Partial Class AdminArchiveListPanel
         btnSearch.FlatStyle = FlatStyle.Flat
         btnSearch.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         btnSearch.ForeColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
-        btnSearch.Location = New Point(1202, 6)
+        btnSearch.Location = New Point(790, 8)
         btnSearch.Name = "btnSearch"
-        btnSearch.Size = New Size(90, 32)
-        btnSearch.TabIndex = 2
+        btnSearch.Size = New Size(90, 30)
+        btnSearch.TabIndex = 3
         btnSearch.Text = "Search"
         btnSearch.UseVisualStyleBackColor = False
+        ' 
+        ' chkFilterDate
+        ' 
+        chkFilterDate.AutoSize = True
+        chkFilterDate.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        chkFilterDate.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        chkFilterDate.Location = New Point(14, 48)
+        chkFilterDate.Name = "chkFilterDate"
+        chkFilterDate.Size = New Size(116, 21)
+        chkFilterDate.TabIndex = 4
+        chkFilterDate.Text = "Filter by Date:"
+        chkFilterDate.UseVisualStyleBackColor = True
+        ' 
+        ' dtpDateFrom
+        ' 
+        dtpDateFrom.CustomFormat = "yyyy-MM-dd"
+        dtpDateFrom.Font = New Font("Segoe UI", 9F)
+        dtpDateFrom.Format = DateTimePickerFormat.Short
+        dtpDateFrom.Location = New Point(134, 46)
+        dtpDateFrom.Name = "dtpDateFrom"
+        dtpDateFrom.Size = New Size(125, 25)
+        dtpDateFrom.TabIndex = 5
+        ' 
+        ' lblDateTo
+        ' 
+        lblDateTo.AutoSize = True
+        lblDateTo.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        lblDateTo.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        lblDateTo.Location = New Point(265, 50)
+        lblDateTo.Name = "lblDateTo"
+        lblDateTo.Size = New Size(22, 17)
+        lblDateTo.TabIndex = 6
+        lblDateTo.Text = "to"
+        ' 
+        ' dtpDateTo
+        ' 
+        dtpDateTo.CustomFormat = "yyyy-MM-dd"
+        dtpDateTo.Font = New Font("Segoe UI", 9F)
+        dtpDateTo.Format = DateTimePickerFormat.Short
+        dtpDateTo.Location = New Point(292, 46)
+        dtpDateTo.Name = "dtpDateTo"
+        dtpDateTo.Size = New Size(125, 25)
+        dtpDateTo.TabIndex = 7
+        ' 
+        ' btnResetFilter
+        ' 
+        btnResetFilter.BackColor = Color.FromArgb(CByte(150), CByte(150), CByte(150))
+        btnResetFilter.Cursor = Cursors.Hand
+        btnResetFilter.FlatAppearance.BorderSize = 0
+        btnResetFilter.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(170), CByte(170), CByte(170))
+        btnResetFilter.FlatStyle = FlatStyle.Flat
+        btnResetFilter.Font = New Font("Segoe UI", 8.5F, FontStyle.Bold)
+        btnResetFilter.ForeColor = Color.White
+        btnResetFilter.Location = New Point(430, 45)
+        btnResetFilter.Name = "btnResetFilter"
+        btnResetFilter.Size = New Size(110, 27)
+        btnResetFilter.TabIndex = 8
+        btnResetFilter.Text = "Clear Filters"
+        btnResetFilter.UseVisualStyleBackColor = False
         ' 
         ' pnlActions
         ' 
@@ -234,6 +315,37 @@ Partial Class AdminArchiveListPanel
         pnlActions.Controls.Add(btnUpdateDocument)
         pnlActions.Controls.Add(btnApproveDocument)
         pnlActions.Controls.Add(btnDeleteDocument)
+        pnlActions.Controls.Add(btnPrintDocument)
+        pnlActions.Controls.Add(lblTotalDocs)
+
+        ' 
+        ' btnPrintDocument
+        ' 
+        btnPrintDocument.BackColor = Color.FromArgb(CByte(70), CByte(130), CByte(80))
+        btnPrintDocument.Cursor = Cursors.Hand
+        btnPrintDocument.FlatAppearance.BorderSize = 0
+        btnPrintDocument.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(90), CByte(150), CByte(100))
+        btnPrintDocument.FlatStyle = FlatStyle.Flat
+        btnPrintDocument.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        btnPrintDocument.ForeColor = Color.White
+        btnPrintDocument.Location = New Point(418, 11)
+        btnPrintDocument.Name = "btnPrintDocument"
+        btnPrintDocument.Size = New Size(140, 38)
+        btnPrintDocument.TabIndex = 5
+        btnPrintDocument.Text = "🖨️ Print Document"
+        btnPrintDocument.UseVisualStyleBackColor = False
+        ' 
+        ' lblTotalDocs
+        ' 
+        lblTotalDocs.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        lblTotalDocs.Font = New Font("Segoe UI", 10.5F, FontStyle.Bold)
+        lblTotalDocs.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        lblTotalDocs.Location = New Point(880, 16)
+        lblTotalDocs.Name = "lblTotalDocs"
+        lblTotalDocs.Size = New Size(400, 28)
+        lblTotalDocs.TabIndex = 6
+        lblTotalDocs.Text = "Total Documents: 0"
+        lblTotalDocs.TextAlign = ContentAlignment.MiddleRight
         pnlActions.Dock = DockStyle.Bottom
         pnlActions.Location = New Point(0, 536)
         pnlActions.Name = "pnlActions"
@@ -344,5 +456,13 @@ Partial Class AdminArchiveListPanel
     Friend WithEvents btnUpdateDocument As System.Windows.Forms.Button
     Friend WithEvents btnApproveDocument As System.Windows.Forms.Button
     Friend WithEvents btnDeleteDocument As System.Windows.Forms.Button
+    Friend WithEvents btnPrintDocument  As System.Windows.Forms.Button
+    Friend WithEvents lblTotalDocs      As System.Windows.Forms.Label
+    Friend WithEvents cmbDocTypeFilter  As System.Windows.Forms.ComboBox
+    Friend WithEvents chkFilterDate     As System.Windows.Forms.CheckBox
+    Friend WithEvents dtpDateFrom       As System.Windows.Forms.DateTimePicker
+    Friend WithEvents lblDateTo         As System.Windows.Forms.Label
+    Friend WithEvents dtpDateTo         As System.Windows.Forms.DateTimePicker
+    Friend WithEvents btnResetFilter    As System.Windows.Forms.Button
 
 End Class

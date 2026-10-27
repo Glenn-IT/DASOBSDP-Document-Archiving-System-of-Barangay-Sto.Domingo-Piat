@@ -16,22 +16,43 @@ Public Class UserViewProfilePanel
     End Sub
 
     Private Sub UserViewProfilePanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        cmbSecurityQuestion.Items.AddRange(New String() {
-            "What is your mother's maiden name?",
-            "What was the name of your first pet?",
-            "What is your elementary school name?",
-            "What city were you born in?",
-            "What is your favorite childhood nickname?"
-        })
+        InitQuestions()
         txtUsername.ReadOnly = True
         txtUserType.ReadOnly = True
 
-        AddHandler cmbSecurityQuestion.SelectedIndexChanged, Sub() _isDirty = True
+        AddHandler cmbSecurityQuestion.SelectedIndexChanged, AddressOf OnSecurityQuestionChanged
         AddHandler txtSecurityAnswer.TextChanged,            Sub() _isDirty = True
         AddHandler txtNewPassword.TextChanged,               Sub() _isDirty = True
         AddHandler txtConfirmPassword.TextChanged,           Sub() _isDirty = True
 
         LoadProfileFromDB()
+    End Sub
+
+    Private Sub InitQuestions()
+        cmbSecurityQuestion.Items.Clear()
+        cmbSecurityQuestion.Items.AddRange(New String() {
+            "What is your mother's maiden name?",
+            "What was the name of your first pet?",
+            "What is your elementary school name?",
+            "What city were you born in?",
+            "What is your favorite childhood nickname?",
+            "[ + Write Custom Security Question... ]"
+        })
+    End Sub
+
+    Private Sub OnSecurityQuestionChanged(sender As Object, e As EventArgs)
+        If cmbSecurityQuestion.SelectedItem IsNot Nothing AndAlso cmbSecurityQuestion.SelectedItem.ToString() = "[ + Write Custom Security Question... ]" Then
+            Dim customQ As String = Microsoft.VisualBasic.Interaction.InputBox("Enter your custom security question:", "Custom Security Question", "").Trim()
+            If Not String.IsNullOrEmpty(customQ) Then
+                If Not cmbSecurityQuestion.Items.Contains(customQ) Then
+                    cmbSecurityQuestion.Items.Insert(cmbSecurityQuestion.Items.Count - 1, customQ)
+                End If
+                cmbSecurityQuestion.SelectedItem = customQ
+            Else
+                cmbSecurityQuestion.SelectedIndex = 0
+            End If
+        End If
+        _isDirty = True
     End Sub
 
     Private Sub LoadProfileFromDB()
@@ -41,7 +62,13 @@ Public Class UserViewProfilePanel
                 Dim row As DataRow = dt.Rows(0)
                 txtUsername.Text                 = SessionManager.Username
                 txtUserType.Text                 = row("UserType").ToString()
-                cmbSecurityQuestion.SelectedItem = row("SecurityQuestion").ToString()
+                Dim storedQ As String = row("SecurityQuestion").ToString()
+                If Not String.IsNullOrEmpty(storedQ) Then
+                    If Not cmbSecurityQuestion.Items.Contains(storedQ) Then
+                        cmbSecurityQuestion.Items.Insert(cmbSecurityQuestion.Items.Count - 1, storedQ)
+                    End If
+                    cmbSecurityQuestion.SelectedItem = storedQ
+                End If
                 txtSecurityAnswer.Text           = row("SecurityAnswer").ToString()
             End If
         Catch ex As Exception
@@ -61,7 +88,7 @@ Public Class UserViewProfilePanel
         Dim confirmPassword  As String = txtConfirmPassword.Text.Trim()
 
         If newPassword <> "" AndAlso newPassword <> confirmPassword Then
-            MessageBox.Show("Passwords do not match.", "Account Settings",
+            MessageBox.Show("Passwords do not match.", "Account Management",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
@@ -72,9 +99,9 @@ Public Class UserViewProfilePanel
             UserRepository.UpdateProfile(SessionManager.Username, securityQuestion,
                                          securityAnswer, hashedPassword)
             ActivityLogger.Log(SessionManager.Username, "Success",
-                "User updated their account settings.")
+                "User updated their account management.")
             MessageBox.Show("Profile updated successfully! You will now be logged out for security purposes.",
-                            "Account Settings", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            "Account Management", MessageBoxButtons.OK, MessageBoxIcon.Information)
             RaiseEvent RequestLogout(Me, EventArgs.Empty)
         Catch ex As Exception
             MessageBox.Show("Error updating profile: " & ex.Message,

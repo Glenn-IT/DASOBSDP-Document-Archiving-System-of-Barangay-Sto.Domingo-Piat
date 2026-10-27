@@ -222,6 +222,10 @@ Public Class UserForgotPasswordForm
                     "What city were you born in?",
                     "What is your favorite childhood nickname?"
                 })
+                Dim storedQ As String = dt.Rows(0)("SecurityQuestion").ToString()
+                If Not String.IsNullOrEmpty(storedQ) AndAlso Not cmbSecurityQuestion.Items.Contains(storedQ) Then
+                    cmbSecurityQuestion.Items.Add(storedQ)
+                End If
                 cmbSecurityQuestion.SelectedIndex = 0
             End If
         Catch ex As Exception
@@ -268,7 +272,7 @@ Public Class UserForgotPasswordForm
             ActivityLogger.Log(username, "Success", "User reset their password via forgot password.")
             MessageBox.Show("Password reset successfully!", "Forgot Password",
                             MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+            ClearInputs()
             Me.Close()
         Catch ex As Exception
             MessageBox.Show("Error resetting password: " & ex.Message,
@@ -276,7 +280,16 @@ Public Class UserForgotPasswordForm
         End Try
     End Sub
 
+    Public Sub ClearInputs()
+        txtUsernameField.Clear()
+        txtSecurityAnswer.Clear()
+        txtNewPassword.Clear()
+        txtConfirmPassword.Clear()
+        cmbSecurityQuestion.Items.Clear()
+    End Sub
+
     Private Sub btnBackToLogin_Click(sender As Object, e As EventArgs)
+        ClearInputs()
         Me.Close()
     End Sub
 

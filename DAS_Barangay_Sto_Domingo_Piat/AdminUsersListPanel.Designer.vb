@@ -28,6 +28,7 @@ Partial Class AdminUsersListPanel
         btnAddUser    = New System.Windows.Forms.Button()
         btnUpdateUser = New System.Windows.Forms.Button()
         btnDeleteUser = New System.Windows.Forms.Button()
+        btnToggleStatus = New System.Windows.Forms.Button()
 
         Me.SuspendLayout()
 
@@ -100,6 +101,19 @@ Partial Class AdminUsersListPanel
         pnlActions.Controls.Add(btnAddUser)
         pnlActions.Controls.Add(btnUpdateUser)
         pnlActions.Controls.Add(btnDeleteUser)
+        btnToggleStatus.Text                              = "Deactivate / Activate"
+        btnToggleStatus.Font                              = btnFont
+        btnToggleStatus.BackColor                         = System.Drawing.Color.FromArgb(200, 120, 20)
+        btnToggleStatus.ForeColor                         = System.Drawing.Color.White
+        btnToggleStatus.FlatStyle                         = System.Windows.Forms.FlatStyle.Flat
+        btnToggleStatus.FlatAppearance.BorderSize         = 0
+        btnToggleStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(220, 140, 40)
+        btnToggleStatus.Size                              = New System.Drawing.Size(160, 36)
+        btnToggleStatus.Location                          = New System.Drawing.Point(408, 11)
+        btnToggleStatus.Cursor                            = System.Windows.Forms.Cursors.Hand
+        btnToggleStatus.Name                              = "btnToggleStatus"
+        btnToggleStatus.TabIndex                          = 3
+        pnlActions.Controls.Add(btnToggleStatus)
 
         ' ?? dgvUsersList ??????????????????????????????????????????
         dgvUsersList.Dock                  = System.Windows.Forms.DockStyle.Fill
@@ -175,5 +189,6 @@ Partial Class AdminUsersListPanel
     Friend WithEvents btnAddUser    As System.Windows.Forms.Button
     Friend WithEvents btnUpdateUser As System.Windows.Forms.Button
     Friend WithEvents btnDeleteUser As System.Windows.Forms.Button
+    Friend WithEvents btnToggleStatus As System.Windows.Forms.Button
 
 End Class

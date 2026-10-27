@@ -154,7 +154,7 @@ Partial Class UserDashboardForm
         btnDocumentTypes.Name                              = "btnDocumentTypes"
         btnDocumentTypes.TabIndex                          = 3
 
-        btnViewProfile.Text                              = "  Account Settings"
+        btnViewProfile.Text                              = "  Account Management"
         btnViewProfile.Font                              = sbFont
         btnViewProfile.BackColor                         = dark
         btnViewProfile.ForeColor                         = cream
@@ -162,7 +162,7 @@ Partial Class UserDashboardForm
         btnViewProfile.FlatAppearance.BorderSize         = 0
         btnViewProfile.FlatAppearance.MouseOverBackColor = mid
         btnViewProfile.Size                              = sbSize
-        btnViewProfile.Location                          = New System.Drawing.Point(0, 342)
+        btnViewProfile.Location                          = New System.Drawing.Point(0, 294)
         btnViewProfile.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
         btnViewProfile.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
         btnViewProfile.Cursor                            = System.Windows.Forms.Cursors.Hand
@@ -177,7 +177,7 @@ Partial Class UserDashboardForm
         btnSystemManual.FlatAppearance.BorderSize         = 0
         btnSystemManual.FlatAppearance.MouseOverBackColor = mid
         btnSystemManual.Size                              = sbSize
-        btnSystemManual.Location                          = New System.Drawing.Point(0, 390)
+        btnSystemManual.Location                          = New System.Drawing.Point(0, 342)
         btnSystemManual.TextAlign                         = System.Drawing.ContentAlignment.MiddleLeft
         btnSystemManual.Padding                           = New System.Windows.Forms.Padding(16, 0, 0, 0)
         btnSystemManual.Cursor                            = System.Windows.Forms.Cursors.Hand
@@ -226,7 +226,7 @@ Partial Class UserDashboardForm
         pnlSidebar.Controls.Add(btnDashboard)
         pnlSidebar.Controls.Add(btnUploadDocument)
         pnlSidebar.Controls.Add(btnSearchArchive)
-        pnlSidebar.Controls.Add(btnDocumentTypes)
+        ' pnlSidebar.Controls.Add(btnDocumentTypes)
         pnlSidebar.Controls.Add(btnViewProfile)
         pnlSidebar.Controls.Add(btnSystemManual)
         pnlSidebar.Controls.Add(btnDevelopers)

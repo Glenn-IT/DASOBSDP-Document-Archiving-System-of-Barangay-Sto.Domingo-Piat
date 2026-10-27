@@ -208,12 +208,33 @@ Partial Class UserSearchArchivePanel
         btnSearch.Text = "Search"
         btnSearch.UseVisualStyleBackColor = False
         ' 
+        ' pnlBottom
+        ' 
+        pnlBottom.BackColor = Color.FromArgb(CByte(230), CByte(226), CByte(180))
+        pnlBottom.Controls.Add(lblTotalDocs)
+        pnlBottom.Dock = DockStyle.Bottom
+        pnlBottom.Height = 44
+        pnlBottom.Name = "pnlBottom"
+        ' 
+        ' lblTotalDocs
+        ' 
+        lblTotalDocs.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        lblTotalDocs.Font = New Font("Segoe UI", 10F, FontStyle.Bold)
+        lblTotalDocs.ForeColor = Color.FromArgb(CByte(52), CByte(103), CByte(57))
+        lblTotalDocs.Location = New Point(600, 8)
+        lblTotalDocs.Name = "lblTotalDocs"
+        lblTotalDocs.Size = New Size(400, 26)
+        lblTotalDocs.Text = "Total Documents: 0"
+        lblTotalDocs.TextAlign = ContentAlignment.MiddleRight
+
+        ' 
         ' UserSearchArchivePanel
         ' 
         AutoScaleDimensions = New SizeF(7F, 17F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(242), CByte(237), CByte(194))
         Controls.Add(dgvSearchResults)
+        Controls.Add(pnlBottom)
         Controls.Add(pnlSearch)
         Controls.Add(pnlTop)
         Name = "UserSearchArchivePanel"
@@ -238,5 +259,7 @@ Partial Class UserSearchArchivePanel
     Friend WithEvents pnlSearch        As System.Windows.Forms.Panel
     Friend WithEvents txtSearchQuery   As System.Windows.Forms.TextBox
     Friend WithEvents btnSearch        As System.Windows.Forms.Button
+    Friend WithEvents pnlBottom        As System.Windows.Forms.Panel
+    Friend WithEvents lblTotalDocs     As System.Windows.Forms.Label
 
 End Class
